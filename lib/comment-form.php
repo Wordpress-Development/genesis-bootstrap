@@ -1,7 +1,7 @@
 <?php
 
-add_filter( 'comment_form_default_fields', 'bootstrap3_comment_form_fields' );
-function bootstrap3_comment_form_fields( $fields ) {
+add_filter( 'comment_form_default_fields', 'bsg_comment_form_fields' );
+function bsg_comment_form_fields( $fields ) {
     $commenter = wp_get_current_commenter();
     
     $req      = get_option( 'require_name_email' );
