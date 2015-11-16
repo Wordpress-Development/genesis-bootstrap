@@ -1,21 +1,36 @@
 <?php
 
-// replace style.css - Theme Information (no css)
-// with css/style.min.css -  Compressed CSS for Theme
-
 remove_action( 'genesis_meta', 'genesis_load_stylesheet' );
+add_action( 'wp_enqueue_scripts', 'bsg_load_bootstrap_stylesheet' ); 
 
-function bsg_enqueue_css_js() {
+function bsg_load_bootstrap_stylesheet() {
+    
+    $bsg_theme_dir = trailingslashit(get_stylesheet_directory_uri());
 
-    // wp_register_style( $handle, $src, $deps, $ver, $media );
-    wp_register_style( 'bsg-combined-css', plugins_url('bootstrap/css/style.min.css', __DIR__), array(), '3.3.5' );
+    $pre = apply_filters( 'bsg_pre_load_css', false );
+  
+    if ( $pre !== false )
+        $stylesheet = $pre;
+    elseif ( file_exists( $bsg_theme_dir . 'bootstrap-theme.min.css' ) )
+        $stylesheet = $bsg_theme_url . 'bootstrap-theme.min.css';
+    elseif ( file_exists( $bsg_theme_dir . 'bootstrap-theme.css' ) )
+        $stylesheet = $bsg_theme_url . 'bootstrap-theme.css';
+    elseif ( file_exists( $bsg_theme_dir . 'css/bootstrap-theme.min.css' ) )
+        $stylesheet = $bsg_theme_url . 'css/bootstrap-theme.min.css';
+    elseif ( file_exists( $bsg_theme_dir . 'css/bootstrap-theme.css' ) )
+        $stylesheet = $bsg_theme_url . 'css/bootstrap-theme.css';
+    //elseif ( file_exists( home_url() . '/custom.css' ) )
+        //$custom_css = home_url() . '/custom.css';
+    else
+        $stylesheet = plugins_url('bootstrap/css/bootstrap.min.css', __DIR__); // plugin_dir_url( __FILE__ )
+    $stylesheet = apply_filters( 'bsg_css_url', $stylesheet );
+    
+    if ( $stylesheet )
+        wp_enqueue_style( 'bsg-theme-css', $stylesheet, array(), CHILD_THEME_VERSION );
+        wp_register_script( 'bsg-bootstrap-js', plugins_url('bootstrap/js/javascript.min.js', __DIR__), array('jquery'), '3.3.5', true );
 
-    // wp_register_script( $handle, $src, $deps, $ver, $in_footer );
-    wp_register_script( 'bsg-combined-js', plugins_url('bootstrap/js/javascript.min.js', __DIR__), array('jquery'), '3.3.5', true );
-
-
-    wp_enqueue_style( 'bsg-combined-css' );
-    wp_enqueue_script( 'bsg-combined-js' );
+    //$css_file = file_get_contents($custom_css);
+    //echo '<style type="text/css">' . $css_file . '</style>';
+    //echo '<link rel="stylesheet" type="text/css" href="' . esc_url( $custom_css ) . '">' . "\n";
 
 }
-add_action( 'wp_enqueue_scripts', 'bsg_enqueue_css_js' );
