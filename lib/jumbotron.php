@@ -1,5 +1,28 @@
 <?php
 
+unregister_sidebar( 'header-right' );
+
+add_action('widgets_init', 'register_additional_sidebars');
+function register_additional_sidebars() {
+    
+    $jumbotron = array(
+        'id'            => 'jumbotron-widget-area',
+        'name'          => __( 'Jumbotron', 'gb3' ),
+        'description'   => __( 'This is located inside the jumbotron header.',  'gb3'  ),
+        'class'         => '',
+        'before_widget' => '<div id="%1$s" class="%2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h1>',
+        'after_title'   => '</h1>',
+        
+    );
+    
+    register_sidebar( $jumbotron );
+
+}
+
+
+
 remove_action( 'genesis_site_title', 'genesis_seo_site_title' );
 remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
 add_action( 'genesis_header', 'jumbotron_widget_area_callback' );
