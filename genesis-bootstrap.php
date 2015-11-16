@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name:        GB3 - Genesis Bootstrap
+Plugin Name:        GB3
 Plugin URI:         https://github.com/bryanwillis/bootstrap-genesis-addons/
 Description:        Add Bootstrap to Genesis Theme via plugin
 Version:            1.0.0
@@ -108,8 +108,8 @@ $bsg_add_theme_support = array(
                         'bsg-add-head-markup',
                         'bsg-bootstrap-markup',
                         'bsg-bootstrap-walker',
+                        'bsg-sidebars',
                         'bsg-comment-form',
-                        'bsg-custom-css-js',
                         'bsg-customizer',
                         'bsg-footer-creds',
                         'bsg-genesis-setup',
@@ -120,6 +120,7 @@ $bsg_add_theme_support = array(
                         'bsg-post-content-nav',
                         'bsg-search-form',
                         'bsg-jumbotron',
+                        'bsg-footer'
     );
     
     foreach ( $bsg_add_theme_support as $bsg_support ) {
