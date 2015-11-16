@@ -1,4 +1,4 @@
 # genesis-bootstrap
-Genesis Plugin to add Bootstrap 3 Support
+Wordpress Genesis Plugin to add Bootstrap 3 Support
 
 
