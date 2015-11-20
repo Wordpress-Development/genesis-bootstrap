@@ -96,7 +96,7 @@ function gs_constants() {
         define( 'CHILD_JS',     CHILD_URL .'/js' );
         
         /** @type constant Child Theme JS URL Location. */
-        define( 'CHILD_CSS',    CHILD_URL .'/css' );    
+        define( 'CHILD_CSS',    CHILD_URL .'/css/' );    
 }
 
 
