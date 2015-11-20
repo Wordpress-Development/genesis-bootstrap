@@ -15,6 +15,7 @@ add_filter( 'genesis_attr_archive-pagination',  'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_entry-content',       'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_entry-pagination',    'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_site-footer',         'bsg_add_markup_class', 10, 2 );
+add_filter( 'genesis_attr_comment',             'bsg_add_markup_class', 10, 2 );
 
 function bsg_add_markup_class( $attr, $context ) {
     // default classes to add
@@ -32,7 +33,7 @@ function bsg_add_markup_class( $attr, $context ) {
             'archive-pagination'        => 'clearfix',
             'entry-content'             => 'clearfix',
             'entry-pagination'          => 'clearfix bsg-pagination-numeric',
-
+            'comment'          => ' comment-body media'
         ),
         $context,
         $attr
