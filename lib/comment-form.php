@@ -144,6 +144,15 @@ function replace_reply_link_class($class){
 add_action( 'wp_footer', 'do_comment_form_script', 9999 );
 function do_comment_form_script() {
 ?>
+<style type="text/css">
+#commentform {
+display:table;
+width:100%;   
+}
+.comment-form-comment {
+display: table-header-group; 
+}	
+</style>
 <script type="text/javascript">
 jQuery(document).ready(function($){
     $('textarea.expand').focus(function () {
