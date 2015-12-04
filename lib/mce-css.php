@@ -7,3 +7,9 @@ function plugin_mce_css( $mce_css ) {
 	return $mce_css;
 }
 add_filter( 'mce_css', 'plugin_mce_css' );
+
+/*
+#tinymce {
+    margin: 10px 15px;
+}
+*/
