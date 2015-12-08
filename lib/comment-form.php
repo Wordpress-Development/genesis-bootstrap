@@ -19,6 +19,12 @@ function custom_genesis_comment_list_args( $args ){
 
 
 
+add_filter( 'genesis_comment_list_args', 'custom_genesis_comment_list_args' );
+function custom_genesis_comment_list_args( $args ){
+    $args['callback'] = 'custom_genesis_comment_callback';
+    return $args;
+}
+
 function custom_genesis_comment_callback( $comment, $args, $depth ){
 $GLOBALS['comment'] = $comment; ?>
 <li id="comment-<?php comment_ID(); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
@@ -31,40 +37,40 @@ $GLOBALS['comment'] = $comment; ?>
                    'extra_attr' => 'nopin="nopin"',
                    'class' => 'media-object img-rounded'                  
             );
-            if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'], '', 'Commenter Avatar', $atts );
-       ?>
+            if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'], '', 'commenter avatar', $atts );
+        ?>
        </a>
       </div>
-      <div class="media-body well">
+      <div class="media-body">
     <h5 class="media-heading" itemprop="name"><?php printf( __( '%s ', 'gb3' ), sprintf( '<cite class="fn"><strong>%s</strong></cite>', get_comment_author_link() ) ); ?>&nbsp;<span class="bullet text-muted small" aria-hidden="true">•</span>&nbsp;<span class="comment-meta">
               <a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
                 <time class="text-muted small" datetime="<?php comment_time( 'c' ); ?>" itemprop="commentTime">
                   <?php printf( _x( '%1$s at %2$s', '1: date, 2: time' ), get_comment_date(), get_comment_time() ); ?>
                 </time>
               </a>
-              <span class="edit-link text-muted small pull-right"><?php edit_comment_link( __( 'Edit' ), '<span class="glyphicon glyphicon-edit"></span>', '</span>' ); ?></span>
-            </span>
+              <?php comment_reply_link(
+                array_merge(
+                  $args, array(
+                    'reply_text' => '<span class="glyphicon glyphicon-share-alt"></span> Reply',
+                    'add_below' => 'div-comment',
+                    'depth'   => $depth,
+                    'max_depth' => $args['max_depth'],
+                    'before'  => '<footer class="reply comment-reply text-muted small pull-right">',
+                    'after'   => '</footer><!-- .reply -->'
+                  )
+                )
+              ); ?>
+              <?php edit_comment_link( __( 'Edit' ), '<span class="edit-link text-muted small">', '</span>' ); ?>
+             
      </h5>
           <?php if ( '0' == $comment->comment_approved ) : ?>
             <div class="alert alert-info">
               <p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.'); ?></p>
             </div>
           <?php endif; ?>
-
           <div class="comment-content" itemprop="commentText">
             <?php comment_text(); ?>
           </div><!-- .comment-content -->
-          <?php comment_reply_link(
-            array_merge(
-              $args, array(
-                'add_below' => 'div-comment',
-                'depth'   => $depth,
-                'max_depth' => $args['max_depth'],
-                'before'  => '<footer class="reply comment-reply pull-right">',
-                'after'   => '</footer><!-- .reply -->'
-              )
-            )
-          ); ?>
       </div><!-- .media-body -->
 <?php do_action( 'genesis_after_comment' ); ?>
     </article>
