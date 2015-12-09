@@ -101,6 +101,16 @@ function gs_constants() {
 
 
 
+function gb3_register_sidebar_defaults( $defaults ) {
+	$defaults['before_widget'] = '<section id="%1$s" class="panel panel-default widget %2$s"><div class="panel-body widget-wrap">';
+	return $defaults;
+}
+function genesis_edit_widget_areas() {
+    add_filter( 'genesis_register_widget_area_defaults', 'gb3_register_sidebar_defaults');
+}
+add_action( 'genesis_setup', 'genesis_edit_widget_areas', 15 );
+
+
 
 
 function gb3_custom_theme_support() {
@@ -126,7 +136,6 @@ $bsg_add_theme_support = array(
     foreach ( $bsg_add_theme_support as $bsg_support ) {
 	           add_theme_support( $bsg_support );
     } 
-    
 }
 add_action('after_setup_theme', 'gb3_custom_theme_support');
 
