@@ -105,10 +105,10 @@ function gs_constants() {
 
 function gb3_custom_theme_support() {
 $bsg_add_theme_support = array(
+                        'bsg-sidebars',
                         'bsg-add-head-markup',
                         'bsg-bootstrap-markup',
                         'bsg-bootstrap-walker',
-                        'bsg-sidebars',
                         'bsg-comment-form',
                         'bsg-customizer',
                         'bsg-footer-creds',
