@@ -1,6 +1,6 @@
 <?php
-
 remove_action(  'genesis_doctype', 'genesis_do_doctype' );
+add_action(     'genesis_doctype', 'bsg_conditional_comments' );
 
 function bsg_conditional_comments() {
     ?>
@@ -10,9 +10,7 @@ function bsg_conditional_comments() {
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
     <?php
+    // <!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"> -->
 }
-add_action(     'genesis_doctype', 'bsg_conditional_comments' );
-
 
