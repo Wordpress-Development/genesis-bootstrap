@@ -1,28 +1,30 @@
  <?php
 
 $atts = array(
-                'genesis_attr_nav-primary',
-                'genesis_attr_nav-secondary',
-                'genesis_attr_site-header',
-                'genesis_attr_site-inner',
-                'genesis_attr_content-sidebar-wrap',
-                'genesis_attr_content',
-                'genesis_attr_sidebar-primary',
-                'genesis_attr_sidebar-secondary',
-                'genesis_attr_archive-pagination',
-                'genesis_attr_entry-content',
-                'genesis_attr_entry-pagination',
-                'genesis_attr_site-footer',
-                'genesis_attr_nav-footer',
-                'genesis_attr_comment-reply',
-                'genesis_attr_comment-header',
-                'genesis_attr_comment-time-link',
-                'genesis_attr_comment-media',
-                'genesis_attr_comment'	  
+                  'nav-primary',
+                  'nav-secondary',
+                  'site-header',
+                  'site-inner',
+                  'content-sidebar-wrap',
+                  'content',
+                  'sidebar-primary',
+                  'sidebar-secondary',
+                  'archive-pagination',
+                  'entry-content',
+                  'entry-pagination',
+                  'site-footer',
+                  'nav-footer',
+                  'comment-reply',
+                  'comment-header',
+                  'comment-time-link',
+                  'comment-media',
+                  'comment'	  
     		);
 foreach ( $atts as $context ) {
+	$context = "genesis_attr_$context";
 	add_filter( $context, 'bsg_add_markup_class', 10, 2 );
 }
+
 function bsg_add_markup_class( $attr, $context ) {
     $classes_to_add = apply_filters ('bsg-classes-to-add',
         array(
