@@ -1,6 +1,7 @@
 <?php
 
-$atts = array(
+// add bootstrap classes
+$genesis_atts = array(
                   'nav-primary',
                   'nav-secondary',
                   'site-header',
@@ -20,7 +21,7 @@ $atts = array(
                   'comment-media',
                   'comment'	  
     		);
-foreach ( $atts as $context ) {
+foreach ( $genesis_atts as $context ) {
 	$context = "genesis_attr_$context";
 	add_filter( $context, 'bsg_add_markup_class', 10, 2 );
 }
@@ -63,8 +64,6 @@ function bsg_add_markup_class( $attr, $context ) {
 
 
 
-
-
 // modify bootstrap classes based on genesis_site_layout
 add_filter('bsg-classes-to-add', 'bsg_modify_classes_based_on_template', 10, 3);
 function bsg_layout_options_modify_classes_to_add( $classes_to_add ) {
@@ -102,29 +101,6 @@ function bsg_modify_classes_based_on_template( $classes_to_add, $context, $attr 
     $classes_to_add = bsg_layout_options_modify_classes_to_add( $classes_to_add );
     return $classes_to_add;
 }
-
-
-
-/* Skip to Main Content - Accessibility Link
- *
- */
-
-// add markup for the link
-add_action( 'genesis_before', 'bsg_skip_navigation_add_link', 5 );
-// add id="main-content-container" as target
-add_filter( 'genesis_attr_content', 'bsg_skip_navigation_add_id_for_target' );
-
-
-function bsg_skip_navigation_add_link() {
-    echo '<a class="skip-to-main-content btn btn-large btn-danger" href="#main-content-container" tabindex="1">skip to main content</a>';
-}
-
-function bsg_skip_navigation_add_id_for_target( $attr ) {
-    $attr['id'] = __( 'main-content-container', 'bsg' );
-    return $attr;
-}
-
-
 
 remove_action( 'genesis_after_content_sidebar_wrap', 'genesis_get_sidebar_alt' );
 add_action(    'genesis_after_content', 'genesis_get_sidebar_alt' );
