@@ -1,0 +1,39 @@
+.comment-list, .comment-list .children {
+    padding: 0;
+}
+.comment-list>li, .comment-list .children>li, .ping-list>li {
+    list-style-type: none;
+    padding-left: 48px;
+}
+.comment-list > li,
+.comment-list .children > li,
+.ping-list > li {
+  list-style-type: none;
+  margin-top: 10px;
+}
+.comment-respond,
+.entry-comments,
+.entry-pings {
+  background-color: #fff;
+  margin-bottom: 40px; 
+}
+.comment-list,
+.comment-list .children {
+  padding: 0;
+}
+li.comment.depth-1 {
+    padding-left: 0px;
+}
+.comment-content p {
+    margin-bottom: 0px;
+}
+article.comment-body.media .reply {
+    display: none;
+}
+article.comment-body.media:hover .reply {
+    display: block;
+}
+.media-body {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
