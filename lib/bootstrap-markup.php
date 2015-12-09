@@ -1,5 +1,6 @@
  <?php
 
+
 // add bootstrap classes
 add_filter( 'genesis_attr_nav-primary',         'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_nav-secondary',       'bsg_add_markup_class', 10, 2 );
@@ -14,12 +15,38 @@ add_filter( 'genesis_attr_entry-content',       'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_entry-pagination',    'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_site-footer',         'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_comment',             'bsg_add_markup_class', 10, 2 );
-add_filter( 'genesis_attr_comment-reply',       'bsg_add_markup_class', 10, 2 );
-add_filter( 'genesis_attr_comment-header',      'bsg_add_markup_class', 10, 2 );
-add_filter( 'genesis_attr_comment-time-link',   'bsg_add_markup_class', 10, 2 );
-add_filter( 'genesis_attr_comment-media',       'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_nav-footer',          'bsg_add_markup_class', 10, 2 );
+add_filter( 'genesis_attr_comment-reply',          'bsg_add_markup_class', 10, 2 );
+add_filter( 'genesis_attr_comment-header',          'bsg_add_markup_class', 10, 2 );
+add_filter( 'genesis_attr_comment-time-link',          'bsg_add_markup_class', 10, 2 );
+add_filter( 'genesis_attr_comment-media',          'bsg_add_markup_class', 10, 2 );
 
+
+
+// add bootstrap classes
+	$filters = array(
+                  'nav-primary',
+                  'nav-secondary',
+                  'site-header',
+                  'site-inner',
+                  'content-sidebar-wrap',
+                  'content',
+                  'sidebar-primary',
+                  'sidebar-secondary',
+                  'archive-pagination',
+                  'entry-content',
+                  'entry-pagination',
+                  'site-footer',
+                  'nav-footer',
+                  'comment-reply',
+                  'comment-header',
+                  'comment-time-link',
+                  'comment-media',
+                  'comment'	  
+    	);
+foreach ( $filters as $filter ) {
+ add_filter(genesis_attr_$filter,'bsg_add_markup_class', 10, 2 );
+}
 
 function bsg_add_markup_class( $attr, $context ) {
     // default classes to add
@@ -48,24 +75,18 @@ function bsg_add_markup_class( $attr, $context ) {
         $context,
         $attr
     );
-
     // populate $classes_array based on $classes_to_add
     $value = isset( $classes_to_add[ $context ] ) ? $classes_to_add[ $context ] : array();
-
     if ( is_array( $value ) ) {
         $classes_array = $value;
     } else {
         $classes_array = explode( ' ', (string) $value );
     }
-
     // apply any filters to modify the class
     $classes_array = apply_filters( 'bsg-add-class', $classes_array, $context, $attr );
-
     $classes_array = array_map( 'sanitize_html_class', $classes_array );
-
     // append the class(es) string (e.g. 'span9 custom-class1 custom-class2')
     $attr['class'] .= ' ' . implode( ' ', $classes_array );
-
     return $attr;
 }
 
@@ -73,62 +94,42 @@ function bsg_add_markup_class( $attr, $context ) {
 
 
 
-
-/* Modify the Bootstrap Classes being applied
- * based on the Genesis template chosen
- */
-
 // modify bootstrap classes based on genesis_site_layout
 add_filter('bsg-classes-to-add', 'bsg_modify_classes_based_on_template', 10, 3);
-
-// remove unused layouts
-
 function bsg_layout_options_modify_classes_to_add( $classes_to_add ) {
-
     $layout = genesis_site_layout();
-
-    // content-sidebar          // default
-
     // full-width-content       // supported
     if ( 'full-width-content' === $layout ) {
         $classes_to_add['content'] = 'col-sm-12';
     }
-
     // sidebar-content          // supported
      if ( 'sidebar-content' === $layout ) {
         $classes_to_add['content'] = 'col-sm-12 col-md-8 col-lg-9 col-md-push-4 col-lg-push-3';
         $classes_to_add['sidebar-primary'] = 'hidden-xs hidden-sm col-md-4 col-lg-3 col-md-pull-8 col-lg-pull-9';
     }
-
     // content-sidebar-sidebar  // supported
     if ( 'content-sidebar-sidebar' === $layout ) {
         $classes_to_add['content'] = 'col-sm-6';
         $classes_to_add['sidebar-primary'] = 'col-sm-3';
         $classes_to_add['sidebar-secondary'] = 'col-sm-3';
     }
-
-
     // sidebar-sidebar-content  // supported
     if ( 'sidebar-sidebar-content' === $layout ) {
         $classes_to_add['content'] = 'col-sm-6 col-sm-push-6';
         $classes_to_add['sidebar-primary'] = 'col-sm-3 col-sm-pull-3';
         $classes_to_add['sidebar-secondary'] = 'col-sm-3 col-sm-pull-9';
     }
-
-
     // sidebar-content-sidebar  // supported
     if ( 'sidebar-content-sidebar' === $layout ) {
         $classes_to_add['content'] = 'col-sm-6 col-sm-push-3';
         $classes_to_add['sidebar-primary'] = 'col-sm-3 col-sm-push-3';
         $classes_to_add['sidebar-secondary'] = 'col-sm-3 col-sm-pull-9';
     }
-
     return $classes_to_add;
 };
 
 function bsg_modify_classes_based_on_template( $classes_to_add, $context, $attr ) {
     $classes_to_add = bsg_layout_options_modify_classes_to_add( $classes_to_add );
-
     return $classes_to_add;
 }
 
@@ -150,10 +151,8 @@ function bsg_skip_navigation_add_link() {
 
 function bsg_skip_navigation_add_id_for_target( $attr ) {
     $attr['id'] = __( 'main-content-container', 'bsg' );
-
     return $attr;
 }
-
 
 
 
