@@ -19,7 +19,7 @@ $GLOBALS['comment'] = $comment; ?>
 <article <?php echo genesis_attr( 'comment' ); ?>>
 <?php do_action( 'genesis_before_comment' ); ?>
       <div <?php echo genesis_attr( 'comment-author' ); ?>>
-      <a href="#" itemprop="image">
+    
       <?php
             $atts = array( 
                    'extra_attr' => 'nopin="nopin"',
@@ -27,15 +27,38 @@ $GLOBALS['comment'] = $comment; ?>
             );
             if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'], '', 'commenter avatar', $atts );
         ?>
-       </a>
       </div>
       <div class="media-body">
-    <h5 class="media-heading" itemprop="name"><?php printf( __( '%s ', 'gb3' ), sprintf( '<cite class="fn"><strong>%s</strong></cite>', get_comment_author_link() ) ); ?>&nbsp;<span class="bullet text-muted small" aria-hidden="true">•</span>&nbsp;<span class="comment-meta">
-              <a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
-                <time class="text-muted small" datetime="<?php comment_time( 'c' ); ?>" itemprop="commentTime">
-                  <?php printf( _x( '%1$s at %2$s', '1: date, 2: time' ), get_comment_date(), get_comment_time() ); ?>
-                </time>
-              </a>
+      <h5 <?php echo genesis_attr( 'comment-header' ); ?>>
+
+
+<?php
+	$author = get_comment_author();
+	$url    = get_comment_author_url();
+       if ( ! empty( $url ) && 'http://' !== $url ) {
+					$author = sprintf( '<a href="%s" %s>%s</a>', esc_url( $url ), genesis_attr( 'comment-author-link' ), $author );
+       }
+
+
+$comment_author_says_text = apply_filters( 'comment_author_says_text', __( '', 'genesis' ) );
+				if ( ! empty( $comment_author_says_text ) ) {
+					$comment_author_says_text = '<span class="says">' . $comment_author_says_text . '</span>';
+				}
+				printf( '<span itemprop="name">%s</span> %s', $author, $comment_author_says_text );
+
+
+
+			
+$comment_date = apply_filters( 'genesis_show_comment_date', true, get_post_type() );
+
+			if ( $comment_date ) {
+				printf( '<span %s>', genesis_attr( 'comment-meta' ) );
+				printf( '<time %s>', genesis_attr( 'comment-time' ) );
+				printf( '<a href="%s" %s>', esc_url( get_comment_link( $comment->comment_ID ) ), genesis_attr( 'comment-time-link' ) );
+				echo    esc_html( get_comment_date() ) . ' ' . __( 'at', 'genesis' ) . ' ' . esc_html( get_comment_time() );
+				echo    '</a></time></span>';
+			}
+?>
               <?php comment_reply_link(
                 array_merge(
                   $args, array(
@@ -43,22 +66,20 @@ $GLOBALS['comment'] = $comment; ?>
                     'add_below' => 'div-comment',
                     'depth'   => $depth,
                     'max_depth' => $args['max_depth'],
-                    'before'  => '<footer class="reply comment-reply text-muted small pull-right">',
-                    'after'   => '</footer><!-- .reply -->'
+		    'before' => sprintf( '<div %s>', genesis_attr( 'comment-reply' ) ),
+                    'after'   => '</div><!-- .reply -->'
                   )
                 )
               ); ?>
               <?php edit_comment_link( __( 'Edit' ), '<span class="edit-link text-muted small">', '</span>' ); ?>
-             
      </h5>
-          <?php if ( '0' == $comment->comment_approved ) : ?>
-            <div class="alert alert-info">
-              <p class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.'); ?></p>
-            </div>
-          <?php endif; ?>
-          <div class="comment-content" itemprop="commentText">
-            <?php comment_text(); ?>
-          </div><!-- .comment-content -->
+ 	<div <?php echo genesis_attr( 'comment-content' ); ?>>
+        <?php if ( ! $comment->comment_approved ) : ?>
+		<?php $comment_awaiting_moderation_text = apply_filters( 'genesis_comment_awaiting_moderation', __( 'Your comment is awaiting moderation.', 'genesis' ) ); ?>
+		<div class="alert alert-info"><?php echo $comment_awaiting_moderation_text; ?></div>
+	<?php endif; ?>
+        <?php comment_text(); ?>
+        </div><!-- .comment-content -->
       </div><!-- .media-body -->
 <?php do_action( 'genesis_after_comment' ); ?>
     </article>
