@@ -46,6 +46,21 @@ $output .= $backtotop_text;
 }
 
 
+
+
+add_filter( 'genesis_attr_nav-footer', 'gb3_add_nav_footer_attr' );
+function gb3_add_nav_footer_attr( $attributes ){
+    $attributes['role'] = 'navigation';
+    $attributes['itemscope'] = 'itemscope';
+    $attributes['itemtype'] = 'http://schema.org/SiteNavigationElement';
+    return $attributes;
+}
+
+
+
+
+
+
 add_action( 'wp_footer', 'amethyst_footer_menu', 9999 );
 function amethyst_footer_menu() {
 ?>
