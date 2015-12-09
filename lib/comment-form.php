@@ -18,20 +18,19 @@ $GLOBALS['comment'] = $comment; ?>
 <li id="comment-<?php comment_ID(); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
 <article <?php echo genesis_attr( 'comment' ); ?>>
 <?php do_action( 'genesis_before_comment' ); ?>
-      <div <?php echo genesis_attr( 'comment-author' ); ?>>
-    
-      <?php
-            $atts = array( 
-                   'extra_attr' => 'nopin="nopin"',
-                   'class' => 'media-object img-rounded'                  
-            );
-            if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'], '', 'commenter avatar', $atts );
+        <div <?php echo genesis_attr( 'comment-media' ); ?>>
+        <?php
+        $atts = array( 
+        	'extra_attr' => 'nopin="nopin"',
+                'class' => 'media-object img-rounded'                  
+            	);
+        if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'], '', 'commenter avatar', $atts );
         ?>
-      </div>
+      </div> 
+      
       <div class="media-body">
       <h5 <?php echo genesis_attr( 'comment-header' ); ?>>
-
-
+      <span <?php echo genesis_attr( 'comment-author' ); ?>>
 <?php
 	$author = get_comment_author();
 	$url    = get_comment_author_url();
@@ -46,9 +45,10 @@ $comment_author_says_text = apply_filters( 'comment_author_says_text', __( '', '
 				}
 				printf( '<span itemprop="name">%s</span> %s', $author, $comment_author_says_text );
 
+?>
+</span>
 
-
-			
+		<?php	
 $comment_date = apply_filters( 'genesis_show_comment_date', true, get_post_type() );
 
 			if ( $comment_date ) {
