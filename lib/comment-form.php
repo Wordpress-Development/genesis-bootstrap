@@ -1,8 +1,6 @@
 <?php
 
-
-
-
+// COMMENT HEADER
 add_filter( 'genesis_title_comments', 'sp_genesis_title_comments' );
 function sp_genesis_title_comments() {
 	$title = '<h3 class="page-header">Comments</h3>';
@@ -10,50 +8,42 @@ function sp_genesis_title_comments() {
 }
 
 
+
+// COMMENT LIST
 add_filter( 'genesis_comment_list_args', 'custom_genesis_comment_list_args' );
 function custom_genesis_comment_list_args( $args ){
     $args['callback'] = 'custom_genesis_comment_callback';
     return $args;
 }
-
 function custom_genesis_comment_callback( $comment, $args, $depth ){
 $GLOBALS['comment'] = $comment; ?>
 <li id="comment-<?php comment_ID(); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
 <article <?php echo genesis_attr( 'comment' ); ?>>
 <?php do_action( 'genesis_before_comment' ); ?>
         <div <?php echo genesis_attr( 'comment-media' ); ?>>
-        <?php
+        <?php 
         $atts = array( 
         	'extra_attr' => 'nopin="nopin"',
                 'class' => 'media-object img-rounded'                  
             	);
-        if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'], '', 'commenter avatar', $atts );
-        ?>
-      </div> 
-      
-      <div class="media-body">
-      <h5 <?php echo genesis_attr( 'comment-header' ); ?>>
-      <span <?php echo genesis_attr( 'comment-author' ); ?>>
-<?php
-	$author = get_comment_author();
-	$url    = get_comment_author_url();
-       if ( ! empty( $url ) && 'http://' !== $url ) {
-					$author = sprintf( '<a href="%s" %s>%s</a>', esc_url( $url ), genesis_attr( 'comment-author-link' ), $author );
-       }
-
-
-$comment_author_says_text = apply_filters( 'comment_author_says_text', __( '', 'genesis' ) );
-				if ( ! empty( $comment_author_says_text ) ) {
-					$comment_author_says_text = '<span class="says">' . $comment_author_says_text . '</span>';
-				}
-				printf( '<span itemprop="name">%s</span> %s', $author, $comment_author_says_text );
-
-?>
-</span>
-
-		<?php	
-$comment_date = apply_filters( 'genesis_show_comment_date', true, get_post_type() );
-
+        if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'], '', 'commenter avatar', $atts ); ?>
+        </div>
+        <div class="media-body">
+        	<h5 <?php echo genesis_attr( 'comment-header' ); ?>>
+        		<span <?php echo genesis_attr( 'comment-author' ); ?>>
+        		<?php
+        		$author = get_comment_author();
+			$url    = get_comment_author_url();
+			if ( ! empty( $url ) && 'http://' !== $url ) {
+				$author = sprintf( '<a href="%s" %s>%s</a>', esc_url( $url ), genesis_attr( 'comment-author-link' ), $author );
+       			}
+			$comment_author_says_text = apply_filters( 'comment_author_says_text', __( '', 'genesis' ) );
+			if ( ! empty( $comment_author_says_text ) ) {
+				$comment_author_says_text = '<span class="says">' . $comment_author_says_text . '</span>';
+			}
+			printf( '<span itemprop="name">%s</span> %s', $author, $comment_author_says_text );
+			echo '</span>'; // comment-author
+			$comment_date = apply_filters( 'genesis_show_comment_date', true, get_post_type() );
 			if ( $comment_date ) {
 				printf( '<span %s>', genesis_attr( 'comment-meta' ) );
 				printf( '<time %s>', genesis_attr( 'comment-time' ) );
@@ -61,36 +51,37 @@ $comment_date = apply_filters( 'genesis_show_comment_date', true, get_post_type(
 				echo    esc_html( get_comment_date() ) . ' ' . __( 'at', 'genesis' ) . ' ' . esc_html( get_comment_time() );
 				echo    '</a></time></span>';
 			}
-?>
-              <?php comment_reply_link(
-                array_merge(
-                  $args, array(
-                    'reply_text' => '<span class="glyphicon glyphicon-share-alt"></span> Reply',
-                    'add_below' => 'div-comment',
-                    'depth'   => $depth,
-                    'max_depth' => $args['max_depth'],
-		    'before' => sprintf( '<div %s>', genesis_attr( 'comment-reply' ) ),
-                    'after'   => '</div><!-- .reply -->'
-                  )
-                )
-              ); ?>
-              <?php edit_comment_link( __( ' (Edit)' ), '<span class="edit-link text-muted small">', '</span>' ); ?>
-     </h5>
- 	<div <?php echo genesis_attr( 'comment-content' ); ?>>
-        <?php if ( ! $comment->comment_approved ) : ?>
-		<?php $comment_awaiting_moderation_text = apply_filters( 'genesis_comment_awaiting_moderation', __( 'Your comment is awaiting moderation.', 'genesis' ) ); ?>
-		<div class="alert alert-info"><?php echo $comment_awaiting_moderation_text; ?></div>
-	<?php endif; ?>
-        <?php comment_text(); ?>
-        </div><!-- .comment-content -->
-      </div><!-- .media-body -->
+			comment_reply_link(
+                		array_merge(
+                			$args, array(
+                				'reply_text' => '<span class="glyphicon glyphicon-share-alt"></span> Reply',
+                    				'add_below' => 'div-comment',
+                    				'depth'   => $depth,
+                    				'max_depth' => $args['max_depth'],
+		    				'before' => sprintf( '<div %s>', genesis_attr( 'comment-reply' ) ),
+                    				'after'   => '</div><!-- .reply -->'
+                  				)
+                			)
+              		); 
+              		edit_comment_link( __( ' (Edit)' ), '<span class="edit-link text-muted small">', '</span>' ); 
+              		?>
+              	</h5>
+ 		<div <?php echo genesis_attr( 'comment-content' ); ?>>
+        	<?php if ( ! $comment->comment_approved ) : ?>
+			<?php $comment_awaiting_moderation_text = apply_filters( 'genesis_comment_awaiting_moderation', __( 'Your comment is awaiting moderation.', 'genesis' ) ); ?>
+			<div class="alert alert-info"><?php echo $comment_awaiting_moderation_text; ?></div>
+		<?php endif; ?>
+        	<?php comment_text(); ?>
+        	</div><!-- .comment-content -->
+        </div><!-- .media-body -->
 <?php do_action( 'genesis_after_comment' ); ?>
-    </article>
-    <?php
+</article>
+<?php
 }
 
 
 
+// COMMENT FORM FIELDS
 add_filter( 'comment_form_default_fields', 'bsg_comment_form_fields' );
 function bsg_comment_form_fields( $fields ) {
     $commenter = wp_get_current_commenter();
@@ -110,7 +101,7 @@ function bsg_comment_form_fields( $fields ) {
 
 
 
-
+// COMMENT FORM DEFAULTS
 add_filter( 'comment_form_defaults', 'bsg_comment_form_modifications' );
 function bsg_comment_form_modifications( $args ) {
     $args['title_reply'] = __( 'Join the Conversation' );
