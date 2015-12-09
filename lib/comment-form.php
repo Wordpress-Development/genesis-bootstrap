@@ -71,7 +71,7 @@ $comment_date = apply_filters( 'genesis_show_comment_date', true, get_post_type(
                   )
                 )
               ); ?>
-              <?php edit_comment_link( __( 'Edit' ), '<span class="edit-link text-muted small">', '</span>' ); ?>
+              <?php edit_comment_link( __( ' (Edit)' ), '<span class="edit-link text-muted small">', '</span>' ); ?>
      </h5>
  	<div <?php echo genesis_attr( 'comment-content' ); ?>>
         <?php if ( ! $comment->comment_approved ) : ?>
