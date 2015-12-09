@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 add_filter( 'genesis_title_comments', 'sp_genesis_title_comments' );
 function sp_genesis_title_comments() {
 	$title = '<h3 class="page-header">Comments</h3>';
