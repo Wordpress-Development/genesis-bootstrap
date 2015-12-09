@@ -1,22 +1,10 @@
 <?php
 
-
 add_filter( 'genesis_title_comments', 'sp_genesis_title_comments' );
 function sp_genesis_title_comments() {
-	$title = '<hr><h3 class="page-header">Comments</h3>';
+	$title = '<h3 class="page-header">Comments</h3>';
 	return $title;
 }
-
-
-
-
-add_filter( 'genesis_comment_list_args', 'custom_genesis_comment_list_args' );
-function custom_genesis_comment_list_args( $args ){
-    $args['callback'] = 'custom_genesis_comment_callback';
-    return $args;
-}
-
-
 
 
 add_filter( 'genesis_comment_list_args', 'custom_genesis_comment_list_args' );
@@ -101,70 +89,13 @@ function bsg_comment_form_fields( $fields ) {
 
 add_filter( 'comment_form_defaults', 'bsg_comment_form_modifications' );
 function bsg_comment_form_modifications( $args ) {
-    $args['title_reply'] = _x( 'Join the Conversation', 'noun' );
+    $args['title_reply'] = __( 'Join the Conversation' );
     $args['must_log_in'] = '<p class="must-log-in">' .  sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.' ), wp_registration_url(), wp_login_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</p>';
     $args['comment_notes_after'] = '';
     $args['comment_field'] = '<div class="form-group comment-form-comment">
-            <label for="comment">' . _x( 'Comment', 'noun' ) . '</label> 
+            <label for="comment">' . __( 'Comment' ) . '</label> 
             <textarea class="form-control expand" id="comment" name="comment" cols="45" rows="3" aria-required="true"></textarea>
         </div>';
     $args['class_submit'] = 'btn btn-default'; 
     return $args;
-}
-
-
-
-
-function add_comment_author_to_reply_link($link, $args, $comment){
-    $comment = get_comment( $comment );
-    if ( empty($comment->comment_author) ) {
-        if (!empty($comment->user_id)){
-            $user=get_userdata($comment->user_id);
-            $author=$user->user_login;
-        } else {
-            $author = __('Anonymous');
-        }
-    } else {
-        $author = $comment->comment_author;
-    }
-    if(strpos($author, ' ')){
-        $author = substr($author, 0, strpos($author, ' '));
-    }
-    $reply_link_text = $args['reply_text'];
-    $link = str_replace($reply_link_text, '<i class="glyphicon glyphicon-share-alt"></i> Reply to ' . $author, $link);
-    return $link;
-}
-add_filter('comment_reply_link', 'add_comment_author_to_reply_link', 10, 3); 
-
-
-
-add_filter('comment_reply_link', 'replace_reply_link_class');
-function replace_reply_link_class($class){
-    $class = str_replace("class='comment-reply-link", "class='", $class);
-    return $class;
-}
-
-
-
-
-add_action( 'wp_footer', 'do_comment_form_script', 9999 );
-function do_comment_form_script() {
-?>
-<style type="text/css">
-#commentform {
-display:table;
-width:100%;   
-}
-.comment-form-comment {
-display: table-header-group; 
-}	
-</style>
-<script type="text/javascript">
-jQuery(document).ready(function($){
-    $('textarea.expand').focus(function () {
-        $(this).animate({ height: "9em" }, 300); 
-    });
-});
-</script>
-<?php
 }
