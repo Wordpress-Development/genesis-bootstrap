@@ -1,7 +1,5 @@
  <?php
 
-
-
 // add bootstrap classes
 add_filter( 'genesis_attr_nav-primary',         'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_nav-secondary',       'bsg_add_markup_class', 10, 2 );
@@ -16,6 +14,12 @@ add_filter( 'genesis_attr_entry-content',       'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_entry-pagination',    'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_site-footer',         'bsg_add_markup_class', 10, 2 );
 add_filter( 'genesis_attr_comment',             'bsg_add_markup_class', 10, 2 );
+add_filter( 'genesis_attr_comment-reply',       'bsg_add_markup_class', 10, 2 );
+add_filter( 'genesis_attr_comment-header',      'bsg_add_markup_class', 10, 2 );
+add_filter( 'genesis_attr_comment-time-link',   'bsg_add_markup_class', 10, 2 );
+add_filter( 'genesis_attr_comment-media',       'bsg_add_markup_class', 10, 2 );
+add_filter( 'genesis_attr_nav-footer',          'bsg_add_markup_class', 10, 2 );
+
 
 function bsg_add_markup_class( $attr, $context ) {
     // default classes to add
@@ -33,7 +37,13 @@ function bsg_add_markup_class( $attr, $context ) {
             'archive-pagination'        => 'clearfix',
             'entry-content'             => 'clearfix',
             'entry-pagination'          => 'clearfix bsg-pagination-numeric',
-            'comment'          => ' comment-body media'
+            'comment'                   => 'comment-body media',
+            'comment-reply'             => 'reply text-muted small pull-right',
+            'comment-header'            => 'media-heading',
+            'comment-time-link'         => 'text-muted small',
+            'comment-media'             => 'media-left',
+            'nav-footer'                => 'pull-right'
+
         ),
         $context,
         $attr
