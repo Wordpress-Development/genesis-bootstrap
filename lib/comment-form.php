@@ -94,7 +94,7 @@ function bsg_comment_form_modifications( $args ) {
     $args['comment_notes_after'] = '';
     $args['comment_field'] = '<div class="form-group comment-form-comment">
             <label for="comment">' . __( 'Comment' ) . '</label> 
-            <textarea class="form-control expand" id="comment" name="comment" cols="45" rows="3" aria-required="true"></textarea>
+            <textarea class="form-control expand" id="comment" name="comment" cols="45" rows="4" aria-required="true"></textarea>
         </div>';
     $args['class_submit'] = 'btn btn-default'; 
     return $args;
