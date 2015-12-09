@@ -30,7 +30,7 @@ function bsg_single_featured_image() {
     }
 
     $featured_image_attr = apply_filters( 'bsg-featured-image-attr', array(
-        'class' => 'single-featured-image'
+        'class' => 'single-featured-image  img-responsive'
     ) );
 
     $size = apply_filters( 'bsg-featured-image', 'bsg-featured-image' );
