@@ -1,4 +1,4 @@
- <?php
+<?php
 
 $atts = array(
                   'nav-primary',
