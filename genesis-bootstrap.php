@@ -95,6 +95,29 @@ add_action( 'genesis_setup', 'gb3_genesis_edit_widget_areas', 15 );
 
 
 
+add_theme_support ( 'genesis-menus' , array ( 
+	'primary' => __( 'Primary Navigation Menu', 'genesis' ),
+	'secondary' => __( 'Secondary Navigation Menu', 'genesis' ),
+	'footer' => __( 'Footer Navigation Menu', 'genesis' )
+	) );
+
+
+
+add_filter( 'genesis_post_info', 'sp_post_info_filter' );
+function sp_post_info_filter($post_info) {
+	$post_info = '[post_date format="l, F j, Y" before="<span class=\'post-date text-muted\'>" after="</span>" label="<span class=\'glyphicon glyphicon-calendar\'></span> "][post_author_posts_link before=" <span class=\'author-post-link-before text-muted\'>by</span> "]';
+	return $post_info;
+}
+
+add_filter( 'genesis_post_meta', 'sp_post_meta_filter' );
+function sp_post_meta_filter($post_info) {
+	$post_info = '[post_tags sep=" " before ="<span class=\'text-muted\'><span class=\'glyphicon glyphicon-tags\'></span> <em>Tags:</em>  </span>"]';
+	return $post_info;
+}
+
+
+
+
 if ( ! function_exists( 'gb3_custom_theme_support' ) ) {
 	function gb3_custom_theme_support() {
         	$bsg = array(
