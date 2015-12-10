@@ -97,18 +97,19 @@ add_action( 'genesis_setup', 'gb3_genesis_edit_widget_areas', 15 );
 
 
 
-
 add_filter( 'genesis_post_info', 'sp_post_info_filter' );
 function sp_post_info_filter($post_info) {
-	$post_info = '[post_date format="l, F j, Y" before="<span class=\'post-date text-muted\'>" after="</span>" label="<span class=\'glyphicon glyphicon-calendar\'></span> "][post_author_posts_link before=" <span class=\'author-post-link-before text-muted\'>by</span> "]';
+	$post_info = '[post_date format="j F, Y" before="<span class=\'post-date text-muted\'>" after="</span>" label="<i class=\'fa fa-clock-o\'></i> "][post_author_posts_link before=" <span class=\'author-post-link-before text-muted\'><span class=\'glyphicon glyphicon-user\'></span> " after="</span>"] [post_tags sep=" " before ="<span class=\'text-muted\'><i class=\'fa fa-tags\'></i></span>"] [post_categories sep=" " before="<i class=\'fa fa-th-list\'></i>"] [post_comments before="<span class=\'glyphicon fa fa-comments\'></span>" zero="Leave a Comment" one="1 Comment" more="% Comments"]';
 	return $post_info;
 }
+
 
 add_filter( 'genesis_post_meta', 'sp_post_meta_filter' );
 function sp_post_meta_filter($post_info) {
 	$post_info = '[post_tags sep=" " before ="<span class=\'text-muted\'><span class=\'glyphicon glyphicon-tags\'></span> <em>Tags:</em>  </span>"]';
 	return $post_info;
 }
+
 
 
 
