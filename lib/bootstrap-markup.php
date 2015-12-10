@@ -19,7 +19,11 @@ $genesis_atts = array(
                   'comment-header',
                   'comment-time-link',
                   'comment-media',
-                  'comment'	  
+                  'comment',
+                  'comment-list',
+                  'widget',
+                  'entry'
+
     		);
 foreach ( $genesis_atts as $context ) {
 	$context = "genesis_attr_$context";
@@ -45,7 +49,12 @@ function bsg_add_markup_class( $attr, $context ) {
             'comment-header'            => 'media-heading',
             'comment-time-link'         => 'text-muted small',
             'comment-media'             => 'media-left',
-            'nav-footer'                => 'pull-right'
+            'nav-footer'                => 'pull-right',
+            'comment-list'              => 'list-unstyled',
+            'widget'                    => 'panel panel-default',
+            'entry'                     => 'panel panel-default'
+ 
+
         ),
         $context,
         $attr
@@ -104,3 +113,15 @@ function bsg_modify_classes_based_on_template( $classes_to_add, $context, $attr 
 
 remove_action( 'genesis_after_content_sidebar_wrap', 'genesis_get_sidebar_alt' );
 add_action(    'genesis_after_content', 'genesis_get_sidebar_alt' );
+
+
+
+
+add_action('genesis_entry_header', 'gb3_entry_archive_panel_wrapper_close', 1);
+function gb3_entry_archive_panel_wrapper_close() {
+    echo '<div class="panel-body">';
+}
+add_action('genesis_entry_footer', 'gb3_entry_archive_panel_wrapper_open' , 9999);
+function gb3_entry_archive_panel_wrapper_open() {
+    echo '</div>';
+}
