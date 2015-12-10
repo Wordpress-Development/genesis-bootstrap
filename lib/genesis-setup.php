@@ -1,6 +1,6 @@
 <?php
 
-// Parent Theme Fix
+// Remove Parent Theme Support
 remove_theme_support( 'genesis-accessibility' );
 add_action( 'wp_enqueue_scripts', 'sp_disable_superfish' );
 function sp_disable_superfish() {
@@ -9,13 +9,31 @@ function sp_disable_superfish() {
 }
 
 
+
 // Child Theme Support
-add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption'  ) );
+add_theme_support( 'html5', array( 
+	'comment-list', 
+	'comment-form', 
+	'search-form', 
+	'gallery', 
+	'caption'  ) );
 add_theme_support( 'genesis-responsive-viewport' );
-add_theme_support( 'genesis-structural-wraps', array( 'menu-primary', 'menu-secondary', 'footer', 'jumbotron-inner', 'site-inner', ) );
+add_theme_support( 'genesis-structural-wraps', array( 
+	'menu-primary', 
+	'menu-secondary', 
+	'footer', 
+	'jumbotron-inner', 
+	'site-inner' 
+	) );
+add_theme_support ( 'genesis-menus' , array ( 
+	'primary' => __( 'Primary Navigation Menu', 'genesis' ),
+	'secondary' => __( 'Secondary Navigation Menu', 'genesis' ),
+	'footer' => __( 'Footer Navigation Menu', 'genesis' )
+	) );
 
 
-// Remove dynamic logo/text from genesis customizer
+
+// Remove dynamic logo/text from admin customizer
 add_action( 'customize_register', 'bsg_remove_genesis_customizer_controls', 20 );
 function bsg_remove_genesis_customizer_controls( $wp_customize ) {
     $wp_customize->remove_control( 'blog_title' );
@@ -23,20 +41,23 @@ function bsg_remove_genesis_customizer_controls( $wp_customize ) {
 }
 
 
-// Remove page templates
-function bsg_be_remove_genesis_page_templates( $page_templates ) {
-	unset( $page_templates['page_archive.php'] );
-	unset( $page_templates['page_blog.php'] );
-	return $page_templates;
-}
-add_filter( 'theme_page_templates', 'bsg_be_remove_genesis_page_templates' );
-
 
 // Add featured image sizes
 add_image_size( 'bsg-featured-image', 1170, 630, true );
 
 
-// Add container->wrap classes
+
+// Remove page templates
+add_filter( 'theme_page_templates', 'bsg_be_remove_genesis_page_templates' );
+function bsg_be_remove_genesis_page_templates( $page_templates ) {
+	unset( $page_templates['page_archive.php'] );
+	unset( $page_templates['page_blog.php'] );
+	return $page_templates;
+}
+
+
+
+// Add .container structural-wrap classes
 add_filter( 'genesis_attr_structural-wrap', 'bsg_attributes_structural_wrap' );
 function bsg_attributes_structural_wrap( $attributes ) {
     $attributes['class'] = 'container';
