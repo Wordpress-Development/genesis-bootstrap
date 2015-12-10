@@ -82,6 +82,7 @@ $GLOBALS['comment'] = $comment; ?>
 
 
 // COMMENT FORM FIELDS
+// @ToDo - Change/combine these next two filters to genesis_comment_form_args filter
 add_filter( 'comment_form_default_fields', 'bsg_comment_form_fields' );
 function bsg_comment_form_fields( $fields ) {
     $commenter = wp_get_current_commenter();
@@ -98,8 +99,6 @@ function bsg_comment_form_fields( $fields ) {
     );
     return $fields;
 }
-
-
 
 // COMMENT FORM DEFAULTS
 add_filter( 'comment_form_defaults', 'bsg_comment_form_modifications' );
