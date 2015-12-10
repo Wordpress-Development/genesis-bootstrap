@@ -95,11 +95,6 @@ add_action( 'genesis_setup', 'gb3_genesis_edit_widget_areas', 15 );
 
 
 
-add_theme_support ( 'genesis-menus' , array ( 
-	'primary' => __( 'Primary Navigation Menu', 'genesis' ),
-	'secondary' => __( 'Secondary Navigation Menu', 'genesis' ),
-	'footer' => __( 'Footer Navigation Menu', 'genesis' )
-	) );
 
 
 
