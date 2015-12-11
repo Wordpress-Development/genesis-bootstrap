@@ -1,12 +1,4 @@
-add_action( 'init' , 'arv_localization_callback' );
-function arv_localization_callback() {
-	load_plugin_textdomain( 'adapter-responsive-video' , false , basename( dirname( __FILE__ ) ) . '/languages' );
-}
-
-add_action( 'widgets_init' , 'arv_register_widget' );
-function arv_register_widget() {
-	register_widget( 'Adapter_Responsive_Video' );
-}
+<?php
 
 class Adapter_Responsive_Video extends WP_Widget {
 
@@ -122,4 +114,10 @@ function arv_result_filter( $raw_embed_code ) {
 	$class = arv_get_class_for_aspect_ratio( $raw_embed_code );
 	$bootstrap_markup = get_bootstrap_responsive_video( $src , $class );
 	return "<div class='post-responsive-video'>" . $bootstrap_markup . "</div>";
+}
+
+
+add_action( 'widgets_init' , 'arv_register_widget' );
+function arv_register_widget() {
+	register_widget( 'Adapter_Responsive_Video' );
 }
