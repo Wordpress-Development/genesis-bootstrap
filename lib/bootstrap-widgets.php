@@ -1,3 +1,5 @@
+<?php
+
 function genesis_add_bs_widgets_form($t,$return,$instance) {
     $instance = wp_parse_args(
         (array)$instance,
@@ -325,45 +327,44 @@ function widget_output_filters_display_widget() {
 
 function my_widget_output_filter( $widget_output, $widget_type, $widget_id ) {
     if ( 'categories' == $widget_type ) {
-        $widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
-        $widget_output = str_replace('<li class="cat-item cat-item-', '<li class="list-group-item cat-item cat-item-', $widget_output);
-	    $widget_output = str_replace('(', '<span class="badge cat-item-count"> ', $widget_output);
+        	$widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
+        	$widget_output = str_replace('<li class="cat-item cat-item-', '<li class="list-group-item cat-item cat-item-', $widget_output);
+	    	$widget_output = str_replace('(', '<span class="badge cat-item-count"> ', $widget_output);
    		$widget_output = str_replace(')', ' </span>', $widget_output);
-    }
-    elseif ( 'calendar' == $widget_type ) {
-        $widget_output = str_replace('<table id="wp-calendar', '<table class="table table-responsive table-condensed" id="wp-calendar', $widget_output);
-    }
+        }
+        elseif ( 'calendar' == $widget_type ) {
+                $widget_output = str_replace('<table id="wp-calendar', '<table class="table table-responsive table-condensed" id="wp-calendar', $widget_output);
+        }
   	elseif ( 'tag_cloud' == $widget_type ) {
 		$regex = "/(<a[^>]+?)( style='font-size:.+pt;'>)([^<]+?)(<\/a>)/";
 		$replace_with = "$1><span class='label label-primary'>$3</span>$4";
 		$widget_output = preg_replace( $regex , $replace_with , $widget_output );
 	}
   	elseif ( 'archives' == $widget_type ) {
-        $widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
-        $widget_output = str_replace('<li>', '<li class="list-group-item archive-list-group-item">', $widget_output);
-	    $widget_output = str_replace('(', '<span class="badge cat-item-count"> ', $widget_output);
+        	$widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
+        	$widget_output = str_replace('<li>', '<li class="list-group-item archive-list-group-item">', $widget_output);
+		$widget_output = str_replace('(', '<span class="badge cat-item-count"> ', $widget_output);
    		$widget_output = str_replace(')', ' </span>', $widget_output);
    	}
   	elseif ( 'meta' == $widget_type ) {
-        $widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
-        $widget_output = str_replace('<li>', '<li class="list-group-item meta-list-group-item">', $widget_output);
+        	$widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
+        	$widget_output = str_replace('<li>', '<li class="list-group-item meta-list-group-item">', $widget_output);
    	}
   	elseif ( 'recent-posts' == $widget_type ) {
-        $widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
-        $widget_output = str_replace('<li>', '<li class="list-group-item recent-posts-list-group-item">', $widget_output);
+        	$widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
+        	$widget_output = str_replace('<li>', '<li class="list-group-item recent-posts-list-group-item">', $widget_output);
    	}
   	elseif ( 'recent-comments' == $widget_type ) {
-        $widget_output = str_replace('<ul id="recentcomments">', '<ul id="recentcomments" class="list-group">', $widget_output);
-        $widget_output = str_replace('<li class="recentcomments">', '<li class="recentcomments list-group-item recent-comments-list-group-item">', $widget_output);
+        	$widget_output = str_replace('<ul id="recentcomments">', '<ul id="recentcomments" class="list-group">', $widget_output);
+        	$widget_output = str_replace('<li class="recentcomments">', '<li class="recentcomments list-group-item recent-comments-list-group-item">', $widget_output);
    	}
   	elseif ( 'pages' == $widget_type ) {
-        $widget_output = str_replace('<ul>', '<ul class="nav nav-stacked nav-pills">', $widget_output);
+        	$widget_output = str_replace('<ul>', '<ul class="nav nav-stacked nav-pills">', $widget_output);
    	}
   	elseif ( 'nav_menu' == $widget_type ) {
-        $widget_output = str_replace(' class="menu"', 'class="menu nav nav-stacked nav-pills"', $widget_output);
+        	$widget_output = str_replace(' class="menu"', 'class="menu nav nav-stacked nav-pills"', $widget_output);
    	}
   
       return $widget_output;
 }
 add_filter( 'widget_output', 'my_widget_output_filter', 10, 3 );
-
