@@ -322,49 +322,114 @@ function widget_output_filters_display_widget() {
 }
 
 
-
-
-
 function my_widget_output_filter( $widget_output, $widget_type, $widget_id ) {
     if ( 'categories' == $widget_type ) {
-        	$widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
-        	$widget_output = str_replace('<li class="cat-item cat-item-', '<li class="list-group-item cat-item cat-item-', $widget_output);
-	    	$widget_output = str_replace('(', '<span class="badge cat-item-count"> ', $widget_output);
+        $widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
+        $widget_output = str_replace('<li class="cat-item cat-item-', '<li class="list-group-item cat-item cat-item-', $widget_output);
+	    $widget_output = str_replace('(', '<span class="badge cat-item-count"> ', $widget_output);
    		$widget_output = str_replace(')', ' </span>', $widget_output);
-        }
-        elseif ( 'calendar' == $widget_type ) {
-                $widget_output = str_replace('<table id="wp-calendar', '<table class="table table-responsive table-condensed" id="wp-calendar', $widget_output);
-        }
-  	elseif ( 'tag_cloud' == $widget_type ) {
+    }
+    elseif ( 'calendar' == $widget_type ) {
+		$widget_output = str_replace('calendar_wrap', 'calendar_wrap table-responsive', $widget_output);
+        $widget_output = str_replace('<table id="wp-calendar', '<table class="table table-condensed" id="wp-calendar', $widget_output);
+    }
+  	elseif ( 'tag_cloud' == $widget_type )  {
 		$regex = "/(<a[^>]+?)( style='font-size:.+pt;'>)([^<]+?)(<\/a>)/";
 		$replace_with = "$1><span class='label label-primary'>$3</span>$4";
 		$widget_output = preg_replace( $regex , $replace_with , $widget_output );
 	}
   	elseif ( 'archives' == $widget_type ) {
-        	$widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
-        	$widget_output = str_replace('<li>', '<li class="list-group-item archive-list-group-item">', $widget_output);
-		$widget_output = str_replace('(', '<span class="badge cat-item-count"> ', $widget_output);
+        $widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
+        $widget_output = str_replace('<li>', '<li class="list-group-item archive-list-group-item">', $widget_output);
+	    $widget_output = str_replace('(', '<span class="badge cat-item-count"> ', $widget_output);
    		$widget_output = str_replace(')', ' </span>', $widget_output);
    	}
   	elseif ( 'meta' == $widget_type ) {
-        	$widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
-        	$widget_output = str_replace('<li>', '<li class="list-group-item meta-list-group-item">', $widget_output);
+        $widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
+        $widget_output = str_replace('<li>', '<li class="list-group-item meta-list-group-item">', $widget_output);
    	}
   	elseif ( 'recent-posts' == $widget_type ) {
-        	$widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
-        	$widget_output = str_replace('<li>', '<li class="list-group-item recent-posts-list-group-item">', $widget_output);
+        $widget_output = str_replace('<ul>', '<ul class="list-group">', $widget_output);
+        $widget_output = str_replace('<li>', '<li class="list-group-item recent-posts-list-group-item">', $widget_output);
    	}
   	elseif ( 'recent-comments' == $widget_type ) {
-        	$widget_output = str_replace('<ul id="recentcomments">', '<ul id="recentcomments" class="list-group">', $widget_output);
-        	$widget_output = str_replace('<li class="recentcomments">', '<li class="recentcomments list-group-item recent-comments-list-group-item">', $widget_output);
+        $widget_output = str_replace('<ul id="recentcomments">', '<ul id="recentcomments" class="list-group">', $widget_output);
+        $widget_output = str_replace('<li class="recentcomments">', '<li class="recentcomments list-group-item recent-comments-list-group-item">', $widget_output);
    	}
   	elseif ( 'pages' == $widget_type ) {
-        	$widget_output = str_replace('<ul>', '<ul class="nav nav-stacked nav-pills">', $widget_output);
+        $widget_output = str_replace('<ul>', '<ul class="nav nav-stacked nav-pills">', $widget_output);
    	}
   	elseif ( 'nav_menu' == $widget_type ) {
-        	$widget_output = str_replace(' class="menu"', 'class="menu nav nav-stacked nav-pills"', $widget_output);
+        $widget_output = str_replace(' class="menu"', 'class="menu nav nav-stacked nav-pills"', $widget_output);
    	}
   
       return $widget_output;
 }
-add_filter( 'widget_output', 'my_widget_output_filter', 10, 3 );
+
+
+function my_widget_output_filter_footer( $widget_output, $widget_type, $widget_id ) {
+    if ( 'categories' == $widget_type ) {
+        $widget_output = str_replace('<ul>', '<ul class="list-unstyled">', $widget_output);
+	    $widget_output = str_replace('(', '<span class="badge cat-item-count"> ', $widget_output);
+   		$widget_output = str_replace(')', ' </span>', $widget_output);
+    }
+    elseif ( 'calendar' == $widget_type ) {
+		$widget_output = str_replace('calendar_wrap', 'calendar_wrap table-responsive', $widget_output);
+        $widget_output = str_replace('<table id="wp-calendar', '<table class="table table-condensed" id="wp-calendar', $widget_output);
+    }
+  	elseif ( 'tag_cloud' == $widget_type )  {
+		$regex = "/(<a[^>]+?)( style='font-size:.+pt;'>)([^<]+?)(<\/a>)/";
+		$replace_with = "$1><span class='label label-primary'>$3</span>$4";
+		$widget_output = preg_replace( $regex , $replace_with , $widget_output );
+	}
+  	elseif ( 'archives' == $widget_type ) {
+        $widget_output = str_replace('<ul>', '<ul class="list-unstyled">', $widget_output);
+	    $widget_output = str_replace('(', '<span class="badge cat-item-count"> ', $widget_output);
+   		$widget_output = str_replace(')', ' </span>', $widget_output);
+   	}
+  	elseif ( 'meta' == $widget_type ) {
+        $widget_output = str_replace('<ul>', '<ul class="list-unstyled">', $widget_output);
+   	}
+  	elseif ( 'recent-posts' == $widget_type ) {
+        $widget_output = str_replace('<ul>', '<ul class="list-unstyled">', $widget_output);
+   	}
+  	elseif ( 'recent-comments' == $widget_type ) {
+        $widget_output = str_replace('<ul id="recentcomments">', '<ul id="recentcomments" class="list-unstyled">', $widget_output);
+   	}
+  	elseif ( 'pages' == $widget_type ) {
+        $widget_output = str_replace('<ul>', '<ul class="list-unstyled">', $widget_output);
+   	}
+  	elseif ( 'nav_menu' == $widget_type ) {
+        $widget_output = str_replace(' class="menu"', 'class="menu list-unstyled"', $widget_output);
+   	}
+  
+      return $widget_output;
+}
+
+
+
+
+
+
+function gb3_do_widget_filters_on_sidebar() {
+    add_filter( 'widget_output', 'my_widget_output_filter', 10, 3 );
+}
+add_action( 'genesis_before_sidebar_widget_area', 'gb3_do_widget_filters_on_sidebar' );
+
+function gb3_undo_widget_filters_on_sidebar() {
+    remove_filter( 'widget_output', 'my_widget_output_filter');
+    add_filter( 'widget_output', 'my_widget_output_filter_footer', 10, 3 );  
+}
+add_action( 'genesis_after_sidebar_widget_area', 'gb3_undo_widget_filters_on_sidebar' );
+
+
+
+add_action('genesis_entry_header', 'gb3_entry_archive_panel_wrapper_close', 1);
+function gb3_entry_archive_panel_wrapper_close() {
+    echo '<div class="panel-body">';
+}
+
+add_action('genesis_entry_footer', 'gb3_entry_archive_panel_wrapper_open' , 9999);
+function gb3_entry_archive_panel_wrapper_open() {
+    echo '</div>';
+}
