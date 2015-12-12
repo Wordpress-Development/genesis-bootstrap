@@ -1,3 +1,4 @@
+/* Sticky Footer Support */
 .site-container {
     display: flex;
     min-height: 100vh;
@@ -8,41 +9,58 @@
 }
 
 
-nav.nav-primary,
-nav.nav-secondary {
-    margin-bottom:0px;
-}
-.nav-primary+.nav-secondary {
-    margin-top: 0px;
+
+/* Secondary Nav Menu -> Submenu Bootstrap Fix */
+.nav-primary + .nav-secondary {
+  z-index: 999; 
 }
 
-.jumbotron h1 {
-    margin-top: 15px;
+/* Remove Navbar Margins - too allow multiple layouts */
+.nav-primary,
+.nav-secondary {
+    margin-bottom:0px;
 }
+
+/* Padding added here to fix removal of navbar margins */ 
 .site-inner {
 padding: 30px 0px;
 background: rgba(249, 249, 249, 0.67);
 }
 
-.nav-primary + .nav-secondary {
-  z-index: 999; 
+
+
+/* Jumbotron Header Margins */
+.jumbotron h1 {
+    margin-top: 15px;
 }
 
-.sidebar-primary .widget,
-.sidebar-secondary .widget {
+/* Jumbotron Fullwidth Bottom Margins */
+.jumbotron-header.fullwidth .jumbotron {
+    margin-bottom: 0px;
+}
+
+
+
+/* Sidebar Default Styling */
+.sidebar.sidebar-primary .widget,
+.sidebar.sidebar-secondary .widget {
     margin-bottom: 30px;
 }
 
-
-
-
-/* Widget Panel Wrap */
-.panel  .widget-title {
-    margin-top: 0px;
+/* Sidebar Widget Panel Wrap */
+.sidebar.sidebar-primary .panel.widget .widget-title,
+.sidebar.sidebar-secondary .panel.widget .widget-title {
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
 
+/* Sidebar Widget List Group Margins */
+.sidebar.sidebar-primary .panel.widget .panel-body.widget-wrap .list-group,
+.sidebar.sidebar-secondary .panel.widget .panel-body.widget-wrap .list-group{
+    margin-bottom: 0; 
+}
 
-/* Widget Search */
+/* Sidebar Widget Search */
 @media (min-width: 768px) {
 .sidebar-primary .search-form.form-inline .input-group > .input-group-btn,
 .sidebar-secondary .search-form.form-inline .input-group > .input-group-btn {
@@ -52,6 +70,7 @@ background: rgba(249, 249, 249, 0.67);
 .search-form .glyphicon {
     top: 2px;
 }
+
 
 
 /* Comments */
@@ -75,10 +94,4 @@ article.comment-body.media:hover .reply {
 }
 .media-body {
       border-bottom: 1px solid #eee;
-}
-
-
-/* Jumbotron Fullwidth Bottom Margins */
-.jumbotron-header.fullwidth .jumbotron {
-    margin-bottom: 0px;
 }
