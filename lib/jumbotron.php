@@ -2,17 +2,31 @@
 
 remove_action( 'genesis_site_title', 'genesis_seo_site_title' );
 remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
-add_action( 'genesis_header', 'jumbotron_widget_area_callback' );
+add_action( 'genesis_after_header', 'do_jumbotron_widget_area' );
 
-function jumbotron_widget_area_callback() {
-    if ( is_active_sidebar( 'jumbotron-widget-area' ) ) {
-        echo '<div class="jumbotron">';
-            genesis_structural_wrap( 'jumbotron-inner' );
-                dynamic_sidebar( 'jumbotron-widget-area' );
-            genesis_structural_wrap( 'jumbotron-inner', 'close' );
-        echo '</div>';
-   }
+
+function do_jumbotron_widget_area() {
+	do_action('jumbotron');
 }
+
+
+add_action( 'jumbotron', 'jumbotron_widget_area_callback' );
+function jumbotron_widget_area_callback() {
+
+if ( is_active_sidebar( 'jumbotron-widget-area' ) ): ?>
+<header <?php echo genesis_attr( 'jumbotron-header' ); ?>>
+	<?php genesis_structural_wrap( 'jumbotron-outer' ); ?>
+        	<div class="jumbotron">
+                	<?php genesis_structural_wrap( 'jumbotron-inner' ); ?>
+                    		<?php dynamic_sidebar( 'jumbotron-widget-area' ); ?>
+                		<?php genesis_structural_wrap( 'jumbotron-inner', 'close' ); ?>
+            		</div>
+            	<?php genesis_structural_wrap( 'jumbotron-outer', close ); ?>
+        </header>
+<?php endif;
+
+}
+
 
 
 
