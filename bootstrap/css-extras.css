@@ -33,3 +33,12 @@ Instructions:	Additional style support and examples for integrating Bootstrap wi
     background-color: #818a91;
     text-align: center;
 }
+
+
+
+/*------- [2. Bootstrap - No Gutter Columns / #gutters] -------*/
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
