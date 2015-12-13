@@ -34,6 +34,6 @@ function bsg_load_bootstrap_stylesheet() {
     //echo '<link rel="stylesheet" type="text/css" href="' . esc_url( $custom_css ) . '">' . "\n";
 
     }
+    wp_enqueue_style( 'bsg-font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', array(), CHILD_THEME_VERSION );
     
-
 }
