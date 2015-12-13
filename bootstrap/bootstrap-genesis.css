@@ -7,7 +7,7 @@ Instructions:	CSS Support for Bootstrap Genesis integration.
 
 [Table of contents]
 
-@TODO
+1. 
 
 \*=========================================================================*/
 
@@ -111,10 +111,10 @@ background: rgba(249, 249, 249, 0.67);
 
 
 /* ------------------------------------------------------------------------
-[ 4. Sidebar Widgets / #sidebars ]
+[ 5. Comments / #comments ]
 --------------------------------------------------------------------------- */
 
-/* Comments */
+/*------- [ 5.1 Comments - Media Object Fixes / #comment-media ] ------- */
 .comment-list,
 .comment-list .children,
 li.comment.depth-1 {
@@ -127,12 +127,16 @@ li.comment.depth-1 {
     padding-left: 48px;
     margin-top: 10px;
 }
+
+/*------- [ 5.2 Comments - Comment Reply / #comment-reply ] ------- */
 article.comment-body.media .reply {
     display: none;
 }
 article.comment-body.media:hover .reply {
     display: block;
 }
+
+/*------- [ 5.3 Comments - Border / #comment-border ] ------- */
 .media-body {
       border-bottom: 1px solid #eee;
 }
