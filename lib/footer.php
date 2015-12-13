@@ -17,12 +17,19 @@ function gb3_register_footer_widgets() {
 }
 
 
+function gb3_dynamic_sidebar_footer_inside() {
+    if ( is_active_sidebar( 'footer-inside' ) ) {
+        dynamic_sidebar( 'footer-inside' );
+    }
+}
+add_action('genesis_footer', 'gb3_dynamic_sidebar_footer_inside', 5);
+
+
+
 
 add_filter('genesis_footer_output', 'gb3_genesis_footer_output', 10, 3);
 function gb3_genesis_footer_output( $output, $backtotop_text, $creds_text ) {
-if ( is_active_sidebar( 'footer-inside' ) ) {
-    dynamic_sidebar( 'footer-inside' );
-}
+
 ob_start();
 genesis_nav_menu( array(
 	'theme_location'  => 'footer',
@@ -33,11 +40,14 @@ genesis_nav_menu( array(
 ) );
 $footer_nav = ob_get_contents();
 ob_end_clean();
+
 $backtotop_text ='<a id="gototop" href="#" class="btn btn-primary btn-sm back-to-top" role="button" title="Click to return on the top page" data-toggle="tooltip" data-placement="left"><i class="glyphicon glyphicon-chevron-up"></i></a>';
+
 $creds_text = 'Copyright [footer_copyright] <a href="'. esc_url( home_url( '/' ) ) .'" title="'. esc_attr( get_bloginfo('name') ) .' rel="nofollow"">'.get_bloginfo('name').'</a> &middot; All Rights Reserved';
 $creds_text = apply_filters( 'genesis_footer_creds_text', $creds_text );
 $creds = $creds_text ? sprintf( '<div class="creds">%s</div></div>', $creds_text ) : '';
-$output = '<div class="site-info">';
+
+$output  = '<div class="site-info">';
 $output .= $footer_nav;
 $output .= $creds;
 $output .= '</div>';
@@ -66,17 +76,16 @@ function amethyst_footer_menu() {
 ?>
 <style type="text/css">
 footer.site-footer {
-    padding-top: 20px;
-    padding-bottom: 20px;
     color: #767676;
     border-top: 1px solid #e5e5e5;
 }
-.site-footer .row > span,
-.site-footer .row > div {
- padding: 10px 0px;
+.footer-widget {
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
-.site-footer h3.widgettitle {
-    margin-top: 0px;
+.row+.site-info {
+    padding: 30px 0px;
+    border-top: 1px solid #eee;
 }
 .creds, .menu-footer {
     text-align: center;
