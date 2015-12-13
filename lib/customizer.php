@@ -1,8 +1,5 @@
 <?php
 
-
-
-    
     // add customizer controls
     add_action( 'customize_register', 'bsg_navbar_brand_logo_customize_register' );
     function bsg_navbar_brand_logo_customize_register( $wp_customize ) {
