@@ -17,11 +17,17 @@ Instructions:	Additional style support and examples for integrating Bootstrap wi
 1. Genesis Bootstrap - Meta Entry Tags / #tags
 2. Bootstrap - No Gutter Columns / #gutters
 3. Bootstrap - Additional Container Sizes / #containers
+4. Bootstrap (Helper Classes) - http://getbootstrap.com/css/#helper-classes
+    4.1 - Contextual backgrounds / #backgrounds
+    4.2 - Contextual colors / #colors
 \*=========================================================================*/
 
 
 
-/*------- [1. Genesis - Meta Entry Tags / #tags] -------*/
+/* ------------------------------------------------------------------------
+[1. Genesis - Meta Entry Tags / #tags]
+--------------------------------------------------------------------------- */
+
 .entry-tags a {
     display: inline-block;
     padding: .25em .4em;
@@ -38,15 +44,20 @@ Instructions:	Additional style support and examples for integrating Bootstrap wi
 
 
 
-/*------- [2. Bootstrap - No Gutter Columns / #gutters] -------*/
+/* ------------------------------------------------------------------------
+[2. Bootstrap - No Gutter Columns / #gutters]
+--------------------------------------------------------------------------- */
+
 .no-gutter > [class*='col-'] {
     padding-right:0;
     padding-left:0;
 }
 
 
+/* ------------------------------------------------------------------------
+[3. Bootstrap - Additional Container Sizes / #containers]
+--------------------------------------------------------------------------- */
 
-/*------- [3. Bootstrap - Additional Container Sizes / #containers] -------*/
 @media (min-width: 768px) {
     .container-small {
         width: 300px;
@@ -77,9 +88,33 @@ Instructions:	Additional style support and examples for integrating Bootstrap wi
 
 
 
+/* ------------------------------------------------------------------------
+[4. Bootstrap (Helper Classes) - http://getbootstrap.com/css/#helper-classes]
+--------------------------------------------------------------------------- */
 
+/*------- [4.1 - Contextual backgrounds / #backgrounds] -------*/
 
 .bg-muted {
     color: #fff;
     background-color: #777;
+}
+
+/*------- [4.2 - Contextual colors / #colors] -------*/
+.text-gray-base {
+  color: #000;
+}
+.text-gray-darker {
+  color: #222222;
+}
+.text-gray-dark {
+  color: #333333;
+}
+.text-gray {
+  color: #555555;
+}
+.text-gray-light {
+  color: #777777;
+}
+.text-gray-lighter {
+  color: #eeeeee;
 }
