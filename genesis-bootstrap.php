@@ -157,7 +157,8 @@ function gb3_custom_theme_support() {
                         'bsg-search-form',
                         'bsg-jumbotron',
                         'bsg-footer',
-                        'bsg-responsive-videos-widget'
+                        'bsg-responsive-videos-widget',
+                        'bsg-mce-css'
 
             );
 
