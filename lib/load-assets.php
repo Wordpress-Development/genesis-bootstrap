@@ -27,7 +27,7 @@ function bsg_load_bootstrap_stylesheet() {
     $stylesheet = apply_filters( 'bsg_css_url', $stylesheet );
     
     if ( $stylesheet ) {
-        wp_enqueue_style( 'bsg-theme-css', $stylesheet, array(), CHILD_THEME_VERSION );
+        wp_enqueue_style( 'bsg-bootstrap-css', $stylesheet, array(), CHILD_THEME_VERSION );
         //wp_enqueue_script( 'bsg-bootstrap-js', plugins_url('bootstrap/js/javascript.min.js', __DIR__), array('jquery'), '3.3.5', true );
 
     //$css_file = file_get_contents($custom_css);
