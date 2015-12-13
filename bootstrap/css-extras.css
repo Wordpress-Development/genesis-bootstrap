@@ -74,3 +74,12 @@ Instructions:	Additional style support and examples for integrating Bootstrap wi
 .container-small, .container-large {
     max-width: 100%;
 }
+
+
+
+
+
+.bg-muted {
+    color: #fff;
+    background-color: #777;
+}
