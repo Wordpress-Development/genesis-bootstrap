@@ -410,34 +410,6 @@ function my_widget_output_filter_footer( $widget_output, $widget_type, $widget_i
 
 
 
-/*
-function gb3_do_widget_filters_on_sidebar() {
-    add_filter( 'widget_output', 'my_widget_output_filter', 10, 3 );
-}
-add_action( 'genesis_before_sidebar_widget_area', 'gb3_do_widget_filters_on_sidebar' );
-add_action( 'genesis_before_sidebar_alt_widget_area', 'gb3_do_widget_filters_on_sidebar' );
-
-
-function gb3_undo_widget_filters_on_sidebar() {
-    remove_filter( 'widget_output', 'my_widget_output_filter');
-}
-add_action( 'genesis_after_sidebar_widget_area', 'gb3_undo_widget_filters_on_sidebar'  );
-add_action( 'genesis_after_sidebar_alt_widget_area', 'gb3_do_widget_filters_on_sidebar' );
-
-
-function gb3_do_widget_filters_on_footer() {
-    add_filter( 'widget_output', 'my_widget_output_filter_footer', 10, 3 );
-}
-add_action( 'genesis_before_footer', 'gb3_do_widget_filters_on_footer'  );
-
-
-
-function gb3_undo_widget_filters_on_footer() {
-    remove_filter( 'widget_output', 'my_widget_output_filter_footer');
-}
-add_action( 'genesis_after_footer', 'gb3_undo_widget_filters_on_footer'  );
-*/
-
 function gb3_do_widget_filters_on_sidebar() {
     add_filter( 'widget_output', 'my_widget_output_filter', 10, 3 );
 }
@@ -450,16 +422,3 @@ function gb3_do_widget_filters_on_footer() {
     add_filter( 'widget_output', 'my_widget_output_filter_footer', 10, 3 );
 }
 add_action( 'genesis_before_footer', 'gb3_do_widget_filters_on_footer'  );
-
-
-
-
-add_action('genesis_entry_header', 'gb3_entry_archive_panel_wrapper_close', 1);
-function gb3_entry_archive_panel_wrapper_close() {
-    echo '<div class="panel-body">';
-}
-
-add_action('genesis_entry_footer', 'gb3_entry_archive_panel_wrapper_open' , 9999);
-function gb3_entry_archive_panel_wrapper_open() {
-    echo '</div>';
-}
