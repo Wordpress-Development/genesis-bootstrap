@@ -1,3 +1,18 @@
+/*=========================================================================*\
+[Bootstrap Genesis CSS]
+Plugin:	        Bootstrap Genesis
+Version:	    1.0
+Last change:	12/12/15 
+Instructions:	CSS Support for Bootstrap Genesis integration.
+
+[Table of contents]
+
+@TODO
+
+\*=========================================================================*/
+
+
+
 /* Sticky Footer Support */
 .site-container {
     display: flex;
