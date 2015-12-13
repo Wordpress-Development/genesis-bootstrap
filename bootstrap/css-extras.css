@@ -1,0 +1,32 @@
+/*=========================================================================*\
+[CSS Extras]
+
+Plugin:	        Bootstrap Genesis
+Version:	    1.0
+Last change:	12/12/15 [Entry Tags]
+Instructions:	Additional style support and examples for integrating Bootstrap with Genesis
+
+
+
+
+[Table of contents]
+
+1. Genesis - Meta Entry Tags / #tags
+\*=========================================================================*/
+
+
+
+/*------- [1. Genesis - Meta Entry Tags / #tags] -------*/
+.entry-tags a {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    line-height: 1;
+    color: #fff;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    font-weight: 700;
+    background-color: #818a91;
+    text-align: center;
+}
