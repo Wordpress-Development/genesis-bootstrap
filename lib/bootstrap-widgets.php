@@ -1,3 +1,5 @@
+<?php
+
 function genesis_add_bs_widgets_form($t,$return,$instance) {
     $instance = wp_parse_args(
         (array)$instance,
@@ -408,7 +410,7 @@ function my_widget_output_filter_footer( $widget_output, $widget_type, $widget_i
 
 
 
-
+/*
 function gb3_do_widget_filters_on_sidebar() {
     add_filter( 'widget_output', 'my_widget_output_filter', 10, 3 );
 }
@@ -434,7 +436,20 @@ function gb3_undo_widget_filters_on_footer() {
     remove_filter( 'widget_output', 'my_widget_output_filter_footer');
 }
 add_action( 'genesis_after_footer', 'gb3_undo_widget_filters_on_footer'  );
+*/
 
+function gb3_do_widget_filters_on_sidebar() {
+    add_filter( 'widget_output', 'my_widget_output_filter', 10, 3 );
+}
+add_action( 'genesis_before_sidebar_widget_area', 'gb3_do_widget_filters_on_sidebar' );
+add_action( 'genesis_before_sidebar_alt_widget_area', 'gb3_do_widget_filters_on_sidebar' );
+
+
+function gb3_do_widget_filters_on_footer() {
+    remove_filter( 'widget_output', 'my_widget_output_filter');
+    add_filter( 'widget_output', 'my_widget_output_filter_footer', 10, 3 );
+}
+add_action( 'genesis_before_footer', 'gb3_do_widget_filters_on_footer'  );
 
 
 
