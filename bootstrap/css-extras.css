@@ -63,7 +63,6 @@ Instructions:	Additional style support and examples for integrating Bootstrap wi
 --------------------------------------------------------------------------- */
 
 /*------- [ 3.1 Bootstrap - Container Sizes / #container-sizes ] -------*/
-
 @media (min-width: 768px) {
     .container-small {
         width: 300px;
