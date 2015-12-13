@@ -132,7 +132,8 @@ if ( ! function_exists( 'gb3_custom_theme_support' ) ) {
                         'bsg-post-content-nav',
                         'bsg-search-form',
                         'bsg-jumbotron',
-                        'bsg-footer'
+                        'bsg-footer',
+                        'bsg-responsive-videos-widget'
             	);
 		if(has_filter('bsg_modify_theme')) {
 			$bsg = apply_filters('bsg_modify_theme', $bsg);
