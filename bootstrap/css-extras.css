@@ -14,7 +14,9 @@ Instructions:	Additional style support and examples for integrating Bootstrap wi
 
 [Table of contents]
 
-1. Genesis - Meta Entry Tags / #tags
+1. Genesis Bootstrap - Meta Entry Tags / #tags
+2. Bootstrap - No Gutter Columns / #gutters
+3. Bootstrap - Additional Container Sizes / #containers
 \*=========================================================================*/
 
 
@@ -40,4 +42,35 @@ Instructions:	Additional style support and examples for integrating Bootstrap wi
 .no-gutter > [class*='col-'] {
     padding-right:0;
     padding-left:0;
+}
+
+
+
+/*------- [3. Bootstrap - Additional Container Sizes / #containers] -------*/
+@media (min-width: 768px) {
+    .container-small {
+        width: 300px;
+    }
+    .container-large {
+        width: 970px;
+    }
+}
+@media (min-width: 992px) {
+    .container-small {
+        width: 500px;
+    }
+    .container-large {
+        width: 1170px;
+    }
+}
+@media (min-width: 1200px) {
+    .container-small {
+        width: 700px;
+    }
+    .container-large {
+        width: 1500px;
+    }
+}
+.container-small, .container-large {
+    max-width: 100%;
 }
