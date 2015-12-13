@@ -158,7 +158,9 @@ function gb3_custom_theme_support() {
                         'bsg-jumbotron',
                         'bsg-footer',
                         'bsg-responsive-videos-widget',
-                        'bsg-mce-css'
+                        'bsg-mce-css',
+                        'bsg-bootstrap-widgets',
+                        'bsg-bootstrap-genesis-css'
 
             );
 
