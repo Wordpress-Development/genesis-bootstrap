@@ -23,6 +23,7 @@ function bsg_load_bootstrap_stylesheet() {
         //$custom_css = home_url() . '/custom.css';
     else
         $stylesheet = plugins_url('bootstrap/css/bootstrap.min.css', __DIR__); // plugin_dir_url( __FILE__ )
+        $stylesheet = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css';
     $stylesheet = apply_filters( 'bsg_css_url', $stylesheet );
     
     if ( $stylesheet ) {
