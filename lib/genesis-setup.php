@@ -1,5 +1,8 @@
 <?php
 
+
+unregister_sidebar( 'header-right' );
+
 // Remove Parent Theme Support
 remove_theme_support( 'genesis-accessibility' );
 add_action( 'wp_enqueue_scripts', 'sp_disable_superfish' );
