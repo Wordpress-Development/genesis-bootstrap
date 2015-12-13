@@ -19,7 +19,6 @@ Instructions:	CSS Support for Bootstrap Genesis integration.
 --------------------------------------------------------------------------- */
 
 /*------- [ 1.1  Sticky Footer  ] -------*/
-
 .site-container {
     display: flex;
     min-height: 100vh;
@@ -29,8 +28,19 @@ Instructions:	CSS Support for Bootstrap Genesis integration.
     flex: 1;
 }
 
-/*------- [ 1.2   Navbar Fixes / #navbarfix  ] -------*/
+/*------- [ 1.2  Page Inner Padding / #inner-padding   ] -------*/
+.site-inner {
+padding: 30px 0px; /* Padding added here to fix removal of navbar margins */
+background: rgba(249, 249, 249, 0.67);
+}
 
+
+
+/* ------------------------------------------------------------------------
+[ 2.  Navbar / #navbar ]
+--------------------------------------------------------------------------- */
+
+/*------- [ 2.1  Nav Fixes / #navbar-fixes   ] -------*/
 .nav-primary + .nav-secondary {
   z-index: 999; 
 }
@@ -39,52 +49,55 @@ Instructions:	CSS Support for Bootstrap Genesis integration.
     margin-bottom:0px;
 }
 
-/*------- [ 1.3  Page Inner Padding / #inner-padding   ] -------*/
-
-/* Padding added here to fix removal of navbar margins */ 
-.site-inner {
-padding: 30px 0px;
-background: rgba(249, 249, 249, 0.67);
+/*------- [ 2.2  Navbar Brand / #navbar-brand   ] -------*/
+.navbar-brand {
+  padding: 0px; /* firefox fix - don't change */
+}
+.navbar-brand>img {
+  height: 100%; 
+  width: auto; 
+  padding: 7px 15px;
 }
 
 
-/* ------------------------------------------------------------------------
-[ 1. Jumbotron / #jumbotron ]
---------------------------------------------------------------------------- */
 
-/*------- [ 1.4  Jumbotron / #jumbotron   ] -------*/
+/* ------------------------------------------------------------------------
+[ 3. Jumbotron / #jumbotron ]
+--------------------------------------------------------------------------- */
 
 .jumbotron h1 {
     margin-top: 15px;
 }
-
-/* Jumbotron Fullwidth Bottom Margins */
 .jumbotron-header.fullwidth .jumbotron {
-    margin-bottom: 0px;
+    margin-bottom: 0px; /* Jumbotron Fullwidth Bottom Margins */
 }
 
 
 
-/* Sidebar Default Styling */
+/* ------------------------------------------------------------------------
+[ 4. Sidebar Widgets / #sidebars ]
+--------------------------------------------------------------------------- */
+
+/*------- [ 4.1 Sidebar - Default Styling / #sidebar-defaults ] ------- */
 .sidebar.sidebar-primary .widget,
 .sidebar.sidebar-secondary .widget {
     margin-bottom: 30px;
 }
 
-/* Sidebar Widget Panel Wrap */
+/*------- [ 4.2 Sidebar - Widget Panel Wrap / #sidebar-panels ] ------- */
 .sidebar.sidebar-primary .panel.widget .widget-title,
 .sidebar.sidebar-secondary .panel.widget .widget-title {
     margin-top: 5px;
     margin-bottom: 15px;
 }
 
-/* Sidebar Widget List Group Margins */
+/*------- [ 4.3 Sidebar - List Group Margins / #sidebar-list-group ] ------- */
 .sidebar.sidebar-primary .panel.widget .panel-body.widget-wrap .list-group,
 .sidebar.sidebar-secondary .panel.widget .panel-body.widget-wrap .list-group{
     margin-bottom: 0; 
 }
 
-/* Sidebar Widget Search */
+/*------- [ 4.4 Sidebar - Search Widget / #sidebar-search ] ------- */
 @media (min-width: 768px) {
 .sidebar-primary .search-form.form-inline .input-group > .input-group-btn,
 .sidebar-secondary .search-form.form-inline .input-group > .input-group-btn {
@@ -96,6 +109,10 @@ background: rgba(249, 249, 249, 0.67);
 }
 
 
+
+/* ------------------------------------------------------------------------
+[ 4. Sidebar Widgets / #sidebars ]
+--------------------------------------------------------------------------- */
 
 /* Comments */
 .comment-list,
