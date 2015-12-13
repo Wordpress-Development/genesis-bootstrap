@@ -28,11 +28,6 @@ add_theme_support( 'genesis-structural-wraps', array(
 	'jumbotron-inner', 
 	'site-inner' 
 	) );
-add_theme_support ( 'genesis-menus' , array ( 
-	'primary' => __( 'Primary Navigation Menu', 'genesis' ),
-	'secondary' => __( 'Secondary Navigation Menu', 'genesis' ),
-	'footer' => __( 'Footer Navigation Menu', 'genesis' )
-	) );
 
 
 
