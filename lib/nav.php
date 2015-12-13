@@ -73,3 +73,12 @@ function bsg_navbar_brand_markup() {
     $output .= '</a>';
     return $output;
 }
+
+
+
+function gb3_navbar_nav_navbar_right( $nav_output, $nav ) {
+	$search = 'nav navbar-nav';
+	$replace = 'nav navbar-nav navbar-right';
+	$nav_output = str_replace( $search, $replace, $nav_output );
+	return $nav_output;
+}
