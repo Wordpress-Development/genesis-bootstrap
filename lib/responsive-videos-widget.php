@@ -1,17 +1,48 @@
 <?php
 
+add_action( 'widgets_init', function(){
+     register_widget( 'Bootstrap_Responsive_Video' );
+});
+
+
+/**
+ * Adds Bootstrap_Responsive_Video widget.
+ */
 class Bootstrap_Responsive_Video extends WP_Widget {
 
+  
+  	/**
+	 * Register widget with WordPress.
+	 */
 	function __construct() {
-		 $options = array( 'classname' => 'bootstrap-responsive-video' ,
+		 $widget_options = array( 'classname' => 'bootstrap-responsive-video' ,
 				'description' => __( 'Video from YouTube, Vimeo, and more.' , 'bootstrap-responsive-video' ) ,
 		 );
-		 $this->WP_Widget( 'bootstrap_responsive_video' , __( 'Bootstrap Responsive Video Embed' , 'bootstrap-responsive-video' ) , $options );
+        	$control_ops = array('width' => 250);
+         	parent::__construct('bootstrap_responsive_video','Bootstrap Responsive Video Embed',$widget_options,$control_ops);
 	}
 
-	function form( $instance ) {
+
+	/**
+	 * Back-end widget form.
+	 *
+	 * @see WP_Widget::form()
+	 *
+	 * @param array $instance Previously saved values from database.
+	 */
+	public function form( $instance ) {  
+	  	if ( isset( $instance[ 'title' ] ) ) {
+			$title = $instance[ 'title' ];
+		}
+		else {
+			$title = __( 'Video Title' );
+		}
 		$video_url = isset( $instance[ 'video_url' ] ) ? $instance[ 'video_url' ] : "";
 		?>
+			<p>
+				<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label> 
+				<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
+			</p>
 			<p>
 				<label for="<?php echo $this->get_field_id( 'video_url' ); ?>">
 	 			       <?php _e( 'Video url' , 'bootstrap-responsive-video' ); ?>
@@ -21,28 +52,55 @@ class Bootstrap_Responsive_Video extends WP_Widget {
 		<?php
 	}
 
-	function update( $new_instance , $previous_instance ) {
-		$instance = $previous_instance;
+    
+	/**
+	 * Sanitize widget form values as they are saved.
+	 *
+	 * @see WP_Widget::update()
+	 *
+	 * @param array $new_instance Values just sent to be saved.
+	 * @param array $old_instance Previously saved values from database.
+	 *
+	 * @return array Updated safe values to be saved.
+	 */
+	public function update( $new_instance , $old_instance ) {
+         // $instance = array();
+	    $instance = $old_instance;
 		$video_url = isset( $new_instance[ 'video_url' ] ) ? $new_instance[ 'video_url' ] : "";
 		if ( $video_url ) {
-			$raw_iframe_code = gb3__get_raw_iframe_code( $video_url );
+		    $instance['title'] = ( ! empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
+			$raw_iframe_code = gb3_get_raw_iframe_code( $video_url );
 			$instance[ 'video_source' ] = gb3_get_iframe_attribute( $raw_iframe_code , 'src' );
 			$instance[ 'aspect_ratio_class' ] = gb3_get_class_for_aspect_ratio( $raw_iframe_code );
 			$instance[ 'video_url' ] = strip_tags( $video_url );
 		}
 		return $instance;
 	}
-
-	function widget( $args , $instance ) {
+    
+    
+	/**
+	 * Front-end display of widget.
+	 *
+	 * @see WP_Widget::widget()
+	 *
+	 * @param array $args     Widget arguments.
+	 * @param array $instance Saved values from database.
+	 */
+	public function widget( $args , $instance ) {
 		$video_source = isset( $instance[ 'video_source' ] ) ? $instance[ 'video_source' ] : "";
 		$aspect_ratio_class = isset( $instance[ 'aspect_ratio_class' ] ) ? $instance[ 'aspect_ratio_class' ] : "";
 		if ( $video_source ) {
-			$bootstrap_responsive_video = get_bootstrap_responsive_video( $video_source , $aspect_ratio_class );
-			echo $args[ 'before_widget' ] . $bootstrap_responsive_video . $args[ 'after_widget' ];
+			$bootstrap_responsive_video = gb3_get_bootstrap_responsive_video( $video_source , $aspect_ratio_class );
+ 	  		echo $args['before_widget'];
+			if ( ! empty( $instance['title'] ) ) {
+			echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ). $args['after_title'];
+			}
+        	echo $bootstrap_responsive_video; 
+			echo $args[ 'after_widget' ];
 		}
 	}
-
-}
+  
+} // class Bootstrap_Responsive_Video
 
 
 
@@ -51,7 +109,7 @@ function gb3_get_raw_iframe_code( $url ) {
 	return $raw_code;
 }
 
-function get_bootstrap_responsive_video( $src , $class ) {
+function gb3_get_bootstrap_responsive_video( $src , $class ) {
 	$max_width = apply_filters( 'gb3_video_max_width' , '580' );
 	return
 		"<div class='responsive-video-container' style='max-width:{$max_width}px'>
@@ -77,7 +135,7 @@ function gb3_get_class_for_aspect_ratio( $embed_code ) {
 
 function gb3_get_bootstrap_aspect_ratio( $embed_code ) {
 	$aspect_ratio = gb3_get_raw_aspect_ratio( $embed_code );
-	if ( is_ratio_closer_to_four_by_three( $aspect_ratio ) ) {
+	if ( gb3_is_ratio_closer_to_four_by_three( $aspect_ratio ) ) {
 		return '4by3';
 	}
 	return '16by9';
@@ -116,10 +174,4 @@ function gb3_responsive_embed_result_filter( $raw_embed_code ) {
 	$class = gb3_get_class_for_aspect_ratio( $raw_embed_code );
 	$bootstrap_markup = gb3_get_bootstrap_responsive_video( $src , $class );
 	return "<div class='post-responsive-video'>" . $bootstrap_markup . "</div>";
-}
-
-
-add_action( 'widgets_init' , 'gb3_register_widget_responsive_embed' );
-function gb3_register_widget_responsive_embed() {
-	register_widget( 'Bootstrap_Responsive_Video' );
 }
