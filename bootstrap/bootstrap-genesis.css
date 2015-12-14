@@ -215,3 +215,14 @@ article.comment-body.media:hover .reply {
 .media-body {
       border-bottom: 1px solid #eee;
 }
+
+
+.comment-content {
+    color: #777;
+}
+span.comment-author {
+    margin-right: 6px;
+}
+a.comment-time-link{
+    color: #aaa;
+}
