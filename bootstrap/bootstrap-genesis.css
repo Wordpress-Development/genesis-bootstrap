@@ -123,6 +123,9 @@ background: rgba(249, 249, 249, 0.67);
     top: 2px;
 }
 
+.widget_recent_entries .list-group-item a {
+    display: block;
+}
 
 
 /* ------------------------------------------------------------------------
