@@ -56,7 +56,7 @@ background: rgba(249, 249, 249, 0.67);
 --------------------------------------------------------------------------- */
 
 /*------- [ 2.1  Nav Fixes / #navbar-fixes   ] -------*/
-.nav-primary + .nav-secondary {
+.nav-primary ~ .nav-secondary {
   z-index: 999; 
 }
 .nav-primary,
@@ -66,13 +66,70 @@ background: rgba(249, 249, 249, 0.67);
 
 /*------- [ 2.2  Navbar Brand / #navbar-brand   ] -------*/
 .navbar-brand {
-  padding: 0px; /* firefox fix - don't change */
+  padding: 0px!important; /* firefox fix - don't change */
 }
 .navbar-brand>img {
-  height: 100%; 
+  height: 100%;
+  max-height: 100%;
   width: auto; 
-  padding: 7px 15px;
+  padding: 5px 15px; /* Adjust the size and positioning with padding alone*/
 }
+
+
+
+/*------- [ 2.3 Center Navbar Logo / #navbar-brand-center ] ------- */
+.navbar-brand {
+  padding: 0px!important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 50px;
+  margin-right: 15px;
+  left: 0;
+  top: 0;
+}
+.brand-center .navbar-brand {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Centered Navbar Background Image with text for sreen readers and seo support */
+.brand-center .navbar-brand {
+  /* background-image: url(); */
+  /* max-width: 200px; */ /*optional*/
+}
+
+
+
+/*------- [ 2.4 Tall Navbar / #navbar-brand-tall ] ------- */
+.nav-primary-tall .nav-primary .navbar-brand,
+.nav-secondary-tall .nav-secondary .navbar-brand {
+  height: 80px;
+  line-height: 80px;
+}
+/* line height is 20px by default so add 30px top and bottom to equal the new .navbar-brand 80px height  */
+.nav-primary-tall .nav-primary .nav >li >a,
+.nav-secondary-tall .nav-secondary .nav >li >a {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+/* Toggle position fix for example 3 */
+.nav-primary-tall .nav-primary .navbar-toggle,
+.nav-secondary-tall .nav-secondary .navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+}
+
+
+
+
+
 
 
 
