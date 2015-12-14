@@ -236,3 +236,9 @@ a.comment-time-link{
     width: 40px;
     height: 40px;
 }
+a.comment-reply-link {
+    color: #aaa;
+    font-weight: 500;
+    margin-left: 0px;
+    font-size: 86%;
+}
