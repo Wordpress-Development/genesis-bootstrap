@@ -1,0 +1,35 @@
+
+body.bootstrap-genesis-fixed-nav {
+	padding-top: 70px;
+}
+body.admin-bar.bootstrap-genesis-fixed-nav {
+	padding-top: 71px;
+}
+body.admin-bar.bootstrap-genesis-fixed-nav .navbar.affix-top,
+body.admin-bar.bootstrap-genesis-fixed-nav .navbar.affix {
+	top: 32px;
+}
+.no-js body.admin-bar.bootstrap-genesis-fixed-nav .nav-primary {
+	padding-top: 32px;
+}
+
+@media screen and (max-width: 782px) {
+	body.admin-bar.bootstrap-genesis-fixed-nav {
+		padding-top: 71px;
+	}
+	body.admin-bar.bootstrap-genesis-fixed-nav .navbar.affix-top,
+	body.admin-bar.bootstrap-genesis-fixed-nav .navbar.affix {
+		top: 46px;
+	}
+	.no-js body.admin-bar.bootstrap-genesis-fixed-nav .nav-primary {
+		padding-top: 46px;
+	}
+}
+@media screen and (max-width: 600px) {
+	body.admin-bar.bootstrap-genesis-fixed-nav .navbar.affix {
+		top: 0;
+	}
+	.no-js body.admin-bar.bootstrap-genesis-fixed-nav .nav-primary {
+		padding-top: 46px;
+	}
+}
