@@ -69,8 +69,6 @@ function gb3_add_nav_footer_attr( $attributes ){
 
 
 
-
-
 add_action( 'wp_footer', 'amethyst_footer_menu', 9999 );
 function amethyst_footer_menu() {
 ?>
@@ -83,8 +81,11 @@ footer.site-footer {
     padding-top: 30px;
     padding-bottom: 30px;
 }
+.site-info {
+    padding: 25px 0;
+    border-top: none;
+}
 .row+.site-info {
-    padding: 30px 0px;
     border-top: 1px solid #eee;
 }
 .creds, .menu-footer {
