@@ -141,11 +141,9 @@ function sp_post_meta_filter($post_info) {
 
 function gb3_custom_theme_support() {
            $bsg = array(
-                        'bsg-sidebars',
                         'bsg-head',
                         'bsg-bootstrap-markup',
-                        'bsg-bootstrap-walker',
-                        'bsg-comment-form',
+                        'bsg-comments',
                         'bsg-customizer',
                         'bsg-footer-creds',
                         'bsg-genesis-setup',
@@ -161,7 +159,6 @@ function gb3_custom_theme_support() {
                         'bsg-mce-css',
                         'bsg-bootstrap-widgets',
                         'bsg-bootstrap-genesis-css'
-
             );
 
     if(has_filter('bsg_modify_theme')) {
