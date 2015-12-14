@@ -5,8 +5,8 @@ function gb3_register_footer_widgets() {
     // Moved from sidebars.php to stay modular
     $footer = array(
         'id'            => 'footer-inside',
-        'name'          => __( 'Footer', 'gb3' ),
-        'description'   => __( 'This is located inside the footer container.',  'gb3'  ),
+        'name'          => __( 'Footer' ),
+        'description'   => __( 'This is located inside the footer container.' ),
         'class'         => 'gb3-footer',
         'before_widget' => '<div id="%1$s" class="footer-widget %2$s">',
         'after_widget'  => '</div>',
