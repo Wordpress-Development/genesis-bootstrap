@@ -1,6 +1,6 @@
 <?php
 
-/* Bootstrap CDN */
+/* Bootstrap CDN - not fully supported (use at own risk) */
 
 
 function twbsg_bootstrap_js_url() {
@@ -44,3 +44,8 @@ function twbsg_bootstrap_js_cdn() {
 }
 add_action('wp_enqueue_scripts', 'twbsg_bootstrap_js_cdn');
 // */
+
+
+
+
+// Roots Way - http://wordpress.stackexchange.com/a/12450/43806
