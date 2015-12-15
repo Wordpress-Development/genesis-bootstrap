@@ -1,7 +1,12 @@
 <?php
 
 
-unregister_sidebar( 'header-right' );
+// unregister_sidebar( 'header-right' );
+
+# Hide Wordpress Specific Schema 
+remove_filter( 'genesis_attr_site-header', 'genesis_attributes_header' );
+remove_filter( 'genesis_attr_site-footer', 'genesis_attributes_site_footer' );
+
 
 // Remove Parent Theme Support
 remove_theme_support( 'genesis-accessibility' );
