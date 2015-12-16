@@ -1,5 +1,9 @@
 <?php
 
+/** RESPONSIVE BOOTSTRAP VIDEO EMBEDS
+ *  Please read ( http://goo.gl/Ba14Ol ) following Stack Overflow post for information concerning Chrome browser warnings
+ */
+
 add_action( 'widgets_init', function(){
      register_widget( 'Bootstrap_Responsive_Video' );
 });
@@ -9,8 +13,7 @@ add_action( 'widgets_init', function(){
  * Adds Bootstrap_Responsive_Video widget.
  */
 class Bootstrap_Responsive_Video extends WP_Widget {
-
-  
+	
   	/**
 	 * Register widget with WordPress.
 	 */
@@ -111,13 +114,12 @@ function gb3_get_raw_iframe_code( $url ) {
 
 function gb3_get_bootstrap_responsive_video( $src , $class ) {
 	$max_width = apply_filters( 'gb3_video_max_width' , '580' );
-	return
-		"<div class='responsive-video-container' style='max-width:{$max_width}px'>
+	return "<div class='responsive-video-container' style='max-width:{$max_width}px'>
 			<div class='embed-responsive {$class}'>
 			     <iframe class='embed-responsive-item' src='{$src}'>
 			     </iframe>
 			 </div>
-		 </div>\n";
+		</div>\n";
 }
 
 function gb3_get_iframe_attribute( $iframe , $attribute ) {
