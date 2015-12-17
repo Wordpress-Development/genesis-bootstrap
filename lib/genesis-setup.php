@@ -10,13 +10,14 @@ remove_filter( 'genesis_attr_site-footer', 'genesis_attributes_site_footer' );
 
 // Remove Parent Theme Support
 remove_theme_support( 'genesis-accessibility' );
+add_filter( 'genesis_superfish_enabled', '__return_false' );
+/*
 add_action( 'wp_enqueue_scripts', 'sp_disable_superfish' );
 function sp_disable_superfish() {
 	wp_deregister_script( 'superfish' );
 	wp_deregister_script( 'superfish-args' );
 }
-
-
+*/
 
 // Child Theme Support
 add_theme_support( 'html5', array( 
