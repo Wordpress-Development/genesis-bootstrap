@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name:        GB3
+Plugin Name:        GB3 - Genesis Bootstrap 3
 Plugin URI:         https://github.com/bryanwillis/bootstrap-genesis-addons/
 Description:        Add Bootstrap to Genesis Theme via plugin
 Version:            1.0.0
