@@ -1,20 +1,29 @@
 <?php
 /**
- * Custom Author Box
- * Adds User Contact Methods, Remove Default Genesis Box, and add Bootstraped Box 
- *************************************************************************************/
+ * Module: Custom Author Box
+ * Description: Adds User Contact Methods, Remove Default Genesis Box, and add Bootstraped Box.
+ */
 
 
-/* Display author box on single posts
+
+/*-----------------------------------------------------------------------------------*/
+/* Display author box on single posts                                                */
+/*-----------------------------------------------------------------------------------*/
+//* 
 add_filter( 'get_the_author_genesis_author_box_single', '__return_true' );
+// */
 
 
 
-/* Modify the size of the Gravatar in the author box
+/*-----------------------------------------------------------------------------------*/
+/* Modify the size of the Gravatar in the author box                                 */
+/*-----------------------------------------------------------------------------------*/
+//* 
 add_filter( 'genesis_author_box_gravatar_size', 'altitude_author_box_gravatar' );
 function altitude_author_box_gravatar( $size ) {
     return 90;
 }
+// */
 
 
 /*-----------------------------------------------------------------------------------*/
@@ -40,7 +49,7 @@ function rv_custom_profile_fields( $contactmethods ) {
 /* Removes default Genesis Author Box - Add custom box with custom user meta fields  */
 /*-----------------------------------------------------------------------------------*/
 //* 
-function rv_theme_author_box() { 
+function twbsgen_genesis_do_author_box_single() { 
   if ( is_single() ) {
   ?>
 	<?php $gravatar = get_avatar( get_the_author_meta( 'ID' ), 250 ); // Author Gravatar ?>
@@ -79,9 +88,9 @@ function rv_theme_author_box() {
 		</div><!-- .col-sm-9 -->
 </div> <!-- .row -->
 	</section>
-<?php 
+<?php
   }
 }
-remove_action( 'genesis_after_entry', 'genesis_do_author_box_single', 8 ); // Remove default Genesis Author Box
-add_action( 'genesis_after_entry', 'rv_theme_author_box', 8 ); // Do custom author box instead
+remove_action( 'genesis_after_entry', 'genesis_do_author_box_single', 8 ); // Remove Genesis Author Box
+add_action( 'genesis_after_entry', 'twbsgen_genesis_do_author_box_single', 8 ); // Add bootstrap author box instead
 //*/
