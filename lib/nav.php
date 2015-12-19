@@ -8,7 +8,6 @@ if (
 }
 
 
-
 /**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
@@ -112,8 +111,11 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 
 
-remove_action( 'genesis_site_title', 'genesis_seo_site_title' );
-remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
+
+
+
+//remove_action( 'genesis_site_title', 'genesis_seo_site_title' );
+//remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
 
 // remove primary & secondary nav from default position
 remove_action( 'genesis_after_header', 'genesis_do_nav' );
@@ -168,6 +170,8 @@ EOT;
 }
 
 
+
+
   // add customizer controls
 add_action( 'customize_register', 'bsg_navbar_brand_logo_customize_register' );
 function bsg_navbar_brand_logo_customize_register( $wp_customize ) {
@@ -191,22 +195,16 @@ function bsg_navbar_brand_logo_customize_register( $wp_customize ) {
         ) );
 }
 
+
+
 function bsg_navbar_brand_markup() {
         $brand_logo = get_theme_mod( 'brand_logo' );
-        if ( ! $brand_logo ) {
-            return $output;
+        if ( $brand_logo ) {
+            $img = '<img src="'.$brand_logo.'" alt="'.esc_attr( get_bloginfo( 'name' ) ).'">';
+            $output = '<a class="navbar-brand" id="logo" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.$img.'</a>';
+        } else {
+            $output = '<a class="navbar-brand" id="logo" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.esc_attr(get_bloginfo( 'name' )).'</a>';
         }
-        $output = '<a class="navbar-brand" id="logo" title="' .
-            esc_attr( get_bloginfo( 'description' ) ) .
-            '" href="' .
-            esc_url( home_url( '/' ) ) .
-            '">';
-        $output .= '<img src="' .
-            $brand_logo .
-            '" alt="' .
-            esc_attr( get_bloginfo( 'name' ) ) .
-            '">';
-        $output .= '</a>';
         return $output;
 }
 
