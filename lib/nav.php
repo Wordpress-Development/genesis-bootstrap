@@ -140,6 +140,8 @@ function bsg_nav_menu_args_filter( $args ) {
     return $args;
 }
 
+
+
 add_filter( 'wp_nav_menu', 'bsg_nav_menu_markup_filter', 10, 2 );
 function bsg_nav_menu_markup_filter( $html, $args ) {
     if (
