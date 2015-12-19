@@ -28,5 +28,5 @@ function brw_filter_footer_widgets_structural_wrap( $output, $original_output ) 
 	}
   	return $output;
 }
-add_filter( 'genesis_structural_wrap-site-inner', 'brw_filter_footer_widgets_structural_wrap', 999, 2);
+add_filter( 'genesis_structural_wrap-site-inner', 'brw_filter_footer_widgets_structural_wrap', 99, 2);
 // */
