@@ -76,6 +76,20 @@ add_filter( 'widget_output', 'wop_bootstrap_widget_output_filters', 10, 3 ); // 
 
 
 /******************************************************************************************/
+/*   Sidebar Styling - Uses bsg-classes-to-add filter                                     */
+/******************************************************************************************/
+
+/*  #http://bit.do/bootstrap-markup-php-L55 
+add_filter('bsg-classes-to-add', 'bsg_modify_classes_based_on_template', 10, 3);   
+function bsg_layout_options_modify_classes_to_add( $classes_to_add ) {
+        $classes_to_add['widget'] = 'panel panel-default';
+}
+// */
+    
+
+
+
+/******************************************************************************************/
 /*   Search Form - Using native in wordpress filter                                       */
 /******************************************************************************************/
 
