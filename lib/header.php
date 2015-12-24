@@ -6,10 +6,18 @@
  
 // Add no-js meta to html tag to <html> element
 // http://www.paulirish.com/2009/avoiding-the-fouc-v3/
-add_filter( 'language_attributes', 'bsg_doctype_language_atts_no_js' );
-function bsg_doctype_language_atts_no_js($output) {
+add_filter( 'language_attributes', 'bsg_js_detection_lang_atts' );
+add_action( 'genesis_doctype', 'bsg_js_detection_script', 100 );
+
+function bsg_js_detection_lang_atts($output) {
     return $output . ' class="no-js"';
 }
+function bsg_js_detection_script() {
+    if ( has_filter( 'language_attributes', 'bsg_js_detection_lang_atts' ) ) {
+        echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
+    }
+}
+
 
 
 // Remove 'viewport' tag from genesis_meta
@@ -17,11 +25,10 @@ remove_action( 'genesis_meta', 'genesis_responsive_viewport' );
 
 // Allow theme to override with theme support method
 // remove_theme_support('genesis-responsive-viewport');
-
 function bootstrap_genesis_responsive_allow_child_theme_override() {
-if ( ! current_theme_supports( 'genesis-responsive-viewport' ) ) {
-	add_theme_support('genesis-responsive-viewport');
-}
+	if ( ! current_theme_supports( 'genesis-responsive-viewport' ) ) {
+		add_theme_support('genesis-responsive-viewport');
+	}
 }
 add_action('genesis_setup','bootstrap_genesis_responsive_allow_child_theme_override', 15);
 
@@ -30,11 +37,13 @@ add_action('genesis_setup','bootstrap_genesis_responsive_allow_child_theme_overr
 // Add viewport earlier for better rendering
 add_action( 'genesis_doctype', 'bsg_browser_support', 99 );
 function bsg_browser_support() {
-?>
-<?php genesis_responsive_viewport(); ?>
-<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+	genesis_responsive_viewport();
 <?php
 }
+
+
+
+
 
 
 // Add IE compatability using wp functions : <meta http-equiv="X-UA-Compatible" content="IE=edge">
