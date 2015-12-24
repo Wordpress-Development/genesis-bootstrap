@@ -11,11 +11,14 @@ function bsg_doctype_language_atts_no_js($output) {
 }
 
 
-// Remove 'viewport' tag 
+// Remove 'viewport' tag from genesis_meta
 remove_action( 'genesis_meta', 'genesis_responsive_viewport' );
-add_theme_support('genesis-responsive-viewport');
 
-// Add early for better rendering
+if ( ! current_theme_supports( 'genesis-responsive-viewport' ) ) {
+	add_theme_support('genesis-responsive-viewport');
+}
+
+// Add viewport earlier for better rendering
 add_action( 'genesis_doctype', 'bsg_browser_support', 99 );
 function bsg_browser_support() {
 ?>
