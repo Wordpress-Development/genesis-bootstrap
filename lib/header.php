@@ -1,6 +1,6 @@
 <?php
 /*----------------------------------------------------------------------------*
- * Bootstrap Header Support for IE and older browsers 
+ * Genesis Bootstrap Header Support for IE and older browsers 
  *----------------------------------------------------------------------------*/
  
  
@@ -46,3 +46,6 @@ function html5_shiv_respond_js_add_last() {
 <![endif]-->
 <?php
 }
+
+
+// remove_action( 'wp_head', 'genesis_do_meta_pingback' );
