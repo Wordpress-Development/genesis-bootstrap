@@ -20,32 +20,6 @@ function bsg_js_detection_script() {
 
 
 
-// Remove 'viewport' tag from genesis_meta
-remove_action( 'genesis_meta', 'genesis_responsive_viewport' );
-
-// Allow theme to override with theme support method
-// remove_theme_support('genesis-responsive-viewport');
-function bootstrap_genesis_responsive_allow_child_theme_override() {
-	if ( ! current_theme_supports( 'genesis-responsive-viewport' ) ) {
-		add_theme_support('genesis-responsive-viewport');
-	}
-}
-add_action('genesis_setup','bootstrap_genesis_responsive_allow_child_theme_override', 15);
-
-
-
-// Add viewport earlier for better rendering
-add_action( 'genesis_doctype', 'bsg_browser_support', 99 );
-function bsg_browser_support() {
-	genesis_responsive_viewport();
-<?php
-}
-
-
-
-
-
-
 // Add IE compatability using wp functions : <meta http-equiv="X-UA-Compatible" content="IE=edge">
 // This fixes validation errors and issues with ie
 // https://codex.wordpress.org/Plugin_API/Action_Reference/send_headers
@@ -70,6 +44,27 @@ function bsg_html5_shiv_respond_js_add_last() {
 <![endif]-->
 <?php
 }
+
+
+
+// Remove 'viewport' tag from genesis_meta
+remove_action( 'genesis_meta', 'genesis_responsive_viewport' );
+
+// Allow theme to override with theme support method
+// remove_theme_support('genesis-responsive-viewport');
+function bootstrap_genesis_responsive_allow_child_theme_override() {
+	if ( ! current_theme_supports( 'genesis-responsive-viewport' ) ) {
+		add_theme_support('genesis-responsive-viewport');
+	}
+}
+add_action('genesis_setup','bootstrap_genesis_responsive_allow_child_theme_override', 15);
+
+
+// Add viewport earlier for better rendering
+add_action( 'genesis_doctype', function() {
+	return genesis_responsive_viewport();
+});
+
 
 
 // remove_action( 'wp_head', 'genesis_do_meta_pingback' );
