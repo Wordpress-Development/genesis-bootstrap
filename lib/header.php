@@ -1,6 +1,6 @@
 <?php
 /*----------------------------------------------------------------------------*
- * Genesis Bootstrap Header Support for IE and older browsers 
+ * Bootstrap Header Support for IE and older browsers 
  *----------------------------------------------------------------------------*/
  
  
@@ -27,7 +27,8 @@ function bsg_browser_support() {
 
 // Add IE compatability using wp functions : <meta http-equiv="X-UA-Compatible" content="IE=edge">
 // This fixes validation errors and issues with ie
-// For more approaches : http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e/8942455#8942455
+// http://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e/8942455#8942455
+// https://stackoverflow.com/questions/6771258/whats-the-difference-if-meta-http-equiv-x-ua-compatible-content-ie-edge-e
 add_action( 'send_headers', 'add_header_xua_compatible' );
 function add_header_xua_compatible() {
 	header( 'X-UA-Compatible: IE=edge,chrome=1' );
@@ -35,7 +36,8 @@ function add_header_xua_compatible() {
 
 
 
-// HTML5shiv and Respond JS for older browsers and IE
+// HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries 
+// http://getbootstrap.com/getting-started/#support-ie8-ie9
 // Should be added right before closing head tag
 remove_action( 'wp_head', 'genesis_html5_ie_fix' ); // html5shiv.googlecode.com/svn/trunk/html5.js
 add_action( 'wp_head', 'html5_shiv_respond_js_add_last', 999 );
