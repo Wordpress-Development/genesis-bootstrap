@@ -293,27 +293,59 @@ add_action('customize_controls_print_scripts', 'genesis_add_bs_widgets_head_styl
 
 
 
+
+
 /******************************************************************************************/
-/*   Bootstrap 3 Widget Filters                                                           */
+/*  Sidebar Filters - Remove Widget Panel in Header                                       */
 /******************************************************************************************/
-
-
-
-
 //*
-function widget_output_filters_dynamic_sidebar_params( $sidebar_params ) {
+function wordpress_widgets_booststrapped_widget_params( $params ) { 
+  if ('header-right' === $params[0]['id']) {
+    $params[0]['before_widget'] = ''; // before SIDEBAR 
+  }
+  return $params;
+}
+add_filter( 'dynamic_sidebar_params', 'wordpress_widgets_booststrapped_widget_params', 99 );
+// */
+
+
+
+
+
+
+/******************************************************************************************/
+/*   Sidebar Defaults - Filter Genesis Sidebar Default Markup to add Panels               */
+/******************************************************************************************/
+//*
+function gb3_register_sidebar_defaults( $defaults ) {
+	$defaults['before_widget'] = '<section id="%1$s" class="panel panel-default widget %2$s"><div class="panel-body widget-wrap">';
+	return $defaults;
+}
+add_filter( 'genesis_register_widget_area_defaults', 'gb3_register_sidebar_defaults', 99);
+// */
+
+
+
+
+
+
+/******************************************************************************************/
+/*   Bootstrap 3 Widget Filters  -  Experimental Feature                                  */
+/******************************************************************************************/
+//*
+function bootstrap_genesis_widget_output_filters_dynamic_sidebar_params( $sidebar_params ) {
 	if ( is_admin() ) {
 		return $sidebar_params;
 	}
 	global $wp_registered_widgets;
 	$widget_id = $sidebar_params[0]['widget_id'];
 	$wp_registered_widgets[ $widget_id ]['original_callback'] = $wp_registered_widgets[ $widget_id ]['callback'];
-	$wp_registered_widgets[ $widget_id ]['callback'] = 'widget_output_filters_display_widget';
+	$wp_registered_widgets[ $widget_id ]['callback'] = 'bootstrap_genesis_widget_output_filters_display_widget';
 	return $sidebar_params;
 }
-add_filter( 'dynamic_sidebar_params', 'widget_output_filters_dynamic_sidebar_params', 9 );
+add_filter( 'dynamic_sidebar_params', 'bootstrap_genesis_widget_output_filters_dynamic_sidebar_params', 9 );
 
-function widget_output_filters_display_widget() {
+function bootstrap_genesis_widget_output_filters_display_widget() {
 	global $wp_registered_widgets;
 	$original_callback_params = func_get_args();
 	$widget_id = $original_callback_params[0]['widget_id'];
@@ -336,7 +368,7 @@ function widget_output_filters_display_widget() {
 
 
 //* // SIDEBAR WIDGETS
-function bootstrap_genesis_widget_output_filters( $widget_output, $widget_type, $widget_id ) {
+function bootstrap_genesis_sidebar_widget_output_filters( $widget_output, $widget_type, $widget_id ) {
 	
 	switch( $widget_type ) {
 		
@@ -394,7 +426,7 @@ add_filter( 'widget_output', 'wop_bootstrap_widget_output_filters', 10, 3 );
 
 
 //* // FOOTER WIDGETS
-function my_widget_output_filter_footer( $widget_output, $widget_type, $widget_id ) {
+function bootstrap_genesis_footer_widget_output_filters( $widget_output, $widget_type, $widget_id ) {
     	
     	switch( $widget_type ) {
 		
