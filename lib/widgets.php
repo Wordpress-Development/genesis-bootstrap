@@ -301,7 +301,9 @@ add_action('customize_controls_print_scripts', 'genesis_add_bs_widgets_head_styl
 //*
 function wordpress_widgets_booststrapped_widget_params( $params ) { 
   if ('header-right' === $params[0]['id']) {
-    $params[0]['before_widget'] = ''; // before SIDEBAR 
+    $params[0]['before_widget'] = ''; // before sidebar widget 
+    $params[0]['after_widget']  = ''; // after sidebar widget 
+
   }
   return $params;
 }
