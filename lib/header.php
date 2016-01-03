@@ -12,7 +12,6 @@
  */
 
 
-
 add_filter( 'language_attributes', 'bsg_js_detection_lang_atts' );
 add_action( 'genesis_doctype', 'bsg_js_detection_script', 100 );
 /**
@@ -33,7 +32,6 @@ function bsg_js_detection_script() {
 }
 
 
-
 add_action( 'send_headers', 'bsg_add_header_xua_compatible' );
 /**
  * Add `X-UA-compatible` meta tag using send_headers to ensure it's being used by IE9 Intranets and avoid validation errors
@@ -43,7 +41,6 @@ add_action( 'send_headers', 'bsg_add_header_xua_compatible' );
 function bsg_add_header_xua_compatible() {
 	header( 'X-UA-Compatible: IE=edge,chrome=1' );
 }
-
 
 
 remove_action( 'wp_head', 'genesis_html5_ie_fix' ); 
@@ -65,13 +62,14 @@ function bsg_html5_shiv_respond_js_add_last() {
 
 
 
-remove_action( 'genesis_meta', 'genesis_responsive_viewport' );
-add_action('genesis_setup','bootstrap_genesis_responsive_viewport', 15);
+// remove_action( 'genesis_meta', 'genesis_responsive_viewport' );
+ add_action('genesis_setup','bootstrap_genesis_responsive_viewport', 15);
 /**
  * Add genesis responsive viewport if it's not explicitly removed using `remove_theme_support('genesis-responsive-viewport');` in child theme.
  * 
  * @since 1.0.0
  */
+ 
 function bootstrap_genesis_responsive_viewport() {
 	if ( genesis_html5()  && ! current_theme_supports( 'genesis-responsive-viewport' ) ) {
 		add_theme_support('genesis-responsive-viewport');
