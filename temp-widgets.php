@@ -141,10 +141,11 @@ function bsg_layout_options_modify_classes_to_add( $classes_to_add ) {
 //*
 add_filter( 'get_search_form', 'wop_bootstrap_search_form', 100);
 function wop_bootstrap_search_form() {
-    $value_or_placeholder = ( get_search_query() == '' ) ? 'placeholder' : 'value';
-    $label = 'Search';
-    $search_text = 'Search this website...';
-    $button_text = 'Search';
+	$value_or_placeholder = ( get_search_query() == '' ) ? 'placeholder' : 'value';
+	$label = 'Search';
+	$search_text = 'Search this website...';
+	$button_text = 'Search';
+
 $form = '<form method="get" class="search-form form-inline" action="'.home_url( '/' ).'" role="search">
     <div class="form-group">
         <label class="sr-only sr-only-focusable" for="bsg-search-form">'.esc_html( $label ).'</label>
@@ -159,7 +160,8 @@ $form = '<form method="get" class="search-form form-inline" action="'.home_url( 
         </div>
     </div>
 </form>';
-    return $form;
+
+return $form;
 }
 // */
 
@@ -183,11 +185,11 @@ add_filter( 'genesis_register_widget_area_defaults', 'gb3_register_sidebar_defau
 /******************************************************************************************/
 
 //*
-function wordpress_widgets_booststrapped_widget_params( $params ) { 
-  if ('header-right' === $params[0]['id']) {
-    $params[0]['before_widget'] = ''; // before SIDEBAR 
-  }
-  return $params;
-}
 add_filter( 'dynamic_sidebar_params', 'wordpress_widgets_booststrapped_widget_params', 99 );
+function wordpress_widgets_booststrapped_widget_params( $params ) { 
+	if ('header-right' === $params[0]['id']) {
+		$params[0]['before_widget'] = ''; // before SIDEBAR 
+  	}
+	return $params;
+}
 // */
