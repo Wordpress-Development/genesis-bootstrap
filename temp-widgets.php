@@ -187,9 +187,11 @@ add_filter( 'genesis_register_widget_area_defaults', 'gb3_register_sidebar_defau
 //*
 add_filter( 'dynamic_sidebar_params', 'wordpress_widgets_booststrapped_widget_params', 99 );
 function wordpress_widgets_booststrapped_widget_params( $params ) { 
-	if ('header-right' === $params[0]['id']) {
-		$params[0]['before_widget'] = ''; // before SIDEBAR 
-  	}
-	return $params;
+if ( ! is_admin() ) {
+	  if(isset($params[0]['id']) && $params[0]['id'] == 'header-right'){
+		$params[0]['before_widget'] = '';
+    		$params[0]['after_widget'] = '';	  }
+  		return $params;
+	}
 }
 // */
