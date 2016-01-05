@@ -44,6 +44,13 @@ add_theme_support ( 'genesis-menus' , array (
 	) );
 }
 
+add_theme_support( 'genesis-structural-wraps', array( 
+	'menu-primary', 
+	'menu-secondary', 
+	'footer', 
+	'jumbotron-inner', 
+	'site-inner' 
+) );
 
 
 
