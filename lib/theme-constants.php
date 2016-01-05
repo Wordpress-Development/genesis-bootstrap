@@ -1,5 +1,4 @@
 <?php
-
 /**
  * This function defines the Genesis Child theme constants
  *
@@ -10,6 +9,10 @@
  *
  * @since 1.1.0
  */
+ 
+add_action( 'genesis_init', 'gs_constants', 15 );
+
+
 function gs_constants() {
   $theme = wp_get_theme();
     
