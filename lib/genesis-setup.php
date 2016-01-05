@@ -27,22 +27,6 @@ add_filter( 'genesis_register_widget_area_defaults', 'gb3_register_sidebar_defau
 add_filter( 'genesis_post_info', 'sp_post_info_filter' );
 add_filter( 'genesis_post_meta', 'sp_post_meta_filter' );
 
-add_theme_support( 'html5', array( 
-	'comment-list', 
-	'comment-form', 
-	'search-form', 
-	'gallery', 
-	'caption'  
-	) );
-add_theme_support( 'genesis-responsive-viewport' );
-
-add_theme_support ( 'genesis-menus' , array ( 
-	'primary' => __( 'Primary Navigation Menu', 'genesis' ),
-	'secondary' => __( 'Secondary Navigation Menu', 'genesis' ),
-	// Add New Footer Menu; Keep Primary and Secondary Menus
-	'footer' => __( 'Footer Navigation Menu', 'genesis' )
-	) );
-}
 
 add_theme_support( 'genesis-structural-wraps', array( 
 	'menu-primary', 
@@ -51,6 +35,25 @@ add_theme_support( 'genesis-structural-wraps', array(
 	'jumbotron-inner', 
 	'site-inner' 
 ) );
+
+add_theme_support( 'html5', array( 
+	'comment-list', 
+	'comment-form', 
+	'search-form', 
+	'gallery', 
+	'caption'  
+	) );
+	
+add_theme_support( 'genesis-responsive-viewport' );
+
+add_theme_support ( 'genesis-menus' , array ( 
+	'primary' => __( 'Primary Navigation Menu', 'genesis' ),
+	'secondary' => __( 'Secondary Navigation Menu', 'genesis' ),
+	// Add New Footer Menu; Keep Primary and Secondary Menus
+	'footer' => __( 'Footer Navigation Menu', 'genesis' )
+	) );
+	
+}
 
 
 
