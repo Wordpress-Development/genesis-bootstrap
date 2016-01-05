@@ -30,6 +30,7 @@ add_action('after_switch_theme', 'deactivate_genesis_bootstrap_plugin_script_che
 
 
 
+require_once dirname( __FILE__ ) . '/lib/genesis_setup';
 
 
 
