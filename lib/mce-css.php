@@ -30,6 +30,7 @@ function twbsg_mce_css( $mce_css ) {
 add_filter( 'tiny_mce_before_init', 'twbsg_tinymce_before_init_content_style' );
 function twbsg_tinymce_before_init_content_style( $mce ) {
     // $mce['body_class'] = ' container-fluid'; 
+    // $mce['content_css'] = plugins_url('bootstrap/css/bootstrap.min.css', __DIR__);
     $mce['content_style'] = "#tinymce {margin: 10px 15px!important;}";
     return $mce;
 }
