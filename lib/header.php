@@ -43,35 +43,38 @@ function bsg_add_header_xua_compatible() {
 }
 
 
+
+
+
 remove_action( 'wp_head', 'genesis_html5_ie_fix' ); 
-add_action( 'wp_head', 'bsg_html5_shiv_respond_js_add_last', 999 );
-/**
- * HTML5shiv tag support for HTML5 and Respond.js for IE8 media queries
- * 
- * @link http://getbootstrap.com/getting-started/#support-ie8-ie9
- * 
- * @since 1.0.0
- */
-function bsg_html5_shiv_respond_js_add_last() {	
-?><!--[if lt IE 9]>
-<script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
-<?php
+add_action('wp_print_scripts', function() {
+    global $wp_scripts, $is_IE;
+    if($is_IE) {
+        wp_enqueue_script( 'html5shiv', 'https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js', array( 'bootstrap' )  );
+        wp_enqueue_script( 'respond', 'https://oss.maxcdn.com/respond/1.4.2/respond.min.js', array( 'bootstrap' )  );
+        $wp_scripts->add_data( 'html5shiv', 'conditional', 'lt IE 9' );
+        $wp_scripts->add_data( 'respond', 'conditional', 'lt IE 9' );
+    }
+} );
+
+
+
+
+
+remove_action( 'genesis_meta', 'genesis_responsive_viewport' );
+// Add viewport earlier for better rendering
+add_action( 'genesis_doctype', function() {
+	return bsg_genesis_responsive_viewport( );
+});
+function bsg_genesis_responsive_viewport( ) {
+	if ( ! current_theme_supports( 'genesis-responsive-viewport' ) )
+		return;
+	$content = apply_filters('genesis_responsive_viewport', 'width=device-width, initial-scale=1');
+	echo '<meta name="viewport" content="'.$content.'" />' . "\n";
 }
 
-
-
-// remove_action( 'genesis_meta', 'genesis_responsive_viewport' );
- add_action('genesis_setup','bootstrap_genesis_responsive_viewport', 15);
-/**
- * Add genesis responsive viewport if it's not explicitly removed using `remove_theme_support('genesis-responsive-viewport');` in child theme.
- * 
- * @since 1.0.0
- */
- 
-function bootstrap_genesis_responsive_viewport() {
-	if ( genesis_html5()  && ! current_theme_supports( 'genesis-responsive-viewport' ) ) {
-		add_theme_support('genesis-responsive-viewport');
-	}
-}
+/*
+add_filter('genesis_responsive_viewport', function(){
+    return 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+} );
+// */
