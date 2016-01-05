@@ -45,6 +45,7 @@ function bsg_add_header_xua_compatible() {
 
 
 remove_action( 'wp_head', 'genesis_html5_ie_fix' ); 
+add_action('wp_print_scripts', 'genesis_bootstrap_ie_fix');
 /**
  * Remove default html5shiv and add custom with respond
  * 
@@ -52,7 +53,7 @@ remove_action( 'wp_head', 'genesis_html5_ie_fix' );
  * 
  * @since 1.0.0
  */
-add_action('wp_print_scripts', function() {
+function genesis_bootstrap_ie_fix() {
     global $wp_scripts, $is_IE;
     if($is_IE) {
         wp_enqueue_script( 'html5shiv', 'https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js', array( 'bootstrap' )  );
@@ -60,8 +61,7 @@ add_action('wp_print_scripts', function() {
         $wp_scripts->add_data( 'html5shiv', 'conditional', 'lt IE 9' );
         $wp_scripts->add_data( 'respond', 'conditional', 'lt IE 9' );
     }
-} );
-
+}
 
 
 
