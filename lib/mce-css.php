@@ -9,18 +9,24 @@
  * 
  */
 
-// Add Bootstrap styles
-add_filter( 'mce_css', 'twbsg_mce_css' );
 
+/** Add Bootstrap styles */
+add_filter( 'mce_css', 'twbsg_mce_css' );
 function twbsg_mce_css( $mce_css ) {
-	if ( ! empty( $mce_css ) )
+	if (defined('TWBSG_CSS')) {
+		$plugin_css = TWBSG_CSS;
+	} else {
+		$plugin_css = plugins_url('bootstrap/css/bootstrap.min.css', __DIR__);
+	}
+	 if ( ! empty( $mce_css ) ) {
 		$mce_css .= ',';
-	$mce_css .= plugins_url('bootstrap/css/bootstrap.min.css', __DIR__); 
+		$mce_css .= $plugin_css;
+		}
+	 }
 	return $mce_css;
 }
 
-
-// Fix padding on editor body since Bootstrap container classes aren't used
+/** Fix padding on editor body since Bootstrap container classes aren't used */
 add_filter( 'tiny_mce_before_init', 'twbsg_tinymce_before_init_content_style' );
 function twbsg_tinymce_before_init_content_style( $mce ) {
     // $mce['body_class'] = ' container-fluid'; 
