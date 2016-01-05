@@ -8,7 +8,7 @@
 * @param string $output The markup to be returned
 * @param string $original_output Set to either 'open' or 'close'
 */
-function tbg3_wrap_container_fluid( $output, $original_output ) {
+function bsg_wrap_container_fluid( $output, $original_output ) {
 	switch ( $original_output ) {
 		case 'open':
 	   		$output = sprintf( '<div %s>', genesis_attr( 'container-fluid' ) );
@@ -17,7 +17,12 @@ function tbg3_wrap_container_fluid( $output, $original_output ) {
   return $output;
 }
 
-function __bsg_wrap_all_container_fluid() {
+
+
+
+
+
+function __bsg_wrap_container_fluid_all() {
     $genesis_atts = array(
 	'menu-primary', 
 	'menu-secondary', 
@@ -27,9 +32,11 @@ function __bsg_wrap_all_container_fluid() {
     );
     foreach ( $genesis_atts as $context ) {
 	$context = "genesis_attr_$context";
-	add_filter( $context, 'bsg-classes-to-add', 10, 2 );
+	$output = add_filter( $context, 'bsg_wrap_container_fluid', 11, 2 );
     }
+    return $output;
 }
+
 
 /* Useage
 -----------
