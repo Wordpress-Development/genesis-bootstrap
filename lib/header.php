@@ -66,6 +66,7 @@ add_action('wp_print_scripts', function() {
 
 
 remove_action( 'genesis_meta', 'genesis_responsive_viewport' );
+add_theme_support( 'genesis-responsive-viewport' );
 /**
  * Better Viewport 
  * 
