@@ -1,5 +1,26 @@
 <?php
 
+function bsg_get_field( $key, $id=false, $default='' ) {
+  global $post;
+  $key = trim( filter_var( $key, FILTER_SANITIZE_STRING ) );
+  $result = '';
+  if ( function_exists( 'get_field' ) ) {
+    $result = ( isset( $post->ID ) && ! $id ? get_field( $key ) : get_field( $key, $id ) );
+    if ( $result == '' ) {
+      $result = $default;
+    }
+  } else { 
+    $result = $default;
+  }
+  return $result;
+}
+
+function bsg_do_field( $key, $id=false, $default='' ) {
+  echo bw_get_field( $key, $id, $default );
+}
+
+
+
 if(function_exists("register_field_group"))
 {
 	register_field_group(array (
@@ -54,14 +75,12 @@ function genesis_remove_action_title_toggle() {
 }
 
 function title_toggle() {
-  if(function_exists( 'get_field' )){
-    if(get_field('hide_title')) {
+    if(bsg_get_field( 'hide_title' )) {
         add_action('genesis_before', 'genesis_remove_action_title_toggle');
     }
-  }
 }
 
 function genesis_get_header_acf_hide_title() {
-        title_toggle();
+    title_toggle();
 }
 add_action('get_header','genesis_get_header_acf_hide_title');
