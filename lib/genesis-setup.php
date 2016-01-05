@@ -35,13 +35,7 @@ add_theme_support( 'html5', array(
 	'caption'  
 	) );
 add_theme_support( 'genesis-responsive-viewport' );
-add_theme_support( 'genesis-structural-wraps', array( 
-	'menu-primary', 
-	'menu-secondary', 
-	'footer', 
-	'jumbotron-inner', 
-	'site-inner' 
-	) );
+
 add_theme_support ( 'genesis-menus' , array ( 
 	'primary' => __( 'Primary Navigation Menu', 'genesis' ),
 	'secondary' => __( 'Secondary Navigation Menu', 'genesis' ),
