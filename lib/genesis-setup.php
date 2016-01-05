@@ -89,13 +89,6 @@ function bsg_be_remove_genesis_page_templates( $page_templates ) {
 	return $page_templates;
 }
 
-// Add .container structural-wrap classes
-add_filter( 'genesis_attr_structural-wrap', 'bsg_attributes_structural_wrap' );
-function bsg_attributes_structural_wrap( $attributes ) {
-    $attributes['class'] = 'container';
-    return $attributes;
-}
-
 // Remove header settings from genesis admin screens
 add_action( 'genesis_admin_before_metaboxes', 'bsg_remove_genesis_theme_metaboxes' );
 function bsg_remove_genesis_theme_metaboxes( $hook ) {
