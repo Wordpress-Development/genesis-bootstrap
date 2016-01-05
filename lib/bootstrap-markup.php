@@ -1,5 +1,13 @@
 <?php
 
+// Add .container structural-wrap classes
+add_filter( 'genesis_attr_structural-wrap', 'bsg_attributes_structural_wrap' );
+function bsg_attributes_structural_wrap( $attributes ) {
+    $attributes['class'] = 'container';
+    return $attributes;
+}
+
+
 // add bootstrap classes
 $genesis_atts = array(
                   'nav-primary',
