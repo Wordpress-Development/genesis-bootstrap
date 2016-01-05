@@ -44,9 +44,14 @@ function bsg_add_header_xua_compatible() {
 
 
 
-
-
 remove_action( 'wp_head', 'genesis_html5_ie_fix' ); 
+/**
+ * Remove default html5shiv and add custom with respond
+ * 
+ * Only will print on IE browsers
+ * 
+ * @since 1.0.0
+ */
 add_action('wp_print_scripts', function() {
     global $wp_scripts, $is_IE;
     if($is_IE) {
@@ -60,9 +65,14 @@ add_action('wp_print_scripts', function() {
 
 
 
-
 remove_action( 'genesis_meta', 'genesis_responsive_viewport' );
-// Add viewport earlier for better rendering
+/**
+ * Better Viewport 
+ * 
+ * Loads earlier and has a filter modify
+ * 
+ * @since 1.0.0
+ */
 add_action( 'genesis_doctype', function() {
 	return bsg_genesis_responsive_viewport( );
 });
@@ -78,3 +88,6 @@ add_filter('genesis_responsive_viewport', function(){
     return 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
 } );
 // */
+
+
+// remove_action( 'wp_head', 'genesis_do_meta_pingback' );
