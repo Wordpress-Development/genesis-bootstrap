@@ -8,12 +8,6 @@
  *
 */
 
-
-
-
-
-
-
 /**
  * Include the TGM_Plugin_Activation class.
  */
