@@ -74,11 +74,14 @@ function bsg_wrap_all_container_fluid() {
 
 
 /**
- * Helper function to apply to all areas
+ * Example of using the Above Helper
  */
+ 
+ /*
 function do_genesis_wrap() {
    if (is_home() ) {
        bsg_wrap_all_container_fluid();
    }
 }
 add_action('genesis_before', 'do_genesis_wrap');
+*/
