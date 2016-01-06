@@ -33,28 +33,3 @@ function twbsg_tinymce_before_init_content_style( $mce ) {
     $mce['content_style'] = "#tinymce {margin: 10px 15px!important;}";
     return $mce;
 }
-
-
-/*
-class TWBSG_TinymceCSS {
-	public function __construct() {
-		// Add Bootstrap styles
-		add_filter( 'mce_css', 'twbsg_mce_css' );
-		// Fix padding on editor body since Bootstrap container classes aren't used
-		add_filter( 'tiny_mce_before_init', 'twbsg_tinymce_before_init_content_style' );
-	}
-	public function mce_css( $mce_css ) {
-		if ( ! empty( $mce_css ) ) {
-			$mce_css .= ',';
-			$mce_css .= plugins_url('bootstrap/css/bootstrap.min.css', __DIR__); 
-			return $mce_css;
-		}
-	}
-	public function tinymce_before_init( $mce_css ) {
-		// $mce['body_class'] = ' container-fluid'; 
-		$mce['content_style'] = "#tinymce {margin: 10px 15px!important;}";
-		return $mce;
-	}
-}
-new TWBSG_TinymceCSS();
-// */
