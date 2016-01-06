@@ -25,6 +25,33 @@ $format = <<<EOT
     </div>
 </form>
 EOT;
-
     return sprintf( $format, home_url( '/' ), esc_html( $label ), $value_or_placeholder, esc_attr( $search_text ), esc_attr( $button_text ) );
 }
+
+
+
+
+/*
+add_filter( 'get_search_form', 'wop_bootstrap_search_form', 100);
+function wop_bootstrap_search_form() {
+	$value_or_placeholder = ( get_search_query() == '' ) ? 'placeholder' : 'value';
+	$label = 'Search';
+	$search_text = 'Search this website...';
+	$button_text = 'Search';
+$form = '<form method="get" class="search-form form-inline" action="'.home_url( '/' ).'" role="search">
+    <div class="form-group">
+        <label class="sr-only sr-only-focusable" for="bsg-search-form">'.esc_html( $label ).'</label>
+        <div class="input-group">
+            <input type="search" class="search-field form-control" id="search" name="s" '.$value_or_placeholder.'="'.esc_attr( $search_text ).'">
+            <span class="input-group-btn">
+                <button type="submit" class="search-submit btn btn-default">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    <span class="sr-only">'.esc_attr( $button_text ).'</span>
+                </button>
+            </span>
+        </div>
+    </div>
+</form>';
+return $form;
+}
+// */
