@@ -28,14 +28,6 @@ add_filter( 'genesis_post_info', 'sp_post_info_filter' );
 add_filter( 'genesis_post_meta', 'sp_post_meta_filter' );
 
 
-add_theme_support( 'genesis-structural-wraps', array( 
-	'menu-primary', 
-	'menu-secondary', 
-	'footer', 
-	'jumbotron-inner', 
-	'site-inner' 
-) );
-
 add_theme_support( 'html5', array( 
 	'comment-list', 
 	'comment-form', 
