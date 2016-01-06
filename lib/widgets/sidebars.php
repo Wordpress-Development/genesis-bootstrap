@@ -25,3 +25,16 @@ function wordpress_widgets_booststrapped_widget_params( $params ) {
 }
 add_filter( 'dynamic_sidebar_params', 'wordpress_widgets_booststrapped_widget_params', 99 );
 // */
+
+
+
+/******************************************************************************************/
+/*   Sidebar Styling - Uses bsg-classes-to-add filter                                     */
+/******************************************************************************************/
+
+/*  #http://bit.do/bootstrap-markup-php-L55 
+add_filter('bsg-classes-to-add', 'bsg_modify_classes_based_on_template', 10, 3);   
+function bsg_layout_options_modify_classes_to_add( $classes_to_add ) {
+        $classes_to_add['widget'] = 'panel panel-default';
+}
+// */
