@@ -3,15 +3,18 @@
 /**
  * Add theme support for structural wraps
  */
-add_theme_support( 'genesis-structural-wraps', array( 
-	'menu-primary', 
-	'menu-secondary',
-	'footer',
-	'jumbotron-inner',
-	'site-inner',
-    'header'
-	) );
-
+function gb3_add_theme_support_structural_wraps() {
+	add_theme_support( 'genesis-structural-wraps', 
+		array( 
+			'menu-primary', 
+			'menu-secondary',
+			'footer',
+			'jumbotron-inner',
+			'site-inner',
+    			'header'
+		) 
+	);
+}
 
 
 /**
@@ -22,7 +25,6 @@ function bsg_attributes_structural_wrap( $attributes ) {
     $attributes['class'] = 'container';
     return $attributes;
 }
-
 
 
 /**
@@ -37,7 +39,6 @@ function bsg_wrap_container_fluid( $output, $original_output ) {
 	}
 	return $output;
 }
-
 
 
 /**
