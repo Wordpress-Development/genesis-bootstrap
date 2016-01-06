@@ -18,8 +18,8 @@ add_filter( 'genesis_register_widget_area_defaults', 'gb3_register_sidebar_defau
 //*
 function wordpress_widgets_booststrapped_widget_params( $params ) { 
   if(isset($params[0]['id']) && $params[0]['id'] == 'header-right'){
-    $params[0]['before_widget'] = '<div '; // before sidebar widget 
-    $params[0]['after_widget']  = ''; // after sidebar widget 
+    $params[0]['before_widget'] = printf( '<div %s>', genesis_attr( 'header-right-area' ) ); // before sidebar widget 
+    $params[0]['after_widget']  = '</div>'; // after sidebar widget 
   }
   return $params;
 }
