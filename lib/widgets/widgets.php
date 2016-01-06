@@ -19,7 +19,9 @@
 /******************************************************************************************/
 
 if ( !class_exists('Widget_Output_Filters') ) {
-
+	$path = plugins_url('/vendor/widget-output-filters/src/class.Widget_Output_Filters.php', __DIR__);
+	require_once( $path );
+	new Widget_Output_Filters();
 }
 
 add_filter( 'widget_output', 'wop_bootstrap_widget_output_filters', 10, 4 );
