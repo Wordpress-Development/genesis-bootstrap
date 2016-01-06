@@ -45,22 +45,17 @@ function bsg_add_header_xua_compatible() {
 
 
 remove_action( 'wp_head', 'genesis_html5_ie_fix' ); 
-add_action('wp_print_scripts', 'genesis_bootstrap_ie_fix');
+add_action('wp_enqueue_scripts', 'genesis_bootstrap_ie_fix', 99);
 /**
  * Remove default html5shiv and add custom with respond
- * 
- * Only will print on IE browsers
  * 
  * @since 1.0.0
  */
 function genesis_bootstrap_ie_fix() {
-    global $wp_scripts, $is_IE;
-    if($is_IE) {
-        wp_enqueue_script( 'html5shiv', 'https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js', array( 'bootstrap' )  );
-        wp_enqueue_script( 'respond', 'https://oss.maxcdn.com/respond/1.4.2/respond.min.js', array( 'bootstrap' )  );
-        $wp_scripts->add_data( 'html5shiv', 'conditional', 'lt IE 9' );
-        $wp_scripts->add_data( 'respond', 'conditional', 'lt IE 9' );
-    }
+        wp_enqueue_script( 'html5shiv', '//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js', array( 'bootstrap' ), '3.7.2', false  );
+        wp_enqueue_script( 'respond', '//oss.maxcdn.com/respond/1.4.2/respond.min.js', array( 'bootstrap' ), '1.4.2', false  );
+        wp_scripts()->add_data( 'html5shiv', 'conditional', 'lt IE 9' );
+        wp_scripts()->add_data( 'respond', 'conditional', 'lt IE 9' );
 }
 
 
