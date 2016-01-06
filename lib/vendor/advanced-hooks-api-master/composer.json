@@ -1,0 +1,21 @@
+{
+	"name"        : "rarst/advanced-hooks-api",
+	"description" : "Set of (experimental) wrappers that allow to hook more elaborate WordPress events without coding intermediary functions",
+	"keywords"    : ["wordpress"],
+	"type"        : "wordpress-plugin",
+	"homepage"    : "https://github.com/Rarst/advanced-hooks-api",
+	"license"     : "MIT",
+	"authors"     : [
+		{
+			"name"    : "Andrey Savchenko",
+			"email"   : "contact@rarst.net",
+			"homepage": "http://www.Rarst.net/"
+		}
+	],
+	"support"     : {
+		"issues": "https://github.com/Rarst/advanced-hooks-api/issues"
+	},
+	"require"     : {
+		"composer/installers": "~1.0"
+	}
+}
