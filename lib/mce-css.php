@@ -6,7 +6,6 @@
  *
  * These functions adds Bootstrap styling support to the admin 
  * TinyMCE post editor
- * 
  */
 
 
