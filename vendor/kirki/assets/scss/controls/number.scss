@@ -1,0 +1,26 @@
+/////////////////////
+// number controls
+/////////////////////
+.customize-control-number {
+	.ui-spinner.ui-widget-content {
+		position: relative;
+		.ui-spinner-button {
+			position: absolute;
+			right: 5px;
+			color: rgba(0,0,0,.3);
+			border-left: 1px solid rgba(0,0,0,.1);
+			padding: 0 5px;
+			width: 6px;
+			font-size: 10px;
+			&.ui-spinner-up {
+				top: -7px;
+			}
+			&.ui-spinner-down {
+				top: 7px;
+			}
+			&:hover {
+				color: rgba(0,0,0,.7);
+			}
+		}
+	}
+}
