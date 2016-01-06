@@ -19,36 +19,7 @@
 /******************************************************************************************/
 
 if ( !class_exists('Widget_Output_Filters') ) {
-class Widget_Output_Filters {
-	public function __construct() {
-		add_filter( 'dynamic_sidebar_params', array( $this, 'filter_dynamic_sidebar_params' ), 9 );
-	}
-	public function filter_dynamic_sidebar_params( $sidebar_params ) {
-		if ( is_admin() ) {
-			return $sidebar_params;
-		}
-		global $wp_registered_widgets;
-		$current_widget_id = $sidebar_params[0]['widget_id'];
-		$wp_registered_widgets[ $current_widget_id ]['original_callback'] = $wp_registered_widgets[ $current_widget_id ]['callback'];
-		$wp_registered_widgets[ $current_widget_id ]['callback'] = array( $this, 'display_widget' );
-		return $sidebar_params;
-	}
-	public function display_widget() {
-		global $wp_registered_widgets;
-		$original_callback_params = func_get_args();
-		$widget_id = $original_callback_params[0]['widget_id'];
-		$original_callback = $wp_registered_widgets[ $widget_id ]['original_callback'];
-		$widget_id_base = $original_callback[0]->id_base;
-		$sidebar_id = $original_callback_params[0]['id'];
-		if ( is_callable( $original_callback ) ) {
-			ob_start();
-			call_user_func_array( $original_callback, $original_callback_params );
-			$widget_output = ob_get_clean();
-			echo apply_filters( 'widget_output', $widget_output, $widget_id_base, $widget_id, $sidebar_id );
-		}
-	}
-}
-new Widget_Output_Filters();
+
 }
 
 add_filter( 'widget_output', 'wop_bootstrap_widget_output_filters', 10, 4 );
@@ -101,7 +72,6 @@ function wop_bootstrap_widget_output_filters( $widget_output, $widget_type, $wid
 	} 
 	
     	return $widget_output;
-    
 }
 
 
@@ -113,9 +83,6 @@ function categories_postcount_filter ($variable) {
 	$variable = str_replace( ')', ' </span>', $variable );
 	return $variable;
 }
-
-
-
 
 
 
@@ -162,36 +129,5 @@ $form = '<form method="get" class="search-form form-inline" action="'.home_url( 
 </form>';
 
 return $form;
-}
-// */
-
-
-
-/******************************************************************************************/
-/*   Sidebar Defaults - Filter Genesis Sidebar Default Markup to add Panels               */
-/******************************************************************************************/
-
-//*
-function gb3_register_sidebar_defaults( $defaults ) {
-	$defaults['before_widget'] = '<section id="%1$s" class="panel panel-default widget %2$s"><div class="panel-body widget-wrap">';
-	return $defaults;
-}
-add_filter( 'genesis_register_widget_area_defaults', 'gb3_register_sidebar_defaults', 99);
-// */
-
-
-/******************************************************************************************/
-/*  Sidebar Filters - Remove Widget Panel in Header                                       */
-/******************************************************************************************/
-
-//*
-add_filter( 'dynamic_sidebar_params', 'wordpress_widgets_booststrapped_widget_params', 99 );
-function wordpress_widgets_booststrapped_widget_params( $params ) { 
-if ( ! is_admin() ) {
-	  if(isset($params[0]['id']) && $params[0]['id'] == 'header-right'){
-		$params[0]['before_widget'] = '';
-    		$params[0]['after_widget'] = '';	  }
-  		return $params;
-	}
 }
 // */
