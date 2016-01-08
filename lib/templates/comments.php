@@ -103,6 +103,7 @@ function bsg_comment_form_fields( $fields ) {
 // COMMENT FORM DEFAULTS
 add_filter( 'comment_form_defaults', 'bsg_comment_form_modifications' );
 function bsg_comment_form_modifications( $args ) {
+    $args['submit_field'] = '<div class="form-submit">%1$s %2$s</div>';
     $args['title_reply'] = __( 'Join the Conversation' );
     $args['must_log_in'] = '<p class="must-log-in">' .  sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.' ), wp_registration_url(), wp_login_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</p>';
     $args['comment_notes_after'] = '';
