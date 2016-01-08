@@ -25,6 +25,9 @@ function custom_genesis_comment_list_args( $args ){
     return $args;
 }
 
+
+
+// COMMENT CALLBACK
 function custom_genesis_comment_callback( $comment, $args, $depth ){
 $GLOBALS['comment'] = $comment; ?>
 <li id="comment-<?php comment_ID(); ?>" <?php comment_class( empty( $args['has_children'] ) ? '' : 'parent' ); ?>>
@@ -93,6 +96,7 @@ $GLOBALS['comment'] = $comment; ?>
 }
 
 
+// COMMENT FORM DEFAULT FIELDS
 add_filter( 'comment_form_default_fields', 'bsg_comment_form_fields' );
 // add_filter( 'genesis_comment_form_args', 'bsg_comment_form_fields' );
 function bsg_comment_form_fields( $fields ) {
@@ -121,19 +125,19 @@ function bsg_comment_form_modifications( $args ) {
     
     global $user_identity;
     $commenter = wp_get_current_commenter();
-    $req      = get_option( 'require_name_email' );
-    $aria_req = ( $req ? " aria-required='true'" : '' );
-    $html5    = current_theme_supports( 'html5', 'comment-form' ) ? 1 : 0;
+    $req       = get_option( 'require_name_email' );
+    $aria_req  = ( $req ? " aria-required='true'" : '' );
+    $html5     = current_theme_supports( 'html5', 'comment-form' ) ? 1 : 0;
 
-    $args['submit_field'] = '<div class="form-submit">%1$s %2$s</div>';
-    $args['title_reply'] = __( 'Join the Conversation' );
-    $args['must_log_in'] = '<p style="position: absolute; right: 35px; margin-top: 2px;" class="must-log-in text-info small">' .  sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.' ), wp_registration_url(), wp_login_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</p>';
-    $args['logged_in_as'] = '<p style="position: absolute; right: 35px; margin-top: 2px;" class="logged-in-as text-muted small">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ), admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</p>';
+    $args['submit_field']         = '<div class="form-submit">%1$s %2$s</div>';
+    $args['title_reply']          = __( 'Join the Conversation' );
+    $args['must_log_in']          = '<p style="position: absolute; right: 35px; margin-top: 2px;" class="must-log-in text-info small">' .  sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.' ), wp_registration_url(), wp_login_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</p>';
+    $args['logged_in_as']         = '<p style="position: absolute; right: 35px; margin-top: 2px;" class="logged-in-as text-muted small">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ), admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</p>';
     $args['comment_notes_before'] = '<p style="position: absolute; right: 35px; margin-top: 2px;" class="comment-notes text-info small">'. __( 'Your email address will not be published.' ) .'</p>';
-    $args['class_form'] = 'comment-form well';
-    $args['comment_notes_after'] = '';
-    $args['comment_field'] = '<div class="form-group comment-form-comment"> <label for="comment">' . __( 'Comment' ) . '</label> <textarea class="form-control expand" id="comment" name="comment" cols="45" rows="4" aria-required="true"></textarea> </div>';
-    $args['class_submit'] = 'btn btn-primary'; 
+    $args['class_form']           = 'comment-form well';
+    $args['comment_notes_after']  = '';
+    $args['comment_field']        = '<div class="form-group comment-form-comment"> <label for="comment">' . __( 'Comment' ) . '</label> <textarea class="form-control expand" id="comment" name="comment" cols="45" rows="4" aria-required="true"></textarea> </div>';
+    $args['class_submit']         = 'btn btn-primary'; 
     
     return $args;
     
