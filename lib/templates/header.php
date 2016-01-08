@@ -27,22 +27,19 @@ function bsg_js_detection_lang_atts($output) {
 function bsg_js_detection_script() {
 	if ( has_filter( 'language_attributes', 'bsg_js_detection_lang_atts' ) ) {
 		echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
-		
 	}
 }
 
 
-add_action( 'send_headers', 'bsg_add_header_xua_compatible' );
 /**
  * Add `X-UA-compatible` meta tag using send_headers to ensure it's being used by IE9 Intranets and avoid validation errors
  * 
  * @since 1.0.0
  */
+is_admin() || add_action( 'send_headers', function() {
 function bsg_add_header_xua_compatible() {
 	header( 'X-UA-Compatible: IE=edge,chrome=1' );
-}
-
-
+} );
 
 remove_action( 'wp_head', 'genesis_html5_ie_fix' ); 
 add_action('wp_enqueue_scripts', 'genesis_bootstrap_ie_fix', 99);
