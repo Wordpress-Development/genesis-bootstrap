@@ -49,11 +49,12 @@ add_action('wp_enqueue_scripts', 'genesis_bootstrap_ie_fix', 99);
  * @since 1.0.0
  */
 function genesis_bootstrap_ie_fix() {
-        wp_enqueue_script( 'html5shiv', '//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js', array( 'bootstrap' ), '3.7.2', false  );
-        wp_enqueue_script( 'respond', '//oss.maxcdn.com/respond/1.4.2/respond.min.js', array( 'bootstrap' ), '1.4.2', false  );
-        wp_scripts()->add_data( 'html5shiv', 'conditional', 'lt IE 9' );
-        wp_scripts()->add_data( 'respond', 'conditional', 'lt IE 9' );
+	wp_enqueue_script( 'html5shiv', 'https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js', array(), '3.7.2', false );
+	wp_enqueue_script( 'respond', 'https://oss.maxcdn.com/respond/1.4.2/respond.min.js', array(), '3.7.2', false );
+     	wp_script_add_data( 'html5shiv', 'conditional', 'lt IE 9' );
+    	wp_script_add_data( 'respond', 'conditional', 'lt IE 9' );
 }
+
 
 
 
