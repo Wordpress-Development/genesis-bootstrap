@@ -13,7 +13,6 @@
 
 
 add_filter( 'language_attributes', 'bsg_js_detection_lang_atts' );
-add_action( 'genesis_doctype', 'bsg_js_detection_script', 100 );
 /**
  * Add `no-js` class to `<html>` and include javascript check script early
  * 
@@ -24,11 +23,11 @@ add_action( 'genesis_doctype', 'bsg_js_detection_script', 100 );
 function bsg_js_detection_lang_atts($output) {
 	return $output . ' class="no-js"';
 }
-function bsg_js_detection_script() {
+is_admin() || add_action( 'genesis_doctype' function() {
 	if ( has_filter( 'language_attributes', 'bsg_js_detection_lang_atts' ) ) {
 		echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 	}
-}
+}, 100 );
 
 
 /**
@@ -40,6 +39,7 @@ is_admin() || add_action( 'send_headers', function() {
 function bsg_add_header_xua_compatible() {
 	header( 'X-UA-Compatible: IE=edge,chrome=1' );
 } );
+
 
 remove_action( 'wp_head', 'genesis_html5_ie_fix' ); 
 add_action('wp_enqueue_scripts', 'genesis_bootstrap_ie_fix', 99);
