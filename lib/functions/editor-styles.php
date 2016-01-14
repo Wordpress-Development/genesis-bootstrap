@@ -25,7 +25,25 @@ function twbsg_mce_css( $mce_css ) {
 	return $mce_css;
 }
 
+
+
+/*
+
+// Theme Editor Styles
+
+add_filter( 'mce_css', 'custom_editor_mce_css' );
+function custom_editor_mce_css( $mce_css ) {
+	if ( ! empty( $mce_css ) )
+		$mce_css .= ',';
+	$mce_css .= get_stylesheet_directory_uri() . '/css/custom_editor.css';
+	return $mce_css;
+}
+
+// */
+
 /** Fix padding on editor body since Bootstrap container classes aren't used */
+
+
 add_filter( 'tiny_mce_before_init', 'twbsg_tinymce_before_init_content_style' );
 function twbsg_tinymce_before_init_content_style( $mce ) {
     // $mce['body_class'] = ' container-fluid'; 
@@ -33,3 +51,5 @@ function twbsg_tinymce_before_init_content_style( $mce ) {
     $mce['content_style'] = "#tinymce {margin: 10px 15px!important;}";
     return $mce;
 }
+
+
