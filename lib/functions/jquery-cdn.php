@@ -1,8 +1,7 @@
 <?php
 /** 
- * jQuery CDN
+ * jQuery CDN with local fallback
  */
- 
 add_action('wp_enqueue_scripts', 'bsg_jquery_cdn', 100);
 function bsg_jquery_cdn() {
   $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
