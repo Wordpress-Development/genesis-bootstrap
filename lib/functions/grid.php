@@ -1,6 +1,5 @@
 <?php
 
-
 // add bootstrap classes
 $genesis_atts = array(
                   'nav-primary',
@@ -67,7 +66,6 @@ function bsg_add_markup_class( $attr, $context ) {
     } else {
         $classes_array = explode( ' ', (string) $value );
     }
-    $classes_array = apply_filters( 'bsg-add-class', $classes_array, $context, $attr );
     $classes_array = array_map( 'sanitize_html_class', $classes_array );
     $attr['class'] .= ' ' . implode( ' ', $classes_array );
     return $attr;
