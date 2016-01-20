@@ -21,3 +21,14 @@ class TWBSG_TinymceCSS {
 }
 new TWBSG_TinymceCSS();
 // */
+/*
+// Theme Editor Styles Example
+
+add_filter( 'mce_css', 'custom_editor_mce_css' );
+function custom_editor_mce_css( $mce_css ) {
+	if ( ! empty( $mce_css ) )
+		$mce_css .= ',';
+	$mce_css .= get_stylesheet_directory_uri() . '/css/custom_editor.css';
+	return $mce_css;
+}
+// */
