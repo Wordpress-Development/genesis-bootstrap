@@ -1,5 +1,21 @@
 <?php
 
+// COMMENT CLASS FILTERS - you can modify this in your theme
+add_filter('bw_add_classes', 'bw_custom');
+function bw_custom($classes) {
+    $classes = array( 
+            'comment'                   => 'comment-body media',
+            'comment-reply'             => 'reply text-muted small pull-right',
+            'comment-header'            => 'media-heading',
+            'comment-time-link'         => 'text-muted small',
+            'comment-media'             => 'media-left',
+            'nav-footer'                => 'pull-right',
+            'comment-list'              => 'list-unstyled'
+    );
+    return $classes;
+}
+
+
 // COMMENT HEADER
 add_filter( 'genesis_title_comments', 'sp_genesis_title_comments' );
 function sp_genesis_title_comments() {
