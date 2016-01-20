@@ -19,7 +19,7 @@ function bsg_jquery_cdn() {
 add_action( 'wp_head', 'bsg_jquery_local_fallback' );
 
 function bsg_jquery_local_fallback( $src, $handle = null ) {
-	static $add_jquery_fallback = false;
+    static $add_jquery_fallback = false;
     if ($add_jquery_fallback) {
         echo '<script>window.jQuery || document.write(\'<script src="' . $add_jquery_fallback .'"><\/script>\')</script>' . "\n";
         $add_jquery_fallback = false;
