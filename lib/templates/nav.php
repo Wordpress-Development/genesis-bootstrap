@@ -8,6 +8,20 @@ if (
 }
 
 
+
+add_filter('bw_add_classes', 'bw_nav_custom_classes');
+function bw_nav_custom_classes($classes) {
+    $classes = array( 
+    	'site-header'               => 'container',
+    	'nav-primary'               => 'navbar navbar-default navbar-static-top',
+    	'nav-secondary'             => 'navbar navbar-inverse navbar-static-top'
+    );
+    return $classes;
+}
+
+
+           
+
 /**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
