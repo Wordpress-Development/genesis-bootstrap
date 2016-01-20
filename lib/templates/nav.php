@@ -1,24 +1,20 @@
 <?php
 
-if (
-    class_exists('UberMenu')
-    || class_exists('UberMenuStandard')
-) {
-    return;
+
+
+add_action('genesis_meta', 'bw_custom_nav_classes_init');
+function bw_custom_nav_classes_init() {
+    add_filter('bw_add_classes', 'bw_custom_nav_classes');
+
 }
-
-
-
-add_filter('bw_add_classes', 'bw_nav_custom_classes');
-function bw_nav_custom_classes($classes) {
+function bw_custom_nav_classes($classes) {
     $classes = array( 
-    	'site-header'               => 'container',
-    	'nav-primary'               => 'navbar navbar-default navbar-static-top',
-    	'nav-secondary'             => 'navbar navbar-inverse navbar-static-top'
+    	   'site-header'    => 'container',
+	   'nav-primary'    => 'navbar navbar-inverse navbar-static-top',
+ 	   'nav-secondary'  => 'navbar navbar-default navbar-static-top'
     );
     return $classes;
 }
-
 
            
 
