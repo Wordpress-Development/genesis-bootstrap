@@ -41,24 +41,32 @@ function bsg_add_header_xua_compatible() {
 }, 1 );
 
 
-remove_action( 'wp_head', 'genesis_html5_ie_fix' ); 
-add_action('wp_enqueue_scripts', 'genesis_bootstrap_ie_fix', 99);
+remove_action( 'wp_head', 'genesis_html5_ie_fix' );
+add_action('wp_enqueue_scripts', 'genesis_bootstrap_ie_fix');
 /**
  * Remove default html5shiv and add custom with respond
  * 
  * @since 1.0.0
  */
-function genesis_bootstrap_ie_fix() {
-	wp_enqueue_script( 'html5shiv', 'https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js', array(), '3.7.2', false );
-	wp_enqueue_script( 'respond', 'https://oss.maxcdn.com/respond/1.4.2/respond.min.js', array(), '3.7.2', false );
-     	wp_script_add_data( 'html5shiv', 'conditional', 'lt IE 9' );
-    	wp_script_add_data( 'respond', 'conditional', 'lt IE 9' );
+function genesis_bootstrap_ie_fix()  {
+	wp_enqueue_script( 'html5shiv',
+		'https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js',
+    		array( 'bootstrap' ),
+		'3.7.2',
+		false
+	);
+	wp_enqueue_script( 'respond',
+		'https://oss.maxcdn.com/respond/1.4.2/respond.min.js',
+    		array( 'bootstrap' ),
+		'1.4.2',
+		false
+	);	
+  	wp_script_add_data( 'html5shiv', 'conditional', 'lt IE 9' );
+  	wp_script_add_data( 'respond', 'conditional', 'lt IE 9' );
 }
 
 
-
-
-remove_action( 'genesis_meta', 'genesis_responsive_viewport' );
+remove_action( 'genesis_meta', 'genesis_responsive_viewport', 999 );
 add_theme_support( 'genesis-responsive-viewport' );
 /**
  * Better Viewport 
@@ -68,7 +76,7 @@ add_theme_support( 'genesis-responsive-viewport' );
  * @since 1.0.0
  */
 add_action( 'genesis_doctype', function() {
-	return bsg_genesis_responsive_viewport( );
+	return bsg_genesis_responsive_viewport();
 });
 function bsg_genesis_responsive_viewport( ) {
 	if ( ! current_theme_supports( 'genesis-responsive-viewport' ) )
@@ -77,6 +85,7 @@ function bsg_genesis_responsive_viewport( ) {
 	echo '<meta name="viewport" content="'.$content.'" />' . "\n";
 }
 
+// Example Viewport Filter
 /*
 add_filter('genesis_responsive_viewport', function(){
     return 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
