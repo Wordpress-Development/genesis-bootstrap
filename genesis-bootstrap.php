@@ -21,17 +21,27 @@ function activate_genesis_bootstrap_plugin_script_check() {
 }
 function deactivate_genesis_bootstrap_plugin_script_check() {
     if ( ! function_exists('genesis_pre') ) {
-		deactivate_plugins( plugin_basename( __FILE__ ) ); 
+    		add_action( 'admin_notices', 'admin_notice_genesis_bootstrap_plugin_deactivate' );
+		deactivate_plugins( plugin_basename( __FILE__ ) );
     }
 } 
 add_action('after_switch_theme', 'deactivate_genesis_bootstrap_plugin_script_check');
 
 
 
+function admin_notice_genesis_bootstrap_plugin_deactivate() {
+  ?>
+  <div class="update-nag notice">
+      <p><?php _e( 'Genesis Bootstrap plugin has been deactivated. You must have a Genesis theme active before you can reactivate.', 'genesis' ); ?></p>
+  </div>
+  <?php
+}
+
+
+
 
 
 require_once dirname( __FILE__ ) . '/lib/genesis_setup';
-
 
 
 
