@@ -41,6 +41,30 @@ function bsg_add_header_xua_compatible() {
 }, 1 );
 
 
+
+
+add_action('wp_enqueue_scripts', 'genesis_bootstrap_js');
+/**
+ * Enqueue Bootstrap JS
+ * 
+ * @since 1.0.0
+ */
+function genesis_bootstrap_js()  {
+
+	$bootstrap_cdn = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js';
+	$bootstrap_local = plugins_url('bootstrap/js/javascript.min.js', __DIR__);
+
+	wp_enqueue_script( 'bootstrap',
+		$bootstrap_local,
+		array( 'jquery' ),
+		false,
+		true
+	);
+	
+}
+
+
+
 remove_action( 'wp_head', 'genesis_html5_ie_fix' );
 add_action('wp_enqueue_scripts', 'genesis_bootstrap_ie_fix');
 /**
@@ -49,16 +73,6 @@ add_action('wp_enqueue_scripts', 'genesis_bootstrap_ie_fix');
  * @since 1.0.0
  */
 function genesis_bootstrap_ie_fix()  {
-	
-	$bootstrap_cdn = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js';
-	$bootstrap_local = plugins_url('bootstrap/js/javascript.min.js', __DIR__);
-
-	wp_enqueue_script( 'bootstrap',
-		plugins_url('vendor/bootstrap/js/javascript.min.js', __DIR__),
-		array( 'jquery' ),
-		false,
-		false
-	);
 
 	wp_enqueue_script( 'html5shiv',
 		'https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js',
