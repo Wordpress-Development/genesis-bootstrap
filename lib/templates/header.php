@@ -49,15 +49,27 @@ add_action('wp_enqueue_scripts', 'genesis_bootstrap_ie_fix');
  * @since 1.0.0
  */
 function genesis_bootstrap_ie_fix()  {
+	
+	$bootstrap_cdn = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js';
+	$bootstrap_local = plugins_url('bootstrap/js/javascript.min.js', __DIR__);
+
+	wp_enqueue_script( 'bootstrap',
+		plugins_url('vendor/bootstrap/js/javascript.min.js', __DIR__),
+		array( 'jquery' ),
+		false,
+		false
+	);
+
 	wp_enqueue_script( 'html5shiv',
 		'https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js',
-    		array( 'bootstrap' ),
+		array( 'bootstrap' ),
 		'3.7.2',
 		false
 	);
+	
 	wp_enqueue_script( 'respond',
 		'https://oss.maxcdn.com/respond/1.4.2/respond.min.js',
-    		array( 'bootstrap' ),
+		array( 'bootstrap' ),
 		'1.4.2',
 		false
 	);	
