@@ -136,32 +136,28 @@ add_action( 'genesis_header', 'genesis_do_nav', 15 );
 add_action( 'genesis_header', 'genesis_do_subnav', 15 );
 
 
-add_filter( 'wp_nav_menu_args', 'bsg_nav_menu_args_filter' );
-function bsg_nav_menu_args_filter( $args ) {
-    if (
-        'primary' === $args['theme_location'] ||
-        'secondary' === $args['theme_location']
-    ) {
-        $args['depth'] = 2;
-        $args['menu_class'] = 'nav navbar-nav';
-        $args['fallback_cb'] = 'wp_bootstrap_navwalker::fallback';
-        $args['walker'] = new wp_bootstrap_navwalker();
-    }
-    return $args;
-}
 
 
 
-add_filter( 'wp_nav_menu', 'bsg_nav_menu_markup_filter', 10, 2 );
-function bsg_nav_menu_markup_filter( $html, $args ) {
-    if (
-        'primary'   !== $args->theme_location &&
-        'secondary' !== $args->theme_location
-    ) {
-        return $html;
-    }
-    $data_target = "nav-collapse" . sanitize_html_class( '-' . $args->theme_location );
-    $output = <<<EOT
+
+
+add_filter( 'genesis_do_nav', 'genesis_child_nav', 10, 3 );
+add_filter( 'genesis_do_subnav', 'genesis_child_nav', 10, 3 );
+
+function genesis_child_nav($nav_output, $nav, $args){
+    
+    $args['depth'] = 3;
+    $args['menu_class'] = 'nav navbar-nav';
+    	$args['fallback_cb'] = 'wp_bootstrap_navwalker::fallback';
+    	$args['walker'] = new wp_bootstrap_navwalker();
+    
+    	$nav = wp_nav_menu( $args );
+	$sanitized_location = sanitize_key( $args['theme_location'] );
+  	
+	$nav_markup_open = sprintf( '<nav %s>', genesis_attr( 'nav-' . $sanitized_location ) ) . genesis_structural_wrap( 'menu-' . $sanitized_location, 'open', 0 );
+	
+   	    $data_target = "nav-collapse-" . $sanitized_location;
+    	$nav_markup = <<<EOT
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{$data_target}">
             <span class="sr-only">Toggle navigation</span>
@@ -171,16 +167,20 @@ function bsg_nav_menu_markup_filter( $html, $args ) {
           </button>
 EOT;
 
-        if ( 'primary' === $args->theme_location ) {
-            $output .= apply_filters( 'bsg_navbar_brand', bsg_navbar_brand_markup() );
+        if ( 'primary' === $sanitized_location ) {
+            $nav_markup .= apply_filters( 'bsg_navbar_brand', bsg_navbar_brand_markup() );
         }
-        $output .= '</div>'; // .navbar-header
-        $output .= "<div class=\"collapse navbar-collapse\" id=\"{$data_target}\">";
-            $output .= $html;
-        $output .= '</div>'; // .collapse .navbar-collapse
-    return $output;
+        $nav_markup .= '</div>';
+        $nav_markup .= "<div class=\"collapse navbar-collapse\" id=\"{$data_target}\">";
+	    $nav_markup .= $nav;
+        $nav_markup .= '</div>'; // .collapse .navbar-collapse
+    
+	$nav_markup_close  = genesis_structural_wrap( 'menu-' . $sanitized_location, 'close', 0 ) . '</nav>';
+  	
+	$nav_output = $nav_markup_open . $nav_markup . $nav_markup_close;
+    	
+	return $nav_output;
 }
-
 
 
 
