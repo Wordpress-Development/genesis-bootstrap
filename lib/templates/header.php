@@ -73,18 +73,16 @@ add_action('wp_enqueue_scripts', 'genesis_bootstrap_ie_fix');
  * @since 1.0.0
  */
 function genesis_bootstrap_ie_fix()  {
-
 	wp_enqueue_script( 'html5shiv',
 		'https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js',
 		array(),
-		'3.7.2',
+		false,
 		false
 	);
-	
 	wp_enqueue_script( 'respond',
 		'https://oss.maxcdn.com/respond/1.4.2/respond.min.js',
 		array(),
-		'1.4.2',
+		false,
 		false
 	);
   	wp_script_add_data( 'html5shiv', 'conditional', 'lt IE 9' );
