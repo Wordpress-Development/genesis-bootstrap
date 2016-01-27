@@ -15,11 +15,13 @@ function bw_custom_comment_classes($classes) {
 }
 
 // COMMENT CLASS
+/*
 add_filter( 'comment_class' , 'remove_comment_classes' );
 function remove_comment_classes( $classes ) {
 	$classes[] = 'media';
         return $classes;
 }
+// */
 
 
 // COMMENT HEADER
