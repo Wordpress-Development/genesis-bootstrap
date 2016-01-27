@@ -1,7 +1,5 @@
 <?php
 
-<?php
-
 /**
  * Adds Filters Automatically from Array Keys
  */
@@ -14,6 +12,7 @@ function bw_add_array_filters_genesis_attr()
         add_filter($context, 'bw_add_markup_sanitize_classes', 10, 2);
     }
 }
+
 /**
  * Clean classes output
  */
@@ -34,6 +33,7 @@ function bw_add_markup_sanitize_classes($attr, $context)
     $attr['class'].= ' ' . implode(' ', $classes_array);
     return $attr;
 }
+
 /**
  * Default array of classes to add
  */
@@ -46,20 +46,19 @@ function bw_merge_genesis_attr_classes($classes)
             'site-inner'                => 'container',
             'site-footer'               => 'container',
             'content-sidebar-wrap'      => 'row',
-            'content'                   => 'col-sm-9',
-            'sidebar-primary'           => 'col-sm-3',
+            'content'                   => 'col-xs-12 col-sm-8 col-md-9',
+            'sidebar-primary'           => 'hidden-xs col-sm-4 col-md-3',
             'archive-pagination'        => 'clearfix',
             'entry-content'             => 'clearfix',
             'entry-pagination'          => 'clearfix bsg-pagination-numeric',
             'sidebar-secondary'        => ''
         );
     if (has_filter('bw_add_classes')) {
-        $add_classes = apply_filters('bw_add_classes', $add_classes);
-        $classes = wp_parse_args($classes, $add_classes);
-        
+        $classes = apply_filters('bw_add_classes', $classes);
     }
     return $classes;
 }
+
 /**
  * Adds classes array to bsg_add_markup_class() for cleaning
  */
