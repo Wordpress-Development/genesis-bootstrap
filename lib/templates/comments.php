@@ -1,18 +1,24 @@
 <?php
 
 // COMMENT CLASS FILTERS - you can modify this in your theme
-add_filter('bw_add_classes', 'bw_custom');
-function bw_custom($classes) {
-    $classes = array( 
+add_filter('bw_add_classes', 'bw_custom_comment_classes');
+function bw_custom_comment_classes($classes) {
+    $new_classes = array( 
             'comment'                   => 'comment-body media',
             'comment-reply'             => 'reply text-muted small pull-right',
             'comment-header'            => 'media-heading',
             'comment-time-link'         => 'text-muted small',
             'comment-media'             => 'media-left',
-            'nav-footer'                => 'pull-right',
             'comment-list'              => 'list-unstyled'
     );
-    return $classes;
+    return wp_parse_args($new_classes, $classes);
+}
+
+// COMMENT CLASS
+add_filter( 'comment_class' , 'remove_comment_classes' );
+function remove_comment_classes( $classes ) {
+	$classes[] = 'media';
+        return $classes;
 }
 
 
@@ -27,11 +33,7 @@ function sp_genesis_title_comments() {
 remove_filter('comment_text','wpautop',30);
 
 // COMMENT CLASS
-add_filter( 'comment_class' , 'remove_comment_classes' );
-function remove_comment_classes( $classes ) {
-	$classes[] = 'media';
-        return $classes;
-}
+
 
 // COMMENT LIST
 add_filter( 'genesis_comment_list_args', 'custom_genesis_comment_list_args' );
