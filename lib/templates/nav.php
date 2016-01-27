@@ -1,8 +1,15 @@
 <?php
 
 
-
-
+add_filter('bw_add_classes', 'bsg_custom_nav_classes');
+function bsg_custom_nav_classes($classes) {
+    $new_classes = array( 
+            'nav-primary'               => 'navbar navbar-default navbar-static-top',
+            'nav-secondary'             => 'navbar navbar-inverse navbar-static-top',
+            'site-header'               => 'container',
+    );
+    return wp_parse_args($new_classes, $classes);
+}
 
 
 /**
