@@ -4,7 +4,7 @@
 /*   Sidebar Defaults - Filter Genesis Sidebar Default Markup to add Panels               */
 /******************************************************************************************/
 
-add_action( 'genesis_register_sidebar_defaults', 'twbsg_register_sidebar_defaults', 99 );
+add_action( 'genesis_register_widget_area_defaults', 'twbsg_register_sidebar_defaults', 99 );
 /**
  * Boostrap on Genesis sidebar defaults 
  *
@@ -12,12 +12,21 @@ add_action( 'genesis_register_sidebar_defaults', 'twbsg_register_sidebar_default
  * @return array           Modified Genesis defaults.
  */
 function twbsg_register_sidebar_defaults( $defaults ) {
-	return 	array(
-		'before_widget' => '<section id="%1$s" class="panel panel-default widget %2$s"><div class="panel-body widget-wrap">',
-		'after_widget'  => "</div></section>\n", 
-		'before_title'  => '<h3 class="widgettitle">', 
-		'after_title'   => "</h3>\n",
+  	$defaults = array(
+		'before_widget' => genesis_markup( array(
+			'html5' => '<section id="%1$s" class="panel panel-default widget %2$s"><div class="panel-body widget-wrap">',
+			'xhtml' => '<div id="%1$s" class="panel panel-default widget %2$s"><div class="panel-body widget-wrap">',
+			'echo'  => false,
+		) ),
+		'after_widget'  => genesis_markup( array(
+			'html5' => '</div></section>' . "\n",
+			'xhtml' => '</div></div>' . "\n",
+			'echo'  => false
+		) ),
+		'before_title'  => '<h4 class="widget-title widgettitle">',
+		'after_title'   => "</h4>\n",
 	);
+    return $defaults;
 }
 
 
