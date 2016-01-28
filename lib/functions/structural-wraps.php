@@ -15,18 +15,16 @@
 /**
  * Add theme support for structural wraps
  */
-function gb3_add_theme_support_structural_wraps() {
-	add_theme_support( 'genesis-structural-wraps', 
+add_theme_support( 'genesis-structural-wraps', 
 		array( 
 			'menu-primary', 
 			'menu-secondary',
 			'footer',
 			'jumbotron-inner',
 			'site-inner',
-    			'header'
+    	'header'
 		) 
-	);
-}
+);
 
 
 /**
@@ -71,6 +69,16 @@ function bsg_wrap_all_container_fluid() {
      add_filter( $context, 'bsg_wrap_container_fluid', 16, 2 );
  }
 }
+
+
+
+
+add_action( 'genesis_meta', 'bsgen_structural_wrap_fluid_site_inner' );
+function bsgen_structural_wrap_fluid_site_inner(){
+  add_filter( 'genesis_structural_wrap-site-inner', 'bsg_wrap_container_fluid', 99, 2);
+}
+
+
 
 
 /**

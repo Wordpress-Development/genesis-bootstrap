@@ -78,7 +78,7 @@ add_action( 'genesis_after_endwhile', 'bsg_genesis_posts_nav' );
  */
 function bsg_genesis_posts_nav() {
     if ( 'numeric' === genesis_get_option( 'posts_nav' ) ) {
-        bsg_genesis_numeric_posts_nav();
+		bsg_genesis_numeric_posts_nav();
     } else {
         bsg_genesis_prev_next_posts_nav();
     }
@@ -93,25 +93,25 @@ function bsg_genesis_posts_nav() {
  * @since 0.7.0
  */
 function bsg_genesis_prev_next_posts_nav() {
-    $prev_link = get_previous_posts_link( apply_filters( 'genesis_prev_link_text', '<span aria-hidden="true">&larr;</span> ' . __( 'Previous Page', 'genesis' ) ) );
-    $next_link = get_next_posts_link( apply_filters( 'genesis_next_link_text', __( 'Next Page', 'genesis' ) . ' <span aria-hidden="true">&rarr;</span>' ) );
+	$prev_link = get_previous_posts_link( apply_filters( 'genesis_prev_link_text', '<span aria-hidden="true">&larr;</span> ' . __( 'Previous Page', 'genesis' ) ) );
+	$next_link = get_next_posts_link( apply_filters( 'genesis_next_link_text', __( 'Next Page', 'genesis' ) . ' <span aria-hidden="true">&rarr;</span>' ) );
 
-    $prev = $prev_link ? '<li class="previous">' . $prev_link . '</li>' : '';
-    $next = $next_link ? '<li class="next">' . $next_link . '</li>' : '';
+	$prev = $prev_link ? '<li class="previous">' . $prev_link . '</li>' : '';
+	$next = $next_link ? '<li class="next">' . $next_link . '</li>' : '';
 
-    $nav .= genesis_markup( array(
-        'html5'   => '<div class="clearfix"></div><nav %s><ul class="pager">',
-        'xhtml'   => '<div class="navigation">',
-        'context' => 'archive-pagination',
-        'echo'    => false,
-    ) );
+	$nav .= genesis_markup( array(
+		'html5'   => '<div class="clearfix"></div><nav %s><ul class="pager">',
+		'xhtml'   => '<div class="navigation">',
+		'context' => 'archive-pagination',
+		'echo'    => false,
+	) );
 
-    $nav .= $prev;
-    $nav .= $next;
-    $nav .= '</ul></nav>';
+	$nav .= $prev;
+	$nav .= $next;
+	$nav .= '</ul></nav>';
 
-    if ( $prev || $next )
-        echo $nav;
+	if ( $prev || $next )
+		echo $nav;
 
 }
 
@@ -166,9 +166,6 @@ function bsg_do_post_content_nav( $attr ) {
 
 
 
-
-
-
 function bsg_genesis_numeric_posts_nav() {
 
     if( is_singular() )
@@ -176,18 +173,15 @@ function bsg_genesis_numeric_posts_nav() {
 
     global $wp_query;
 
-    //* Stop execution if there's only 1 page
     if( $wp_query->max_num_pages <= 1 )
         return;
 
     $paged = get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1;
     $max   = intval( $wp_query->max_num_pages );
 
-    //* Add current page to the array
     if ( $paged >= 1 )
         $links[] = $paged;
 
-    //* Add the pages around the current page to the array
     if ( $paged >= 3 ) {
         $links[] = $paged - 1;
         $links[] = $paged - 2;
@@ -198,55 +192,34 @@ function bsg_genesis_numeric_posts_nav() {
         $links[] = $paged + 1;
     }
 
-    genesis_markup( array(
-        'html5'   => '<div class="clearfix"></div><div %s>',
-        'xhtml'   => '<div class="navigation">',
-        'context' => 'archive-pagination',
-    ) );
+    echo '<div class="clearfix"></div>';
+
+    printf( '<div %s>', genesis_attr( 'archive-pagination' ) );
 
     $before_number = genesis_a11y( 'screen-reader-text' ) ? '<span class="sr-only">' . __( 'Page ', 'genesis' ) .  '</span>' : '';
 
     printf( '<ul %s>', genesis_attr( 'pagination' ) ); // pagination-lg pagination-sm
 
-    //* Previous Post Link
     if ( get_previous_posts_link() )
         printf( '<li class="pagination-previous">%s</li>' . "\n", get_previous_posts_link( apply_filters( 'genesis_prev_link_text', '&#x000AB; ' . __( 'Previous Page', 'genesis' ) ) ) );
 
-    //* Link to first page, plus ellipses if necessary
     if ( ! in_array( 1, $links ) ) {
-
         $class = 1 == $paged ? ' class="active"' : '';
-
         printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( 1 ) ), $before_number . '1' );
-
-        if ( ! in_array( 2, $links ) ) {
-            echo '<li class="pagination-omission">&#x02026;</li>' . "\n";
-        }
-
     }
 
-    //* Link to current page, plus 2 pages in either direction if necessary
     sort( $links );
     foreach ( (array) $links as $link ) {
         $class = $paged == $link ? ' class="active"  aria-label="' . __( 'Current page', 'genesis' ) . '"' : '';
         printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $link ) ), $before_number . $link );
     }
 
-    //* Link to last page, plus ellipses if necessary
     if ( ! in_array( $max, $links ) ) {
-
-        if ( ! in_array( $max - 1, $links ) )
-            echo '<li class="pagination-omission">&#x02026;</li>' . "\n";
-
         $class = $paged == $max ? ' class="active"' : '';
         printf( '<li%s><a href="%s">%s</a></li>' . "\n", $class, esc_url( get_pagenum_link( $max ) ), $before_number . $max );
-
     }
 
-    //* Next Post Link
     if ( get_next_posts_link() )
         printf( '<li class="pagination-next">%s</li>' . "\n", get_next_posts_link( apply_filters( 'genesis_next_link_text', __( 'Next Page', 'genesis' ) . ' &#x000BB;' ) ) );
-
     echo '</ul></div>' . "\n";
-
 }

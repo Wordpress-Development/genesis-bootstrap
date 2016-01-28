@@ -6,7 +6,7 @@
 add_action('genesis_meta', 'bw_add_array_filters_genesis_attr');
 function bw_add_array_filters_genesis_attr()
 {
-    $filters = bw_merge_genesis_attr_classes($classes);
+    $filters = bw_merge_genesis_attr_classes();
     foreach(array_keys($filters) as $context) {
         $context = "genesis_attr_$context";
         add_filter($context, 'bw_add_markup_sanitize_classes', 10, 2);
@@ -37,24 +37,24 @@ function bw_add_markup_sanitize_classes($attr, $context)
 /**
  * Default array of classes to add
  */
-function bw_merge_genesis_attr_classes($classes)
+function bw_merge_genesis_attr_classes()
 {
     $classes = array(
-            'site-inner'                => 'container',
-            'site-footer'               => 'container',
             'content-sidebar-wrap'      => 'row',
-            'content'                   => 'col-xs-12 col-sm-8 col-md-9',
-            'sidebar-primary'           => 'hidden-xs col-sm-4 col-md-3',
+            'content'                   => 'col-xs-12 col-sm-8 col-lg-7 col-lg-offset-1',
+            'sidebar-primary'           => 'hidden-xs col-sm-4 col-lg-3',
             'archive-pagination'        => 'clearfix',
             'entry-content'             => 'clearfix',
-            'entry-pagination'          => 'clearfix bsg-pagination-numeric',
-            'sidebar-secondary'        => ''
-        );
+            'entry-pagination'          => 'clearfix',
+            'sidebar-secondary'         => '',
+    );
     if (has_filter('bw_add_classes')) {
         $classes = apply_filters('bw_add_classes', $classes);
     }
     return $classes;
 }
+
+
 
 /**
  * Adds classes array to bsg_add_markup_class() for cleaning

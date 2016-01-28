@@ -5,7 +5,7 @@ add_filter('bw_add_classes', 'bw_custom_comment_classes');
 function bw_custom_comment_classes($classes) {
     $new_classes = array( 
             'comment'                   => 'comment-body media',
-            'comment-reply'             => 'reply text-muted small pull-right',
+            'comment-reply'             => 'reply text-muted small',
             'comment-header'            => 'media-heading',
             'comment-time-link'         => 'text-muted small',
             'comment-media'             => 'media-left',
@@ -32,7 +32,7 @@ function sp_genesis_title_comments() {
 }
 
 // COMMENT TEXT
-remove_filter('comment_text','wpautop',30);
+//remove_filter('comment_text','wpautop',30);
 
 // COMMENT CLASS
 
@@ -40,7 +40,7 @@ remove_filter('comment_text','wpautop',30);
 // COMMENT LIST
 add_filter( 'genesis_comment_list_args', 'custom_genesis_comment_list_args' );
 function custom_genesis_comment_list_args( $args ){
-    $args['avatar_size'] = 64;
+    $args['avatar_size'] = 54;
     $args['callback'] = 'custom_genesis_comment_callback';
     return $args;
 }
@@ -55,9 +55,9 @@ $GLOBALS['comment'] = $comment; ?>
 <?php do_action( 'genesis_before_comment' ); ?>
         <div <?php echo genesis_attr( 'comment-media' ); ?>>
         <?php 
-        $atts = array( 
-        	    'extra_attr' => 'nopin="nopin"',
-                'class' => 'media-object img-rounded'                  
+                $atts = array( 
+        	       'extra_attr' => 'nopin="nopin"',
+                    'class' => 'media-object img-rounded'                  
             	);
         if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'], '', 'commenter avatar', $atts ); ?>
         </div>
@@ -84,17 +84,6 @@ $GLOBALS['comment'] = $comment; ?>
 				echo    esc_html( get_comment_date() ) . ' ' . __( 'at', 'genesis' ) . ' ' . esc_html( get_comment_time() );
 				echo    '</a></time></span>';
 			}
-			comment_reply_link(
-                array_merge(
-                    $args, array(
-                        'reply_text' => '<span class="glyphicon glyphicon-share-alt"></span> Reply',
-                        'depth'   => $depth,
-                        'max_depth' => $args['max_depth'],
-		    		    'before' => sprintf( '<div %s>', genesis_attr( 'comment-reply' ) ),
-                        'after'   => '</div><!-- .reply -->'
-                  		)
-                )
-            );
             edit_comment_link( __( ' (Edit)' ), '<span class="edit-link text-muted small">', '</span>' ); 
             ?>
             </h4>
@@ -109,6 +98,18 @@ $GLOBALS['comment'] = $comment; ?>
                      strip_tags($text);
                 ?>
         	</div><!-- .comment-content -->
+            <?php
+            comment_reply_link(
+                array_merge(
+                    $args, array(
+                        'reply_text' => 'Reply <span class="glyphicon glyphicon-share-alt"></span>',
+                        'depth'   => $depth,
+                        'max_depth' => $args['max_depth'],
+                        'before' => sprintf( '<div %s>', genesis_attr( 'comment-reply' ) ),
+                        'after'   => '</div><!-- .reply -->'
+                        )
+                )
+            ); ?>
         </div><!-- .media-body -->
 <?php do_action( 'genesis_after_comment' ); ?>
 </article>
@@ -150,7 +151,7 @@ function bsg_comment_form_modifications( $args ) {
     $html5     = current_theme_supports( 'html5', 'comment-form' ) ? 1 : 0;
 
     $args['submit_field']         = '<div class="form-submit">%1$s %2$s</div>';
-    $args['title_reply']          = __( 'Join the Conversation' );
+    $args['title_reply']          = __( '' );
     $args['must_log_in']          = '<p style="position: absolute; right: 35px; margin-top: 2px;" class="must-log-in text-info small">' .  sprintf( __( 'You must be <a href="%s">logged in</a> to post a comment.' ), wp_registration_url(), wp_login_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</p>';
     $args['logged_in_as']         = '<p style="position: absolute; right: 35px; margin-top: 2px;" class="logged-in-as text-muted small">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>. <a href="%3$s" title="Log out of this account">Log out?</a>' ), admin_url( 'profile.php' ), $user_identity, wp_logout_url( apply_filters( 'the_permalink', get_permalink( ) ) ) ) . '</p>';
     $args['comment_notes_before'] = '<p style="position: absolute; right: 35px; margin-top: 2px;" class="comment-notes text-info small">'. __( 'Your email address will not be published.' ) .'</p>';

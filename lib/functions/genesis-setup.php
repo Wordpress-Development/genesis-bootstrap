@@ -3,12 +3,10 @@
  * Setup Genesis Defaults for Bootstrap Plugin and Themes
  * 
  */
- 
-add_action( 'genesis_setup', 'bsg_add_theme_support', 15 );
-function bsg_add_theme_support() {
+
+remove_theme_support( 'genesis-accessibility' );
 
 /** Remove Parent Theme Support */
-remove_theme_support( 'genesis-accessibility' );
 
 /** Hide Wordpress Specific Schema */
 // remove_filter( 'genesis_attr_site-header', 'genesis_attributes_header' );
@@ -20,8 +18,6 @@ add_action( 'wp_enqueue_scripts', 'sp_disable_superfish' );
 /** Add featured image sizes */
 add_image_size( 'bsg-featured-image', 1170, 630, true );
 
-/** Wrap Sidebar Widgets with Bootstrap Panel Classes */
-add_filter( 'genesis_register_widget_area_defaults', 'gb3_register_sidebar_defaults');
 
 /** Custom Post Info and Meta */
 add_filter( 'genesis_post_info', 'sp_post_info_filter' );
@@ -34,7 +30,7 @@ add_theme_support( 'html5', array(
 	'search-form', 
 	'gallery', 
 	'caption'  
-	) );
+) );
 	
 
 add_theme_support ( 'genesis-menus' , array ( 
@@ -44,7 +40,6 @@ add_theme_support ( 'genesis-menus' , array (
 	'footer' => __( 'Footer Navigation Menu', 'genesis' )
 	) );
 	
-}
 
 function sp_post_info_filter($post_info) {
 	$post_info = '[post_date format="j F, Y" before="<span class=\'post-date text-muted\'>" after="</span>" label="<i class=\'fa fa-clock-o\'></i> "] by [post_author_posts_link] [post_comments before="<span class=\'pull-right\'><span class=\'text-muted fa fa-comments\'></span>" after="</span>" zero=" Leave a Comment" one=" 1 Comment" more=" % Comments"]';

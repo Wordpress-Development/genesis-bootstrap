@@ -39,14 +39,67 @@ function admin_notice_genesis_bootstrap_plugin_deactivate() {
 
 
 
+// require_once dirname( __FILE__ ) . '/lib/genesis_setup';
 
 
-require_once dirname( __FILE__ ) . '/lib/genesis_setup';
+
+
+
+
+/******************************************************************************************/
+/*   Sidebar Defaults - Filter Genesis Sidebar Default Markup to add Panels               */
+/******************************************************************************************/
+
+
+add_action( 'genesis_register_widget_area_defaults', 'twbsg_register_sidebar_defaults', 99 );
+/**
+ * Boostrap on Genesis sidebar defaults 
+ *
+ * @param  array $defaults Genesis defaults.
+ * @return array Modified Genesis defaults.
+ */
+function twbsg_register_sidebar_defaults( $defaults ) {
+    $defaults = array(
+    'before_widget' => '<section id="%1$s" class="panel panel-default widget %2$s"><div class="panel-body widget-wrap">',
+    'after_widget'  => "</div></section>\n",
+    'before_title'  => '<h4 class="widget-title widgettitle">',
+    'after_title'   => "</h4>\n",
+  );
+    return $defaults;
+}
+
+
+/******************************************************************************************/
+/*  Sidebar Filters - Remove Widget Wrap in Header                                        */
+/******************************************************************************************/
+
+
+add_filter( 'dynamic_sidebar_params', 'wordpress_widgets_booststrapped_widget_params', 99 );
+/**
+ * Wordpress Sidebar Filter 
+ *
+ * @param  array $defaults Genesis defaults.
+ * @return array           Modified Genesis defaults.
+ */
+function wordpress_widgets_booststrapped_widget_params( $params ) {
+
+  if(isset($params[0]['id']) && $params[0]['id'] == 'header-right'){
+    //$params[0]['before_widget'] =  '<div ' . genesis_attr( 'header-right-area' ) . '>';
+    $params[0]['before_widget'] =  '';
+    //$params[0]['after_widget']  = '</div>'; // after sidebar widget
+    $params[0]['after_widget']  = ''; // after sidebar widget 
+  }
+  return $params;
+}
+
+
+
+
 
 
 
 function gb3_custom_theme_support() {
-           $bsg = array(
+           $theme_support = array(
                         'bsg-bootstrap-genesis-css',
                         'bsg-comments',
                         'bsg-footer',
@@ -68,17 +121,14 @@ function gb3_custom_theme_support() {
                         'bsg-widget-columns',
                         'bsg-widget-styles'
             );
-
     if(has_filter('bsg_modify_theme')) {
-	     $bsg = apply_filters('bsg_modify_theme', $bsg);
+	     $theme_support = apply_filters('bsg_modify_theme', $theme_support);
     }
-    
-    foreach ( $bsg as $file ) {
-	  add_theme_support( $file );
+    foreach ( $theme_support as $file ) {
+	   add_theme_support( $file );
     } 
-    
 }
-add_action('after_setup_theme', 'gb3_custom_theme_support');
+add_action('plugins_loaded', 'gb3_custom_theme_support');
 
 
 
@@ -92,3 +142,15 @@ function bsg_load_lib_files() {
   }
 }
 add_action('after_setup_theme', 'bsg_load_lib_files', 100);
+
+
+
+
+add_action( 'genesis_setup', 'news_secondheader', 15 );
+function news_secondheader() {
+  genesis_register_widget_area( array(
+    'id'          => 'after-nav-primary',
+    'name'        => __( 'Credits Left', 'jan' ),
+    'description' => __( 'This is the footer Credits Left area.', 'jan' ),
+  ));
+}

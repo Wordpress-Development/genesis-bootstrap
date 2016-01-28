@@ -15,7 +15,7 @@ function twbsg_mce_css( $mce_css ) {
 	if ( ! empty( $mce_css ) ) {
 		$mce_css .= ',';
 	}
-	$mce_css .= $plugins_url('vendor/bootstrap/css/bootstrap.min.css', __DIR__);;
+	$mce_css .= plugins_url('vendor/bootstrap/css/bootstrap.min.css', __DIR__);;
 	return $mce_css;
 }
 

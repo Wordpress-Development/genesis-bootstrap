@@ -38,6 +38,8 @@ Instructions:	CSS Support for Bootstrap Genesis integration.
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background: rgba(249, 249, 249, 0.67);
+
 }
 .site-inner {
     flex: 1;
@@ -45,8 +47,8 @@ Instructions:	CSS Support for Bootstrap Genesis integration.
 
 /*------- [ 1.2  Page Inner Padding / #inner-padding   ] -------*/
 .site-inner {
-padding: 30px 0px; /* Padding added here to fix removal of navbar margins */
-background: rgba(249, 249, 249, 0.67);
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 
@@ -65,6 +67,7 @@ background: rgba(249, 249, 249, 0.67);
 }
 
 /*------- [ 2.2  Navbar Brand / #navbar-brand   ] -------*/
+
 .navbar-brand {
   padding: 0px!important; /* firefox fix - don't change */
 }
@@ -88,6 +91,8 @@ background: rgba(249, 249, 249, 0.67);
   left: 0;
   top: 0;
 }
+
+
 .brand-center .navbar-brand {
   transform: translateX(-50%);
   left: 50%;
@@ -185,6 +190,9 @@ background: rgba(249, 249, 249, 0.67);
 }
 
 
+
+
+
 /* ------------------------------------------------------------------------
 [ 5. Comments / #comments ]
 --------------------------------------------------------------------------- */
@@ -199,21 +207,23 @@ li.comment.depth-1 {
 .comment-list .children>li, 
 .ping-list>li {
     list-style-type: none;
-    padding-left: 48px;
+    padding-left: 54px;
     margin-top: 10px;
 }
 
 /*------- [ 5.2 Comments - Comment Reply / #comment-reply ] ------- */
-article.comment-body.media .reply {
+/*article.comment-body.media .reply {
     display: none;
 }
 article.comment-body.media:hover .reply {
     display: block;
 }
+*/
+
 
 /*------- [ 5.3 Comments - Border / #comment-border ] ------- */
 .media-body {
-      border-bottom: 1px solid #eee;
+      /*border-bottom: 1px solid #eee;*/
 }
 
 
@@ -228,17 +238,9 @@ span.comment-author {
     margin-right: 6px;
 }
 a.comment-time-link{
-    color: #aaa;
-    font-size: 91%;
-    font-weight: 300;
 }
 .children img.avatar {
-    width: 40px;
-    height: 40px;
 }
 a.comment-reply-link {
-    color: #aaa;
-    font-weight: 500;
-    margin-left: 0px;
-    font-size: 86%;
+
 }
