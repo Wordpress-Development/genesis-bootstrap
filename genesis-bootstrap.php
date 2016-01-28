@@ -47,7 +47,7 @@ require_once dirname( __FILE__ ) . '/lib/genesis_setup';
 
 function gb3_custom_theme_support() {
            $bsg = array(
-                        'bsg-bootstrap-genesis-css'
+                        'bsg-bootstrap-genesis-css',
                         'bsg-comments',
                         'bsg-footer',
                         'bsg-genesis-setup',
