@@ -3,7 +3,18 @@
  * Class Widget_Output_Filters
  *
  * Allows developers to filter the output of any WordPress widget.
+ *
+ * @category      Navigation
+ * @package       BootstrapGenesis
+ * @link          https://wordpress.org/plugins/widget-output-filters/
+ * @author        Original Author Philip Newcomer
+ * @license       GPLv2 or later
+ * @version       1.1
+ * @copyright     2015 Philip Newcomer
  */
+
+if ( !class_exists( Widget_Output_Filters ) ) {
+
 class Widget_Output_Filters {
 
 	/**
@@ -71,3 +82,7 @@ class Widget_Output_Filters {
 		}
 	}
 }
+
+new Widget_Output_Filters();
+
+} // class_exists
