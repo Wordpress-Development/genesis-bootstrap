@@ -82,7 +82,7 @@ add_action('after_setup_theme', 'gb3_custom_theme_support');
 
 function bsg_load_lib_files() {
   global $_wp_theme_features;
-  foreach (glob(__DIR__ . '/lib/*.php') as $file) {
+  foreach (glob(__DIR__ . '/lib/functions/*.php') as $file) {
     $feature = 'bsg-' . basename($file, '.php');
     if (isset($_wp_theme_features[$feature])) {
       require_once $file;
