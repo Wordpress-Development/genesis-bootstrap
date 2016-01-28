@@ -13,7 +13,6 @@
  * @copyright     2015 Philip Newcomer
  */
 
-if ( !class_exists( Widget_Output_Filters ) ) {
 
 class Widget_Output_Filters {
 
@@ -84,5 +83,3 @@ class Widget_Output_Filters {
 }
 
 new Widget_Output_Filters();
-
-} // class_exists
