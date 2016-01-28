@@ -3,7 +3,7 @@
 
  /**
   * Remove Header Defaults
-  */ 
+  */
 add_action('genesis_setup', 'bsg_remove_header_defaults', 15);
 function bsg_remove_header_defaults() {
 	unregister_sidebar( 'header-right' );
@@ -28,6 +28,15 @@ function bsg_custom_nav_classes($classes)
             'site-header'               => 'container'
     );
     return wp_parse_args($new_classes, $classes);
+}
+
+
+
+/**
+  * Bootstrap Nav Walker
+  */
+if ( !class_exists('wp_bootstrap_navwalker') ) {
+	require_once( plugins_url('/lib/classes/class.wp_bootstrap_navwalker.php', __DIR__) );
 }
 
 

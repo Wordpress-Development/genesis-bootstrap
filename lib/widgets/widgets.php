@@ -12,17 +12,17 @@
  * - Filters the html markup to support Bootstrap 3 styling for Genesis
  * - Supports - categories, calendar, tag cloud, archives, meta, recent-posts, recent-comments, pages, nav-menu, search
  */
- 
+
+
+if ( !class_exists('Widget_Output_Filters') ) {
+	require_once( plugins_url('/lib/classes/class.Widget_Output_Filters.php', __DIR__) );
+}
+
 
 /******************************************************************************************/
 /*   Bootstrap 3 Widget Filters                                                           */
 /******************************************************************************************/
 
-if ( !class_exists('Widget_Output_Filters') ) {
-	$path = plugins_url('/vendor/widget-output-filters/src/class.Widget_Output_Filters.php', __DIR__);
-	require_once( $path );
-	new Widget_Output_Filters();
-}
 
 add_filter( 'widget_output', 'wop_bootstrap_widget_output_filters', 10, 4 );
 function wop_bootstrap_widget_output_filters( $widget_output, $widget_type, $widget_id, $sidebar_id ) {
