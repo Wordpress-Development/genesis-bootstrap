@@ -66,11 +66,11 @@ function gb3_custom_theme_support() {
                         'bsg-sidebar-styles',
                         'bsg-structural-wraps',
                         'bsg-widget-columns',
-                        'bsg-widget-styles',
+                        'bsg-widget-styles'
             );
 
     if(has_filter('bsg_modify_theme')) {
-	$bsg = apply_filters('bsg_modify_theme', $bsg);
+	     $bsg = apply_filters('bsg_modify_theme', $bsg);
     }
     
     foreach ( $bsg as $file ) {
