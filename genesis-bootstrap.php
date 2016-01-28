@@ -47,24 +47,26 @@ require_once dirname( __FILE__ ) . '/lib/genesis_setup';
 
 function gb3_custom_theme_support() {
            $bsg = array(
-                        'bsg-head',
-                        'bsg-bootstrap-markup',
+                        'bsg-bootstrap-genesis-css'
                         'bsg-comments',
-                        'bsg-customizer',
-                        'bsg-footer-creds',
+                        'bsg-footer',
                         'bsg-genesis-setup',
-                        'bsg-image-display',
+                        'bsg-grid',
+                        'bsg-head',
+                        'bsg-images',
+                        'bsg-layouts',
                         'bsg-load-assets',
+                        'bsg-mce-css',
                         'bsg-nav',
                         'bsg-pagination',
                         'bsg-post-content-nav',
+                        'bsg-post',
+                        'bsg-responsive-embed-widget',
                         'bsg-search-form',
-                        'bsg-jumbotron',
-                        'bsg-footer',
-                        'bsg-responsive-videos-widget',
-                        'bsg-mce-css',
-                        'bsg-bootstrap-widgets',
-                        'bsg-bootstrap-genesis-css'
+                        'bsg-sidebar-styles',
+                        'bsg-structural-wraps',
+                        'bsg-widget-columns',
+                        'bsg-widget-styles',
             );
 
     if(has_filter('bsg_modify_theme')) {
