@@ -67,11 +67,11 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/lib\/classes\/class.WP_Boostrap_Nav_Walker.php": {
+	"\/lib\/classes\/class.wp_bootstrap_navwalker.php": {
 		"fileType": 8192,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/lib\/classes\/class.WP_Boostrap_Nav_Walker.php",
+		"inputAbbreviatedPath": "\/lib\/classes\/class.wp_bootstrap_navwalker.php",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
