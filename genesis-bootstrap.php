@@ -74,23 +74,22 @@ function twbsg_register_sidebar_defaults( $defaults ) {
 /******************************************************************************************/
 
 
-add_filter( 'dynamic_sidebar_params', 'wordpress_widgets_booststrapped_widget_params', 99 );
+// add_filter( 'dynamic_sidebar_params', 'wordpress_widgets_booststrapped_widget_params', 99 );
 /**
  * Wordpress Sidebar Filter 
  *
  * @param  array $defaults Genesis defaults.
  * @return array           Modified Genesis defaults.
  */
+ /*
 function wordpress_widgets_booststrapped_widget_params( $params ) {
-
   if(isset($params[0]['id']) && $params[0]['id'] == 'header-right'){
-    //$params[0]['before_widget'] =  '<div ' . genesis_attr( 'header-right-area' ) . '>';
     $params[0]['before_widget'] =  '';
-    //$params[0]['after_widget']  = '</div>'; // after sidebar widget
-    $params[0]['after_widget']  = ''; // after sidebar widget 
+    $params[0]['after_widget']  = '';
   }
   return $params;
 }
+// */
 
 
 
