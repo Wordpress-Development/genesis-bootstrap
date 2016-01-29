@@ -50,9 +50,9 @@ $GLOBALS['comment'] = $comment; ?>
 <?php do_action( 'genesis_before_comment' ); ?>
         <div <?php echo genesis_attr( 'comment-media' ); ?>>
         <?php $atts = array( 
-        	        'extra_attr' => 'nopin="nopin"',
-                    'class' => 'media-object img-rounded'                  
-            	);
+        		'extra_attr' => 'nopin="nopin"',
+        		'class' => 'media-object img-rounded'                  
+        		);
         if ( 0 != $args['avatar_size'] ) echo get_avatar( $comment, $args['avatar_size'], '', 'commenter avatar', $atts ); ?>
         </div>
         <div class="media-body">
