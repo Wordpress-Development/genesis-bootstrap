@@ -49,8 +49,7 @@ $GLOBALS['comment'] = $comment; ?>
 <article <?php echo genesis_attr( 'comment' ); ?>>
 <?php do_action( 'genesis_before_comment' ); ?>
         <div <?php echo genesis_attr( 'comment-media' ); ?>>
-        <?php 
-                $atts = array( 
+        <?php $atts = array( 
         	        'extra_attr' => 'nopin="nopin"',
                     'class' => 'media-object img-rounded'                  
             	);
