@@ -23,6 +23,8 @@ Instructions:	CSS Support for Bootstrap Genesis integration.
     5.1 Comments - Media Object Fixes / #comment-media
     5.2 Comments - Comment Reply / #comment-reply
     5.3 Comments - Border / #comment-border
+6. Accessibility / #accessibility
+    6.1 Accessibility - Screen Reader Text / #screen-reader-text #sr-only
     
 \*=========================================================================*/
 
@@ -243,4 +245,33 @@ a.comment-time-link{
 }
 a.comment-reply-link {
 
+}
+
+
+
+
+/* ------------------------------------------------------------------------
+[ 6. Genesis Accessibility / #accessibility ]
+--------------------------------------------------------------------------- */
+
+/*------- [ 6.1 Screen Reader Text - Media Object Fixes / #screen-reader-text #sr-only ] ------- */
+.screen-reader-text, 
+.screen-reader-text span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.screen-reader-text:active, 
+.screen-reader-text:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
 }
