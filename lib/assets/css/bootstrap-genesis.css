@@ -254,7 +254,7 @@ a.comment-reply-link {
 [ 6. Genesis Accessibility / #accessibility ]
 --------------------------------------------------------------------------- */
 
-/*------- [ 6.1 Screen Reader Text - Media Object Fixes / #screen-reader-text #sr-only ] ------- */
+/*------- [ 6.1 Screen Reader Text / #screen-reader-text #sr-only ] ------- */
 .screen-reader-text, 
 .screen-reader-text span {
   position: absolute;
