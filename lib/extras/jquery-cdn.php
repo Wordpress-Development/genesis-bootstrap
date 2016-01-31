@@ -9,7 +9,7 @@ function bsg_jquery_cdn() {
   wp_deregister_script('jquery');
   wp_register_script( 
 	  'jquery', 
-	  'https://ajax.googleapis.com/ajax/libs/jquery/' . $jquery_version . "/jquery{$suffix}.js'", 
+	  'https://ajax.googleapis.com/ajax/libs/jquery/' . $jquery_version . "/jquery{$suffix}.js", 
 	  array(), 
 	  null, 
 	  true 
