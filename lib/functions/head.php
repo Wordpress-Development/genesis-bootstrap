@@ -16,7 +16,7 @@
  * Add `X-UA-compatible` Header
  */
 is_admin() || add_action( 'send_headers', function() {
-    header( 'X-UA-Compatible: IE=edge,chrome=1' );
+	header( 'X-UA-Compatible: IE=edge,chrome=1' );
 }, 1 );
 
 
@@ -37,7 +37,7 @@ function bsg_js_detection_lang_atts($output) {
 	return $output . ' class="no-js"';
 }
 
-add_action( 'genesis_doctype' function() {
+add_action( 'genesis_doctype', function() {
 	if ( has_filter( 'language_attributes', 'bsg_js_detection_lang_atts' ) ) {
 		echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
 	}
@@ -49,18 +49,21 @@ add_action( 'genesis_doctype' function() {
  * Enqueued CSS Stylesheets
  */
 remove_action( 'genesis_meta', 'genesis_load_stylesheet' );
-add_action( 'wp_enqueue_scripts', 'twbsg_load_stylesheet_bootstrap' ); 
+add_action( 'wp_enqueue_scripts', 'twbsg_load_bootstrap' ); 
 add_action( 'wp_enqueue_scripts', 'twbsg_load_stylesheet_theme_tweaks', 99 );
 
-function twbsg_load_stylesheet_bootstrap() {
-    $stylesheet = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css';
-    $stylesheet = apply_filters( 'bsg_css_url', $stylesheet );
-    wp_enqueue_style( 'bootstrap', $stylesheet, array(), false );
+function twbsg_load_bootstrap() {
+	$stylesheet = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css';
+	$stylesheet = apply_filters( 'bsg_css_url', $stylesheet );
+	wp_enqueue_style( 'bootstrap', $stylesheet, array(), false );  
+    
+	wp_enqueue_script( 'bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', array('jquery'), false, false );
+	wp_enqueue_style( 'font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css', array(), false );
 }
 
 function twbsg_load_stylesheet_tweaks() {
-    $stylesheet = plugins_url('/assets/css/bootstrap-genesis.css', __DIR__); // plugin_dir_url( __FILE__ )
-    wp_enqueue_style( 'theme-tweaks', $stylesheet, array(), false );
+	$stylesheet = plugins_url('/assets/css/bootstrap-genesis.css', __DIR__); // plugin_dir_url( __FILE__ )
+	wp_enqueue_style( 'theme-tweaks', $stylesheet, array(), false );
 }
 
 
