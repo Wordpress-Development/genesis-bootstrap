@@ -5,13 +5,12 @@
   * Remove Header Defaults
   */
 
-	unregister_sidebar( 'header-right' );
-	remove_action( 'genesis_site_title', 'genesis_seo_site_title' );
-	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
-	remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
-	remove_action( 'genesis_header', 'genesis_do_header' );
-	remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
-
+unregister_sidebar( 'header-right' );
+remove_action( 'genesis_site_title', 'genesis_seo_site_title' );
+remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
+remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
+remove_action( 'genesis_header', 'genesis_do_header' );
+remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
 
 
 
@@ -26,7 +25,6 @@ function bsg_custom_nav_classes($classes)
 }
 
 
-
 add_action( 'genesis_meta', 'bsgen_structural_wrap_fluid_menu' );
 function bsgen_structural_wrap_fluid_menu(){
   add_filter( 'genesis_structural_wrap-menu-primary', 'bsg_wrap_container_fluid', 99, 2);
@@ -34,38 +32,16 @@ function bsgen_structural_wrap_fluid_menu(){
 }
 
 
-
-/**
-  * Bootstrap Nav Classes
-  */
-/*
-add_filter('bw_add_classes', 'bsg_custom_nav_classes', 99);
-function bsg_custom_nav_classes($classes) 
-{
-    $new_classes = array( 
-            'nav-primary'               => 'navbar navbar-default navbar-static-top',
-            'nav-secondary'             => 'navbar navbar-inverse navbar-static-top hidden-xs',
-            'site-header'               => 'container'
-    );
-    return wp_parse_args($new_classes, $classes);
-}
-*/
-
-
-/**
-  * Bootstrap Nav Walker
-  */
-/*
-if ( !class_exists('wp_bootstrap_navwalker') ) {
-	require_once( plugins_url('/classes/class.wp_bootstrap_navwalker.php', __DIR__ ) );
-}
-// */
-
-
 /**
  * Class Name: wp_bootstrap_navwalker
  * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
  */
+ 
+ /*
+if ( !class_exists('wp_bootstrap_navwalker') ) {
+	require_once( plugins_url('/classes/class.wp_bootstrap_navwalker.php', __DIR__ ) );
+}
+// */
 //*
 class wp_bootstrap_navwalker extends Walker_Nav_Menu {
   public function start_lvl( &$output, $depth = 0, $args = array() ) {
