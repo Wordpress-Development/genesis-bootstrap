@@ -11,6 +11,22 @@
  * @link    https://github.com/Wordpress-Development/genesis-bootstrap/
  */
  
+ 
+/**
+ * Add `X-UA-compatible` Header
+ */
+is_admin() || add_action( 'send_headers', function() {
+    header( 'X-UA-Compatible: IE=edge,chrome=1' );
+}, 1 );
+
+
+
+/**
+ * Responsive Viewport
+ */
+add_theme_support( 'genesis-responsive-viewport' );
+
+
 
 /**
  * Add `no-js` class to `<html>` and include javascript check script early
@@ -46,22 +62,6 @@ function twbsg_load_stylesheet_tweaks() {
     $stylesheet = plugins_url('/assets/css/bootstrap-genesis.css', __DIR__); // plugin_dir_url( __FILE__ )
     wp_enqueue_style( 'theme-tweaks', $stylesheet, array(), false );
 }
-
-
-
-/**
- * Add `X-UA-compatible` Header
- */
-is_admin() || add_action( 'send_headers', function() {
-    header( 'X-UA-Compatible: IE=edge,chrome=1' );
-}, 1 );
-
-
-
-/**
- * Responsive Viewport
- */
-add_theme_support( 'genesis-responsive-viewport' );
 
 
 
