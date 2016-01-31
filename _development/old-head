@@ -1,0 +1,53 @@
+
+
+// */
+/*
+add_action('wp_enqueue_scripts', 'genesis_bootstrap_js');
+
+function genesis_bootstrap_js()  {
+
+	$bootstrap_cdn = 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js';
+	//$bootstrap_local = plugins_url('bootstrap/js/javascript.min.js', __DIR__);
+
+	wp_enqueue_script( 'bootstrap',
+		$bootstrap_cdn,
+		array( 'jquery' ),
+		false,
+		true
+	);
+	
+}
+// */
+
+
+
+//remove_action( 'genesis_meta', 'genesis_responsive_viewport', 999 );
+
+/**
+ * Better Viewport 
+ * 
+ * Loads earlier and has a filter modify
+ * 
+ * @since 1.0.0
+ */
+/*
+add_action( 'genesis_doctype', function() {
+	return bsg_genesis_responsive_viewport();
+} );
+
+function bsg_genesis_responsive_viewport() {
+	if ( ! current_theme_supports( 'genesis-responsive-viewport' ) )
+		return;
+	$content = apply_filters('genesis_responsive_viewport', 'width=device-width, initial-scale=1');
+	echo '<meta name="viewport" content="'.$content.'" />' . "\n";
+}
+// */
+// Example Viewport Filter
+/*
+add_filter('genesis_responsive_viewport', function(){
+    return 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+} );
+// */
+
+
+// remove_action( 'wp_head', 'genesis_do_meta_pingback' );
