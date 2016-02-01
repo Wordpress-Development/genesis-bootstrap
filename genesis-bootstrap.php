@@ -14,11 +14,14 @@ License URI:        http://opensource.org/licenses/MIT
 defined( 'WPINC' ) or die;
 register_activation_hook( __FILE__, 'activate_genesis_bootstrap_plugin_script_check' );
 function activate_genesis_bootstrap_plugin_script_check() {
+	// require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+	// genesis_detect_plugin( array $plugins )
 	if ( ! function_exists('genesis_pre') ) {
 		deactivate_plugins( plugin_basename( __FILE__ ) );
 		wp_die( sprintf( __( 'Sorry, you can\'t activate %1$sGenesis Bootstrap unless you have installed the %3$sGenesis Framework%4$s. Go back to the %5$sPlugins Page%4$s.' ), '<em>', '</em>', '<a href="http://www.studiopress.com/themes/genesis" target="_blank">', '</a>', '<a href="javascript:history.back()">' ) );
 	}
 }
+
 function deactivate_genesis_bootstrap_plugin_script_check() {
     if ( ! function_exists('genesis_pre') ) {
     		add_action( 'admin_notices', 'admin_notice_genesis_bootstrap_plugin_deactivate' );
