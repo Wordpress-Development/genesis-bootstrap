@@ -5,12 +5,15 @@
   * Remove Header Defaults
   */
 
-unregister_sidebar( 'header-right' );
-remove_action( 'genesis_site_title', 'genesis_seo_site_title' );
-remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
-remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
-remove_action( 'genesis_header', 'genesis_do_header' );
-remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
+
+
+	unregister_sidebar( 'header-right' );
+	//remove_action( 'genesis_site_title', 'genesis_seo_site_title' );
+	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
+	remove_action( 'genesis_header', 'genesis_header_markup_open', 5 );
+	remove_action( 'genesis_header', 'genesis_do_header' );
+	remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
+
 
 
 
@@ -25,6 +28,7 @@ function bsg_custom_nav_classes($classes)
 }
 
 
+
 add_action( 'genesis_meta', 'bsgen_structural_wrap_fluid_menu' );
 function bsgen_structural_wrap_fluid_menu(){
   add_filter( 'genesis_structural_wrap-menu-primary', 'bsg_wrap_container_fluid', 99, 2);
@@ -32,16 +36,38 @@ function bsgen_structural_wrap_fluid_menu(){
 }
 
 
+
 /**
- * Class Name: wp_bootstrap_navwalker
- * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
- */
- 
- /*
+  * Bootstrap Nav Classes
+  */
+/*
+add_filter('bw_add_classes', 'bsg_custom_nav_classes', 99);
+function bsg_custom_nav_classes($classes) 
+{
+    $new_classes = array( 
+            'nav-primary'               => 'navbar navbar-default navbar-static-top',
+            'nav-secondary'             => 'navbar navbar-inverse navbar-static-top hidden-xs',
+            'site-header'               => 'container'
+    );
+    return wp_parse_args($new_classes, $classes);
+}
+*/
+
+
+/**
+  * Bootstrap Nav Walker
+  */
+/*
 if ( !class_exists('wp_bootstrap_navwalker') ) {
 	require_once( plugins_url('/classes/class.wp_bootstrap_navwalker.php', __DIR__ ) );
 }
 // */
+
+
+/**
+ * Class Name: wp_bootstrap_navwalker
+ * GitHub URI: https://github.com/twittem/wp-bootstrap-navwalker
+ */
 //*
 class wp_bootstrap_navwalker extends Walker_Nav_Menu {
   public function start_lvl( &$output, $depth = 0, $args = array() ) {
@@ -184,30 +210,36 @@ function genesis_child_nav($nav_output, $nav, $args)
             <span class="icon-bar"></span>
           </button>
 EOT;
-    if ( 'primary' === $sanitized_location ) {
-        $nav_markup .= apply_filters( 'bsg_navbar_brand', bsg_navbar_brand_markup() );
-    }
-    $nav_markup .= '</div>'; // .navbar-header
-    $nav_markup .= '<div class="collapse navbar-collapse" id="'.$data_target.'">';
-	  $nav_markup .= $nav;
 
+    $nav_markup .= apply_filters( "bsg_navbar_brand_{$sanitized_location}", $navbar_brand );
+    $nav_markup .= '</div>'; // .navbar-header
+    
+    
+    $nav_markup .= '<div class="collapse navbar-collapse" id="'.$data_target.'">';
+
+    ob_start();
+    do_action('before_nav_' . $sanitized_location);
+    $do_action = ob_get_contents();
+    ob_end_clean();
+    $nav_markup .= $do_action;
+   
+	  $nav_markup .= $nav;
+	  
     ob_start();
     do_action('after_nav_' . $sanitized_location);
     $do_action = ob_get_contents();
     ob_end_clean();
-
     $nav_markup .= $do_action;
-
-
+    
     $nav_markup .= '</div>'; // .collapse .navbar-collapse
+    
     
     $nav_markup_open  = sprintf( '<nav %s>', genesis_attr( 'nav-' . $sanitized_location ) );
     $nav_markup_open .= genesis_structural_wrap( 'menu-' . $sanitized_location, 'open', 0 );
     
-	  $nav_markup_close  = genesis_structural_wrap( 'menu-' . $sanitized_location, 'close', 0 ) . '</nav>';
+	$nav_markup_close  = genesis_structural_wrap( 'menu-' . $sanitized_location, 'close', 0 ) . '</nav>';
 
-	  $nav_output = $nav_markup_open . $nav_markup . $nav_markup_close;
-    	
+	$nav_output = $nav_markup_open . $nav_markup . $nav_markup_close;	
 	return $nav_output;
 }
 
@@ -231,7 +263,7 @@ function bsg_navbar_brand_logo_customize_register( $wp_customize )
              $wp_customize,
              'bsg_brand_logo',
              array(
-                'label' => __( 'Navbar Logo', 'bsg' ),
+                'label' => __( 'Navbar Brand', 'bsg' ),
                 'section' => 'title_tagline',
                 'settings' => 'brand_logo',
                 'priority' => 10,
@@ -240,46 +272,23 @@ function bsg_navbar_brand_logo_customize_register( $wp_customize )
 }
 
 
-
-
-
-
-
-
-/**
- * Navbar Brand Image Output
- */ 
-function bsg_navbar_brand_markup() 
-{
-    $name = esc_attr( get_bloginfo( 'name' ) );
-
+add_filter('bsg_navbar_brand_primary', 'bsg_navbar_brand_markup');
+function bsg_navbar_brand_markup($navbar_brand) {
+    $brand_name = esc_attr( get_bloginfo( 'name' ) );
     if ( get_theme_mod( 'brand_logo' ) ) {
-    	$brand = '<img src="'.get_theme_mod('brand_logo').'" alt="'.$name.'">';
+    	$brand = '<img src="'.get_theme_mod('brand_logo').'" alt="'.$brand_name.'">';
     } else {
     	$brand = $name;
     }
-	
-	return '<a class="navbar-brand" id="logo" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.$brand.'</a>';
-
+	$navbar_brand =  '<a class="navbar-brand" id="logo" title="'.esc_attr( get_bloginfo( 'description' ) ).'" href="'.esc_url( home_url( '/' ) ).'">'.$brand.'</a>';
+    return $navbar_brand;
 }
-
-
-
-
-
 
 
 add_action('wp_head', 'multilevel_dropdown_menu_css', 99);
 function multilevel_dropdown_menu_css() {
     ?>
 <style type="text/css">
-
-@media(min-width: 1200px) {
-  .navbar .container-fluid {
-  margin-left: 8.33333333%;
-  margin-right: 8.33333333%;
-  }
-}
 
 /**
  *----------------------------------------- 
@@ -319,9 +328,6 @@ ul.dropdown-menu ul.dropdown-menu{
 </style>
 <?php
 }
-
-
-
 
 add_action('wp_footer', 'multilevel_dropdown_menu', 999);
 function multilevel_dropdown_menu(){
