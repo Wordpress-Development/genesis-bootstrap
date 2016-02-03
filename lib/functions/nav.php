@@ -6,7 +6,6 @@
   */
 
 
-
 	unregister_sidebar( 'header-right' );
 	//remove_action( 'genesis_site_title', 'genesis_seo_site_title' );
 	remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
@@ -14,6 +13,14 @@
 	remove_action( 'genesis_header', 'genesis_do_header' );
 	remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
 
+/* # NAVBAR HEADER
+add_filter( 'genesis_seo_title', 'bhww_filter_genesis_seo_site_title', 10, 2 );
+function bhww_filter_genesis_seo_site_title( $title, $inside ){
+		$child_inside = sprintf( '<a href="%s" title="%s"><img src="'. get_theme_mod('brand_logo') .'" title="%s" alt="%s"/></a>', trailingslashit( home_url() ), esc_attr( get_bloginfo( 'name' ) ), esc_attr( get_bloginfo( 'name' ) ), esc_attr( get_bloginfo( 'name' ) ) );
+		$title = str_replace( $inside, $child_inside, $title );
+		return $title;
+}
+// */
 
 
 
@@ -37,21 +44,7 @@ function bsgen_structural_wrap_fluid_menu(){
 
 
 
-/**
-  * Bootstrap Nav Classes
-  */
-/*
-add_filter('bw_add_classes', 'bsg_custom_nav_classes', 99);
-function bsg_custom_nav_classes($classes) 
-{
-    $new_classes = array( 
-            'nav-primary'               => 'navbar navbar-default navbar-static-top',
-            'nav-secondary'             => 'navbar navbar-inverse navbar-static-top hidden-xs',
-            'site-header'               => 'container'
-    );
-    return wp_parse_args($new_classes, $classes);
-}
-*/
+
 
 
 /**
@@ -172,8 +165,7 @@ class wp_bootstrap_navwalker extends Walker_Nav_Menu {
 
 
 
-/*
-
+/* # Widget Area
 add_action( 'after_nav_primary', 'sk_do_nav_widget' );
 function sk_do_nav_widget(){
   return genesis_widget_area( 'after-nav-primary', array(
@@ -222,9 +214,9 @@ EOT;
     $do_action = ob_get_contents();
     ob_end_clean();
     $nav_markup .= $do_action;
-   
+    
 	  $nav_markup .= $nav;
-	  
+
     ob_start();
     do_action('after_nav_' . $sanitized_location);
     $do_action = ob_get_contents();
@@ -271,8 +263,9 @@ function bsg_navbar_brand_logo_customize_register( $wp_customize )
         ) );
 }
 
-
-add_filter('bsg_navbar_brand_primary', 'bsg_navbar_brand_markup');
+//add_filter('bsg_navbar_brand_secondary', 'bsg_navbar_brand_markup');
+//add_filter('bsg_navbar_brand_secondary', 'bsg_navbar_brand_markup');
+//add_filter('bsg_navbar_brand_primary', 'bsg_navbar_brand_markup');
 function bsg_navbar_brand_markup($navbar_brand) {
     $brand_name = esc_attr( get_bloginfo( 'name' ) );
     if ( get_theme_mod( 'brand_logo' ) ) {
@@ -328,6 +321,7 @@ ul.dropdown-menu ul.dropdown-menu{
 </style>
 <?php
 }
+
 
 add_action('wp_footer', 'multilevel_dropdown_menu', 999);
 function multilevel_dropdown_menu(){
