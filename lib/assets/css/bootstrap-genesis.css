@@ -275,3 +275,312 @@ a.comment-reply-link {
   overflow: visible;
   clip: auto;
 }
+
+
+
+/*=========================================================================*\
+[Bootstrap Genesis CSS]
+Plugin:	        Bootstrap Genesis
+Version:	    1.0
+Last change:	12/12/15 
+Instructions:	CSS Support for Bootstrap Genesis integration.
+
+
+
+[Table of contents]
+
+1. General / #general
+2. Navbar / #navbar
+    2.1  Nav Fixes / #navbar-fixes
+    2.2  Navbar Brand / #navbar-brand
+3. Jumbotron / #jumbotron
+4. Sidebar Widgets / #sidebars
+    4.1 Sidebar - Default Styling / #sidebar-defaults
+    4.2 Sidebar - Widget Panel Wrap / #sidebar-panels
+    4.3 Sidebar - List Group Margins / #sidebar-list-group
+    4.4 Sidebar - Search Widget / #sidebar-search
+5. Comments / #comments
+    5.1 Comments - Media Object Fixes / #comment-media
+    5.2 Comments - Comment Reply / #comment-reply
+    5.3 Comments - Border / #comment-border
+6. Accessibility / #accessibility
+    6.1 Accessibility - Screen Reader Text / #screen-reader-text #sr-only
+    
+\*=========================================================================*/
+
+
+
+
+/* ------------------------------------------------------------------------
+[ 1. General / #general ]
+--------------------------------------------------------------------------- */
+
+/*------- [ 1.1  Sticky Footer  ] -------*/
+.site-container {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background: rgba(249, 249, 249, 0.67);
+
+}
+.site-inner {
+    flex: 1;
+}
+
+/*------- [ 1.2  Page Inner Padding / #inner-padding   ] -------*/
+.site-inner {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+
+
+/* ------------------------------------------------------------------------
+[ 2.  Navbar / #navbar ]
+--------------------------------------------------------------------------- */
+
+/*------- [ 2.1  Nav Fixes / #navbar-fixes   ] -------*/
+.nav-primary ~ .nav-secondary {
+  z-index: 999; 
+}
+.nav-primary,
+.nav-secondary {
+    margin-bottom:0px;
+}
+
+/*------- [ 2.2  Navbar Brand / #navbar-brand   ] -------*/
+
+.navbar-brand {
+  padding: 0px!important; /* firefox fix - don't change */
+}
+.navbar-brand>img {
+  height: 100%;
+  max-height: 100%;
+  width: auto; 
+  padding: 5px 15px; /* Adjust the size and positioning with padding alone*/
+}
+
+
+
+/*------- [ 2.3 Center Navbar Logo / #navbar-brand-center ] ------- */
+.navbar-brand {
+  padding: 0px!important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 50px;
+  margin-right: 15px;
+  left: 0;
+  top: 0;
+}
+
+
+.brand-center .navbar-brand {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Centered Navbar Background Image with text for sreen readers and seo support */
+.brand-center .navbar-brand {
+  /* background-image: url(); */
+  /* max-width: 200px; */ /*optional*/
+}
+
+
+
+/*------- [ 2.4 Tall Navbar / #navbar-brand-tall ] ------- */
+.nav-primary-tall .nav-primary .navbar-brand,
+.nav-secondary-tall .nav-secondary .navbar-brand {
+  height: 80px;
+  line-height: 80px;
+}
+/* line height is 20px by default so add 30px top and bottom to equal the new .navbar-brand 80px height  */
+.nav-primary-tall .nav-primary .nav >li >a,
+.nav-secondary-tall .nav-secondary .nav >li >a {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+/* Toggle position fix for example 3 */
+.nav-primary-tall .nav-primary .navbar-toggle,
+.nav-secondary-tall .nav-secondary .navbar-toggle {
+  padding: 10px;
+  margin: 25px 15px 25px 0;
+}
+
+
+
+
+
+
+
+
+/* ------------------------------------------------------------------------
+[ 3. Jumbotron / #jumbotron ]
+--------------------------------------------------------------------------- */
+
+.jumbotron h1 {
+    margin-top: 15px;
+}
+.jumbotron-header.fullwidth .jumbotron {
+    margin-bottom: 0px; /* Jumbotron Fullwidth Bottom Margins */
+}
+
+
+
+/* ------------------------------------------------------------------------
+[ 4. Sidebar Widgets / #sidebars ]
+--------------------------------------------------------------------------- */
+
+/*------- [ 4.1 Sidebar - Default Styling / #sidebar-defaults ] ------- */
+.sidebar.sidebar-primary .widget,
+.sidebar.sidebar-secondary .widget {
+    margin-bottom: 30px;
+}
+
+/*------- [ 4.2 Sidebar - Widget Panel Wrap / #sidebar-panels ] ------- */
+.sidebar.sidebar-primary .panel.widget .widget-title,
+.sidebar.sidebar-secondary .panel.widget .widget-title {
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+/*------- [ 4.3 Sidebar - List Group Margins / #sidebar-list-group ] ------- */
+.sidebar.sidebar-primary .panel.widget .panel-body.widget-wrap .list-group,
+.sidebar.sidebar-secondary .panel.widget .panel-body.widget-wrap .list-group{
+    margin-bottom: 0; 
+}
+
+/*------- [ 4.4 Sidebar - Search Widget / #sidebar-search ] ------- */
+@media (min-width: 768px) {
+.sidebar-primary .search-form.form-inline .input-group > .input-group-btn,
+.sidebar-secondary .search-form.form-inline .input-group > .input-group-btn {
+    width: 1%;
+ }
+}
+.search-form .glyphicon {
+    top: 2px;
+}
+
+.widget_recent_entries .list-group-item a {
+    display: block;
+}
+
+
+
+
+
+/* ------------------------------------------------------------------------
+[ 5. Comments / #comments ]
+--------------------------------------------------------------------------- */
+
+/*------- [ 5.1 Comments - Media Object Fixes / #comment-media ] ------- */
+.comment-list,
+.comment-list .children,
+li.comment.depth-1 {
+  padding: 0;
+}
+.comment-list>li, 
+.comment-list .children>li, 
+.ping-list>li {
+    list-style-type: none;
+    padding-left: 54px;
+    margin-top: 10px;
+}
+
+/*------- [ 5.2 Comments - Comment Reply / #comment-reply ] ------- */
+/*article.comment-body.media .reply {
+    display: none;
+}
+article.comment-body.media:hover .reply {
+    display: block;
+}
+*/
+
+
+/*------- [ 5.3 Comments - Border / #comment-border ] ------- */
+.media-body {
+      /*border-bottom: 1px solid #eee;*/
+}
+
+
+
+a.comment-time-link{
+    color: #aaa;
+}
+.comment-content {
+    color: #777;
+}
+span.comment-author {
+    margin-right: 6px;
+}
+a.comment-time-link{
+}
+.children img.avatar {
+}
+a.comment-reply-link {
+
+}
+
+
+
+
+/* ------------------------------------------------------------------------
+[ 6. Genesis Accessibility / #accessibility ]
+--------------------------------------------------------------------------- */
+
+/*------- [ 6.1 Screen Reader Text / #screen-reader-text #sr-only ] ------- */
+.screen-reader-text, 
+.screen-reader-text span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.screen-reader-text:active, 
+.screen-reader-text:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+}
+
+
+/* ------------------------------------------------------------------------
+[ 7. Bootstrap Navbar no-javascript / #no-js ]
+--------------------------------------------------------------------------- */
+
+.no-js .dropdown a:focus ~ .dropdown-menu {
+	display: block;
+}
+@media (max-width: 767px ) {
+	.no-js .navbar-nav .dropdown-toggle:focus ~ .dropdown-menu,
+	.no-js .navbar-nav .dropdown-toggle:focus ~ .dropdown-menu:focus {
+		position: static;
+		float: none;
+		width: auto;
+		margin-top: 0;
+		background-color: transparent;
+		border: 0;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+  		display: block;
+	}
+    .no-js .navbar-header:hover ~ .collapse,
+    .no-js .navbar-header ~ .collapse:hover {
+	    display: block;
+	    overflow-y: visible;
+	    overflow-x: visible;
+	   }
+}
