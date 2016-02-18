@@ -206,29 +206,26 @@ EOT;
     $nav_markup .= apply_filters( "bsg_navbar_brand_{$sanitized_location}", $navbar_brand );
     $nav_markup .= '</div>'; // .navbar-header
     
-    
     $nav_markup .= '<div class="collapse navbar-collapse" id="'.$data_target.'">';
 
     ob_start();
     do_action('before_nav_' . $sanitized_location);
-    $do_action = ob_get_contents();
+    $before_nav = ob_get_contents();
     ob_end_clean();
-    $nav_markup .= $do_action;
+    $nav_markup .= $before_nav;
     
-	  $nav_markup .= $nav;
+		$nav_markup .= $nav;
 
     ob_start();
     do_action('after_nav_' . $sanitized_location);
-    $do_action = ob_get_contents();
+    $after_nav = ob_get_contents();
     ob_end_clean();
-    $nav_markup .= $do_action;
+    $nav_markup .= $after_nav;
     
     $nav_markup .= '</div>'; // .collapse .navbar-collapse
     
-    
     $nav_markup_open  = sprintf( '<nav %s>', genesis_attr( 'nav-' . $sanitized_location ) );
     $nav_markup_open .= genesis_structural_wrap( 'menu-' . $sanitized_location, 'open', 0 );
-    
 	$nav_markup_close  = genesis_structural_wrap( 'menu-' . $sanitized_location, 'close', 0 ) . '</nav>';
 
 	$nav_output = $nav_markup_open . $nav_markup . $nav_markup_close;	
