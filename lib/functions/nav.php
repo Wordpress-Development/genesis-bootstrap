@@ -178,22 +178,23 @@ function sk_do_nav_widget(){
 
 
 /**
-  * Bootstrap Nav Markup
-  */ 
-add_filter( 'genesis_do_nav', 'genesis_child_nav', 10, 3 );
-add_filter( 'genesis_do_subnav', 'genesis_child_nav', 10, 3 );
+ * Bootstrap Nav Markup
+ */
+add_filter('genesis_do_nav', 'genesis_child_nav', 10, 3);
+add_filter('genesis_do_subnav', 'genesis_child_nav', 10, 3);
+
 function genesis_child_nav($nav_output, $nav, $args)
 {
-    $args['depth'] = 3;
-    $args['menu_class'] = 'nav navbar-nav';
-    $args['fallback_cb'] = 'wp_bootstrap_navwalker::fallback';
-    $args['walker'] = new wp_bootstrap_navwalker();
-    
-    $nav = wp_nav_menu( $args );
-    $sanitized_location = sanitize_key( $args['theme_location'] );
-    $data_target = 'nav-collapse-' . $sanitized_location;
-
-    $nav_markup = <<<EOT
+	$args['depth'] = 3;
+	$args['menu_class'] = 'nav navbar-nav';
+	$args['fallback_cb'] = 'wp_bootstrap_navwalker::fallback';
+	$args['walker'] = new wp_bootstrap_navwalker();
+	
+	$nav = wp_nav_menu($args);
+	$sanitized_location = sanitize_key($args['theme_location']);
+	$data_target = 'nav-collapse-' . $sanitized_location;
+	
+	$nav_markup = <<<EOT
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#{$data_target}">
             <span class="sr-only">Toggle navigation</span>
@@ -202,35 +203,36 @@ function genesis_child_nav($nav_output, $nav, $args)
             <span class="icon-bar"></span>
           </button>
 EOT;
-
-    $nav_markup .= apply_filters( "bsg_navbar_brand_{$sanitized_location}", $navbar_brand );
-    $nav_markup .= '</div>'; // .navbar-header
-    
-    $nav_markup .= '<div class="collapse navbar-collapse" id="'.$data_target.'">';
-
-    ob_start();
-    do_action('before_nav_' . $sanitized_location);
-    $before_nav = ob_get_contents();
-    ob_end_clean();
-    $nav_markup .= $before_nav;
-    
-		$nav_markup .= $nav;
-
-    ob_start();
-    do_action('after_nav_' . $sanitized_location);
-    $after_nav = ob_get_contents();
-    ob_end_clean();
-    $nav_markup .= $after_nav;
-    
-    $nav_markup .= '</div>'; // .collapse .navbar-collapse
-    
-    $nav_markup_open  = sprintf( '<nav %s>', genesis_attr( 'nav-' . $sanitized_location ) );
-    $nav_markup_open .= genesis_structural_wrap( 'menu-' . $sanitized_location, 'open', 0 );
-	$nav_markup_close  = genesis_structural_wrap( 'menu-' . $sanitized_location, 'close', 0 ) . '</nav>';
-
-	$nav_output = $nav_markup_open . $nav_markup . $nav_markup_close;	
+	$nav_markup.= apply_filters("bsg_navbar_brand_{$sanitized_location}", $navbar_brand);
+	$nav_markup.= '</div>'; // .navbar-header
+	
+	$nav_markup.= '<div class="collapse navbar-collapse" id="' . $data_target . '">';
+	
+	ob_start();
+	do_action('before_nav_' . $sanitized_location);
+	$before_nav = ob_get_contents();
+	ob_end_clean();
+	$nav_markup.= $before_nav;
+	
+	$nav_markup.= $nav;
+	
+	ob_start();
+	do_action('after_nav_' . $sanitized_location);
+	$after_nav = ob_get_contents();
+	ob_end_clean();
+	$nav_markup.= $after_nav;
+	
+	$nav_markup.= '</div>'; // .collapse .navbar-collapse
+	
+	$nav_markup_open = sprintf('<nav %s>', genesis_attr('nav-' . $sanitized_location));
+	$nav_markup_open.= genesis_structural_wrap('menu-' . $sanitized_location, 'open', 0);
+	$nav_markup_close = genesis_structural_wrap('menu-' . $sanitized_location, 'close', 0) . '</nav>';
+	
+	$nav_output = $nav_markup_open . $nav_markup . $nav_markup_close;
 	return $nav_output;
 }
+
+
 
 
 
