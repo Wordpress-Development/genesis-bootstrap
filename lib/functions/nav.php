@@ -129,7 +129,7 @@ function navbar_brand_markup($navbar_brand) {
 }
 
 //* Navbar Right Helper
-function gb3_navbar_nav_navbar_right($nav_output, $nav) {
+function navbar_right($nav_output, $nav) {
   $search = 'nav navbar-nav';
   $replace = 'nav navbar-nav navbar-right';
   $nav_output = str_replace($search, $replace, $nav_output);
