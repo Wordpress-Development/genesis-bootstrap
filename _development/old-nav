@@ -6,3 +6,14 @@ function bhww_filter_genesis_seo_site_title( $title, $inside ){
 		return $title;
 }
 // */
+
+
+/* # Widget Area
+add_action( 'after_nav_primary', 'sk_do_nav_widget' );
+function sk_do_nav_widget(){
+  return genesis_widget_area( 'after-nav-primary', array(
+    'before' => '<div class="after-nav-primary">',
+    'after'  => '</div>',
+  ) );
+}
+// */
