@@ -1,0 +1,8 @@
+/* # NAVBAR HEADER
+add_filter( 'genesis_seo_title', 'bhww_filter_genesis_seo_site_title', 10, 2 );
+function bhww_filter_genesis_seo_site_title( $title, $inside ){
+		$child_inside = sprintf( '<a href="%s" title="%s"><img src="'. get_theme_mod('brand_logo') .'" title="%s" alt="%s"/></a>', trailingslashit( home_url() ), esc_attr( get_bloginfo( 'name' ) ), esc_attr( get_bloginfo( 'name' ) ), esc_attr( get_bloginfo( 'name' ) ) );
+		$title = str_replace( $inside, $child_inside, $title );
+		return $title;
+}
+// */
