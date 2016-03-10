@@ -50,8 +50,8 @@ function classes($classes) {
 
 //* Bootstrap Multilevel Dropdown Scripts
 function scripts() {
-  wp_enqueue_style('bootstrap-multilevel', );
-  wp_enqueue_script('bootstrap-multilevel', );
+  wp_enqueue_style('bootstrap-multilevel', BSGEN_PLUGIN_URL . '/js/bootstrap-multilevel.php', array( 'bootstrap' ));
+  wp_enqueue_script('bootstrap-multilevel', BSGEN_PLUGIN_URL . '/js/bootstrap-multilevel.js', array( 'bootstrap' ));
 }
 
 //* Bootstrap Container Fluid Structural Wrap
