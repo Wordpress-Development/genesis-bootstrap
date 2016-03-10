@@ -5,7 +5,7 @@ namespace Willis\BootGen\Navbar;
 use Willis\BootGen\Utils;
 
 /**
- * Bootstrap Multileve Navbars
+ * Bootstrap Multilevel Navbars
  *
  * You can enable/disable this feature in functions.php:
  * add_theme_support('bootgen-nav');
