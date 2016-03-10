@@ -31,6 +31,7 @@ function deactivate_genesis_bootstrap_plugin_script_check() {
 add_action('after_switch_theme', 'deactivate_genesis_bootstrap_plugin_script_check');
 
 
+define('BSG_PLUGIN_PATH', plugin_dir_path(__FILE__));    
 
 function admin_notice_genesis_bootstrap_plugin_deactivate() {
   ?>
