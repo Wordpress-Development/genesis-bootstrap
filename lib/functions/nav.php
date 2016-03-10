@@ -14,8 +14,8 @@ function remove_genesis_header() {
 }
 
 //* Bootstrap Load Navbar
-add_action('get_header', __NAMESPACE__ . '\\bootstrap_navbar');
-function bootstrap_navbar() {
+add_action('get_header', __NAMESPACE__ . '\\do_navbar');
+function do_navbar() {
   if ( !class_exists('wp_bootstrap_navwalker') ) {
     include_once( BSGEN_PLUGIN_PATH . 'lib/classes/class.wp_bootstrap_navwalker.php' );
   }
