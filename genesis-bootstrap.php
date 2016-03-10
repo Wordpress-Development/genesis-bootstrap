@@ -32,6 +32,9 @@ add_action('after_switch_theme', 'deactivate_genesis_bootstrap_plugin_script_che
 
 
 define('BSGEN_PLUGIN_PATH', plugin_dir_path(__FILE__));    
+define('BSGEN_PLUGIN_URL', plugins_url(__FILE__));  
+
+
 
 function admin_notice_genesis_bootstrap_plugin_deactivate() {
   ?>
