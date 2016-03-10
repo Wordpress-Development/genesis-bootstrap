@@ -1,8 +1,8 @@
 <?php
 
-namespace Willis\BootGen\Navbar;
+namespace BootstrapGenesis\Nav;
 
-use Willis\BootGen\Utils;
+use BootstrapGenesis\Utils;
 
 /**
  * Bootstrap Multilevel Navbars
@@ -11,7 +11,7 @@ use Willis\BootGen\Utils;
  * add_theme_support('bootgen-nav');
  */
 
-//* Disable Default Header
+//* Disable Default Genesis Header
 add_action('template_redirect', __NAMESPACE__ . '\\remove_genesis_header');
 function remove_genesis_header() {
   unregister_sidebar( 'header-right' );
@@ -26,21 +26,21 @@ function remove_genesis_header() {
 add_action('customize_register', __NAMESPACE__ . '\\customize_register');
 
 //* Bootstrap Load Navbar
-add_action('get_header', __NAMESPACE__ . '\\add_navbar');
-function add_navbar() {
+add_action('get_header', __NAMESPACE__ . '\\navbar');
+function navbar() {
   if ( !class_exists('wp_bootstrap_navwalker') ) {
     include_once( BSGEN_PLUGIN_PATH . 'lib/classes/class.wp_bootstrap_navwalker.php' );
   }
-  add_filter('add_nav_classes', __NAMESPACE__ . '\\classes');
-  add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\scripts');
-  add_action('genesis_meta', __NAMESPACE__ . '\\structural_wrap');
-  add_filter('genesis_do_nav', __NAMESPACE__ . '\\nav_markup', 10, 3);
-  add_filter('genesis_do_subnav', __NAMESPACE__ . '\\structural_wrap', 10, 3);
+  add_filter('add_nav_classes', __NAMESPACE__ . '\\navbar_classes');
+  add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\navbar_enqueue_scripts');
+  add_action('genesis_meta', __NAMESPACE__ . '\\navbar_structural_wrap');
+  add_filter('genesis_do_nav', __NAMESPACE__ . '\\navbar_markup', 10, 3);
+  add_filter('genesis_do_subnav', __NAMESPACE__ . '\\navbar_markup', 10, 3);
   add_filter('bsg_navbar_brand_primary', __NAMESPACE__ . '\\navbar_brand_markup');
 }
 
 //* Bootstrap Nav Classes
-function classes($classes) {
+function navbar_classes($classes) {
     $new_classes = array( 
             'nav-primary'   => 'navbar navbar-default navbar-static-top',
             'nav-secondary' => 'navbar navbar-inverse navbar-static-top hidden-xs'
@@ -49,19 +49,19 @@ function classes($classes) {
 }
 
 //* Bootstrap Multilevel Dropdown Scripts
-function scripts() {
-  wp_enqueue_style('bootstrap-multilevel', BSGEN_PLUGIN_URL . '/js/bootstrap-multilevel.php', array( 'bootstrap' ));
-  wp_enqueue_script('bootstrap-multilevel', BSGEN_PLUGIN_URL . '/js/bootstrap-multilevel.js', array( 'bootstrap' ));
+function navbar_enqueue_scripts() {
+  wp_enqueue_style( 'navbar-multilevel-dropdown', BSGEN_PLUGIN_URL . '/css/bootstrap-multilevel.css', array( 'bootstrap' ), false, 'all' );
+  wp_enqueue_script('navbar-multilevel-dropdown', BSGEN_PLUGIN_URL . '/js/bootstrap-multilevel.js', array( 'jquery', ' bootstrap' ), false, true);
 }
 
 //* Bootstrap Container Fluid Structural Wrap
-function structural_wrap(){
+function navbar_structural_wrap(){
   add_filter( 'genesis_structural_wrap-menu-primary', 'bsg_wrap_container_fluid', 99, 2);
   add_filter( 'genesis_structural_wrap-menu-secondary', 'bsg_wrap_container_fluid', 99, 2);
 }
 
 //* Bootstrap Nav Markup
-function nav_markup($nav_output, $nav, $args) {
+function navbar_markup($nav_output, $nav, $args) {
   $args['depth'] = 3;
   $args['menu_class'] = 'nav navbar-nav';
   $args['fallback_cb'] = 'wp_bootstrap_navwalker::fallback';
