@@ -2,6 +2,15 @@
 
 namespace Willis\BootGen\BootstrapNav;
 
+use Willis\BootGen\Utils;
+
+/**
+ * Bootstrap Multileve Navbars
+ *
+ * You can enable/disable this feature in functions.php:
+ * add_theme_support('bootgen-nav');
+ */
+
 //* Disable Default Header
 add_action('template_redirect', __NAMESPACE__ . '\\remove_genesis_header');
 function remove_genesis_header() {
