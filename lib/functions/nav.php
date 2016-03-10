@@ -13,9 +13,12 @@ function remove_genesis_header() {
   remove_action( 'genesis_header', 'genesis_header_markup_close', 15 );
 }
 
+//* Register Customizer Logo
+add_action('customize_register', __NAMESPACE__ . '\\customize_register');
+
 //* Bootstrap Load Navbar
-add_action('get_header', __NAMESPACE__ . '\\do_navbar');
-function do_navbar() {
+add_action('get_header', __NAMESPACE__ . '\\add_navbar');
+function add_navbar() {
   if ( !class_exists('wp_bootstrap_navwalker') ) {
     include_once( BSGEN_PLUGIN_PATH . 'lib/classes/class.wp_bootstrap_navwalker.php' );
   }
@@ -23,13 +26,8 @@ function do_navbar() {
   add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\scripts');
   add_action('genesis_meta', __NAMESPACE__ . '\\structural_wrap');
   add_filter('genesis_do_nav', __NAMESPACE__ . '\\nav_markup', 10, 3);
-  add_filter('genesis_do_subnav', __NAMESPACE__ . '\\nav_markup', 10, 3);
-}
-
-//* Bootstrap Multilevel Dropdown Scripts
-function scripts() {
-  wp_enqueue_style('bootstrap-multilevel', );
-  wp_enqueue_script('bootstrap-multilevel', );
+  add_filter('genesis_do_subnav', __NAMESPACE__ . '\\structural_wrap', 10, 3);
+  add_filter('bsg_navbar_brand_primary', __NAMESPACE__ . '\\navbar_brand_markup');
 }
 
 //* Bootstrap Nav Classes
@@ -39,6 +37,12 @@ function classes($classes) {
             'nav-secondary' => 'navbar navbar-inverse navbar-static-top hidden-xs'
     );
     return array_merge($new_classes, $classes);
+}
+
+//* Bootstrap Multilevel Dropdown Scripts
+function scripts() {
+  wp_enqueue_style('bootstrap-multilevel', );
+  wp_enqueue_script('bootstrap-multilevel', );
 }
 
 //* Bootstrap Container Fluid Structural Wrap
@@ -93,7 +97,6 @@ EOT;
 }
 
 //* Customizer controls for Bootstrap navbar-brand
-add_action('customize_register', __NAMESPACE__ . '\\customize_register');
 function customize_register( $wp_customize ) {
   $wp_customize->add_setting( 'brand_logo',
     array(
@@ -116,7 +119,6 @@ function customize_register( $wp_customize ) {
 }
 
 //* Brand Output
-add_filter('bsg_navbar_brand_primary', __NAMESPACE__ . '\\navbar_brand_markup');
 function navbar_brand_markup($navbar_brand) {
   $brand_name = esc_attr( get_bloginfo( 'name' ) );
   if ( get_theme_mod( 'brand_logo' ) ) {
