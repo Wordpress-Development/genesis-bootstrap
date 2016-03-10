@@ -1,6 +1,6 @@
 <?php
 
-namespace Willis\BootGen\BootstrapNav;
+namespace Willis\BootGen\Navbar;
 
 use Willis\BootGen\Utils;
 
