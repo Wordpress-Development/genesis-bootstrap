@@ -26,7 +26,7 @@ function bsg_nav_navbar() {
   if ( !class_exists('wp_bootstrap_navwalker') ) {
     include_once( BSG_PLUGIN_PATH . 'lib/classes/class.wp_bootstrap_navwalker.php' );
   }
-  add_filter('bsg_util_add_nav_classes', 'bsg_nav_navbar_classes');
+  add_filter('bsg_utils_add_nav_classes', 'bsg_nav_navbar_classes');
   add_action('wp_enqueue_scripts', 'bsg_nav_navbar_enqueue_scripts');
   add_action('genesis_meta', 'bsg_nav_navbar_structural_wrap');
   add_filter('genesis_do_nav', 'bsg_nav_navbar_markup', 10, 3);
