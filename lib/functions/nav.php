@@ -31,7 +31,7 @@ function bsg_nav_navbar() {
   add_action('genesis_meta', 'bsg_nav_navbar_structural_wrap');
   add_filter('genesis_do_nav', 'bsg_nav_navbar_markup', 10, 3);
   add_filter('genesis_do_subnav', 'bsg_nav_navbar_markup', 10, 3);
-  add_filter('bsg_navbar_brand_primary', 'bsg_nav_navbar_brand_markup');
+  add_filter('bsg_nav_navbar_brand_primary', 'bsg_nav_navbar_brand_markup');
 }
 
 //* Bootstrap Nav Classes
