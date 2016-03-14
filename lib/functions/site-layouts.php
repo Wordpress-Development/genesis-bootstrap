@@ -1,20 +1,27 @@
 <?php
+/**
+ * Page/Post Layouts
+ *
+ * You can enable/disable this feature in functions.php:
+ * add_theme_support('bsg-layouts');
+ */
 
-namespace Willis\BootGen\Layouts;
+//* Make the main content use .container-fluid by default
+add_action( 'genesis_meta', 'bsg_layouts_container_fluid_site_inner' );
+function bsg_layouts_container_fluid_site_inner(){
+  add_filter( 'genesis_structural_wrap-site-inner', 'bsg_util_structural_wrap_container_fluid', 99, 2);
+}
 
-use Willis\BootGen\Utils;
-	
-remove_action( 'genesis_after_content_sidebar_wrap', 'genesis_get_sidebar_alt' );
-add_action( 'genesis_after_content', 'genesis_get_sidebar_alt' );
-
-// modify bootstrap classes based on genesis_site_layout
-add_filter('bw_clean_classes_output', 'bw_modify_classes_based_on_template', 11, 3);
-function bw_modify_classes_based_on_template( $classes, $context, $attr ) {
-    $classes = bw_layout_options_modify_classes_to_add( $classes );
+//* Modify Bootstrap classes based on genesis_site_layout()
+add_filter('bsg_utils_clean_classes_output', 'bsg_layouts_modify_classes_based_on_template', 11, 3);
+function bsg_layouts_modify_classes_based_on_template( $classes, $context, $attr ) {
+    $classes = bsg_layouts_modify_classes( $classes );
     return $classes;
 }
 
-function bw_layout_options_modify_classes_to_add( $classes_to_add ) {
+//* Default Layouts - Copy and paste this funciton in theme to override
+if (!function_exists('bsg_layouts_modify_classes')) {
+  function bsg_layouts_modify_classes( $classes_to_add ) {
     $layout = genesis_site_layout();
     // full-width-content   
     if ( 'full-width-content' === $layout ) {
@@ -44,4 +51,9 @@ function bw_layout_options_modify_classes_to_add( $classes_to_add ) {
         $classes_to_add['sidebar-secondary'] = 'hidden-xs hidden-sm col-md-3';
     }
     return $classes_to_add;
+  }
 }
+
+//* Move sidebar secondary
+remove_action( 'genesis_after_content_sidebar_wrap', 'genesis_get_sidebar_alt' );
+add_action( 'genesis_after_content', 'genesis_get_sidebar_alt' );
