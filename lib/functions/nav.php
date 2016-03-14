@@ -24,7 +24,7 @@ add_action('customize_register', 'bsg_nav_customize_register');
 add_action('get_header', 'bsg_nav_navbar');
 function bsg_nav_navbar() {
   if ( !class_exists('wp_bootstrap_navwalker') ) {
-    include_once( BSGEN_PLUGIN_PATH . 'lib/classes/class.wp_bootstrap_navwalker.php' );
+    include_once( BSG_PLUGIN_PATH . 'lib/classes/class.wp_bootstrap_navwalker.php' );
   }
   add_filter('bsg_util_add_nav_classes', 'bsg_nav_navbar_classes');
   add_action('wp_enqueue_scripts', 'bsg_nav_navbar_enqueue_scripts');
