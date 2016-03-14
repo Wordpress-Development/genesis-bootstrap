@@ -1,19 +1,14 @@
 <?php
-
-namespace BootstrapGenesis\Nav;
-
-use BootstrapGenesis\Utils;
-
 /**
  * Bootstrap Multilevel Navbars
  *
  * You can enable/disable this feature in functions.php:
- * add_theme_support('bootgen-nav');
+ * add_theme_support('bsg-nav');
  */
 
 //* Disable Default Genesis Header
-add_action('template_redirect', __NAMESPACE__ . '\\remove_genesis_header');
-function remove_genesis_header() {
+add_action('template_redirect', 'bsg_nav_remove_genesis_header');
+function bsg_nav_remove_genesis_header() {
   unregister_sidebar( 'header-right' );
   remove_action( 'genesis_site_title', 'genesis_seo_site_title' );
   remove_action( 'genesis_site_description', 'genesis_seo_site_description' );
@@ -23,24 +18,24 @@ function remove_genesis_header() {
 }
 
 //* Register Customizer Logo
-add_action('customize_register', __NAMESPACE__ . '\\customize_register');
+add_action('customize_register', 'bsg_nav_customize_register');
 
-//* Bootstrap Load Navbar
-add_action('get_header', __NAMESPACE__ . '\\navbar');
-function navbar() {
+//* Load Bootstrap Navbar
+add_action('get_header', 'bsg_nav_navbar');
+function bsg_nav_navbar() {
   if ( !class_exists('wp_bootstrap_navwalker') ) {
     include_once( BSGEN_PLUGIN_PATH . 'lib/classes/class.wp_bootstrap_navwalker.php' );
   }
-  add_filter('add_nav_classes', __NAMESPACE__ . '\\navbar_classes');
-  add_action('wp_enqueue_scripts', __NAMESPACE__ . '\\navbar_enqueue_scripts');
-  add_action('genesis_meta', __NAMESPACE__ . '\\navbar_structural_wrap');
-  add_filter('genesis_do_nav', __NAMESPACE__ . '\\navbar_markup', 10, 3);
-  add_filter('genesis_do_subnav', __NAMESPACE__ . '\\navbar_markup', 10, 3);
-  add_filter('bsg_navbar_brand_primary', __NAMESPACE__ . '\\navbar_brand_markup');
+  add_filter('bsg_util_add_nav_classes', 'bsg_nav_navbar_classes');
+  add_action('wp_enqueue_scripts', 'bsg_nav_navbar_enqueue_scripts');
+  add_action('genesis_meta', 'bsg_nav_navbar_structural_wrap');
+  add_filter('genesis_do_nav', 'bsg_nav_navbar_markup', 10, 3);
+  add_filter('genesis_do_subnav', 'bsg_nav_navbar_markup', 10, 3);
+  add_filter('bsg_navbar_brand_primary', 'bsg_nav_navbar_brand_markup');
 }
 
 //* Bootstrap Nav Classes
-function navbar_classes($classes) {
+function bsg_nav_navbar_classes($classes) {
     $new_classes = array( 
             'nav-primary'   => 'navbar navbar-default navbar-static-top',
             'nav-secondary' => 'navbar navbar-inverse navbar-static-top hidden-xs'
@@ -48,20 +43,20 @@ function navbar_classes($classes) {
     return array_merge($new_classes, $classes);
 }
 
-//* Bootstrap Multilevel Dropdown Scripts
-function navbar_enqueue_scripts() {
-  wp_enqueue_style( 'navbar-multilevel-dropdown', BSGEN_PLUGIN_URL . '/css/bootstrap-multilevel.css', array( 'bootstrap' ), false, 'all' );
-  wp_enqueue_script('navbar-multilevel-dropdown', BSGEN_PLUGIN_URL . '/js/bootstrap-multilevel.js', array( 'jquery', ' bootstrap' ), false, true);
+//* Bootstrap Multilevel Dropdown Scripts/Styles
+function bsg_nav_navbar_enqueue_scripts() {
+  wp_enqueue_style( 'bsg-nav', BSG_PLUGIN_URL . '/css/bsg-nav.css', array( 'bootstrap' ), false, 'all' );
+  wp_enqueue_script('bsg-nav', BSG_PLUGIN_URL . '/js/bsg-nav.js', array( 'jquery', ' bootstrap' ), false, true);
 }
 
 //* Bootstrap Container Fluid Structural Wrap
-function navbar_structural_wrap(){
-  add_filter( 'genesis_structural_wrap-menu-primary', 'bsg_wrap_container_fluid', 99, 2);
-  add_filter( 'genesis_structural_wrap-menu-secondary', 'bsg_wrap_container_fluid', 99, 2);
+function bsg_nav_navbar_structural_wrap(){
+  add_filter( 'genesis_structural_wrap-menu-primary', 'bsg_util_structural_wrap_container_fluid', 99, 2);
+  add_filter( 'genesis_structural_wrap-menu-secondary', 'bsg_util_structural_wrap_container_fluid', 99, 2);
 }
 
 //* Bootstrap Nav Markup
-function navbar_markup($nav_output, $nav, $args) {
+function bsg_nav_navbar_markup($nav_output, $nav, $args) {
   $args['depth'] = 3;
   $args['menu_class'] = 'nav navbar-nav';
   $args['fallback_cb'] = 'wp_bootstrap_navwalker::fallback';
@@ -80,17 +75,17 @@ function navbar_markup($nav_output, $nav, $args) {
         <span class="icon-bar"></span>
       </button>
 EOT;
-  $nav_markup.= apply_filters("navbar_brand_{$sanitized_location}", $navbar_brand);
+  $nav_markup.= apply_filters("bsg_nav_navbar_brand_{$sanitized_location}", $navbar_brand);
   $nav_markup.= '</div>'; // .navbar-header
   
   $nav_markup.= '<div class="collapse navbar-collapse" id="' . $data_target . '">';
   
   ob_start();
-  do_action('before_nav_' . $sanitized_location);
+  do_action('bsg_nav_before_' . $sanitized_location);
   $before_nav = ob_get_clean();
 
   ob_start();
-  do_action('after_nav_' . $sanitized_location);
+  do_action('bsg_nav_before_' . $sanitized_location);
   $after_nav = ob_get_clean();
 
   $nav_markup.= $before_nav . $nav . $after_nav;
@@ -106,7 +101,7 @@ EOT;
 }
 
 //* Customizer controls for Bootstrap navbar-brand
-function customize_register( $wp_customize ) {
+function bsg_nav_customize_register( $wp_customize ) {
   $wp_customize->add_setting( 'brand_logo',
     array(
       'default' => '',
@@ -128,7 +123,7 @@ function customize_register( $wp_customize ) {
 }
 
 //* Brand Output
-function navbar_brand_markup($navbar_brand) {
+function bsg_nav_navbar_brand_markup($navbar_brand) {
   $brand_name = esc_attr( get_bloginfo( 'name' ) );
   if ( get_theme_mod( 'brand_logo' ) ) {
     $brand = '<img src="'.get_theme_mod('brand_logo').'" alt="'.$brand_name.'">';
@@ -140,7 +135,7 @@ function navbar_brand_markup($navbar_brand) {
 }
 
 //* Navbar Right Helper
-function navbar_right($nav_output, $nav) {
+function bsg_nav_do_navbar_right($nav_output, $nav) {
   $search = 'nav navbar-nav';
   $replace = 'nav navbar-nav navbar-right';
   $nav_output = str_replace($search, $replace, $nav_output);
